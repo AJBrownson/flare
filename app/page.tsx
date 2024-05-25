@@ -43,7 +43,7 @@ export default function Home() {
 
           {/* cards section */}
           <div className="grid grid-cols-1 md:grid-cols-2 my-16 place-content-center gap-x-8 md:gap-y-0 gap-y-4">
-            <div className="w-full rounded-md border-2 border-[#30302B] bg-[#191815] px-4 py-2">
+            <div className="w-full rounded-xl border-2 border-[#30302B] bg-[#191815] px-4 py-2">
               <div className="w-full flex justify-between items-center">
                 <div className="flex flex-col">
                   <div className="text-white font-cabinet font-bold py-4">
@@ -68,7 +68,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="w-full rounded-md border-2 border-[#30302B] bg-[#191815] px-4 py-2">
+            <div className="w-full rounded-xl border-2 border-[#30302B] bg-[#191815] px-4 py-2">
               <div className="w-full flex justify-between items-center">
                 <div className="flex flex-col">
                   <div className="text-white font-cabinet font-bold py-4">
@@ -104,7 +104,7 @@ export default function Home() {
               <p className="text-center xl:text-xl px-4 xl:px-48 font-cabinet font-bold">
                 You can access gaming campaigns through mobile and web
               </p>
-              <p className="mt-4 xl:px-48 text-xs xl:text-sm text-center font-normal">
+              <p className="mt-4 xl:px-44 text-xs xl:text-sm text-center font-normal">
                 Please open the Solgacy website on your phone or PC by visiting
                 www.solgacy.com in your web browser.
               </p>

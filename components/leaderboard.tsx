@@ -1,10 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import Medal01 from "../public/assets/icons/medal-first-place.png";
-import Medal02 from "../public/assets/icons/medal-second-place.png";
-import Medal03 from "../public/assets/icons/medal-third-place.png";
-import Medal06 from "../public/assets/icons/medal-06.png";
+import Medal01 from "@/public/assets/icons/medal-first-place.png";
+import Medal02 from "@/public/assets/icons/medal-second-place.png";
+import Medal03 from "@/public/assets/icons/medal-third-place.png";
+import Medal06 from "@/public/assets/icons/medal-06.png";
+import Medal07 from "@/public/assets/icons/medal-07.png"
 
 // Define the Player type
 interface Player {
@@ -50,19 +51,25 @@ const Leaderboard = () => {
   };
 
   return (
-    <div className="text-[#FFFFE3] container mx-auto">
+    <>
+    
+    <div className="text-[#FFFFE3] container mx-auto font-sn">
+    <div className="flex items-center gap-5 mb-6 xl:mb-8">
+      <h1 className="font-cabinet font-bold text-xl xl:text-2xl">Top Players</h1>
+      <p className="py-2 px-3 text-sm text-[#8E8E8E] bg-[#191815] border border-[#30302B] flex items-center rounded-xl">Weekly Stats <Image src={Medal07} alt="" className="ml-2 w-5 h-5 xl:w-6 xl:h-6" /></p>
+    </div>
       {/* Table heading for smaller screens */}
-      <div className="flex justify-between xl:hidden mb-2">
-        <p className="text-left">Players</p>
-        <p className="text-right">Rank</p>
+      <div className="flex justify-between lg:hidden mb-2">
+        <p className="text-left font-cabinet font-bold">Players</p>
+        <p className="text-right font-cabinet font-bold">Rank</p>
       </div>
-      <div className="grid grid-cols-1 xl:grid-cols-2 xl:gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-8">
         {[0, 1].map((tableIndex) => (
           <div key={tableIndex} className="">
             {/* table heading for larger screens*/}
-            <div className="justify-between hidden xl:flex mb-2">
-              <p className="text-left">Players</p>
-              <p className="text-right">Rank</p>
+            <div className="justify-between hidden lg:flex mb-2">
+              <p className="text-left font-cabinet font-bold">Players</p>
+              <p className="text-right font-cabinet font-bold">Rank</p>
             </div>
             <table className="min-w-full">
               {/* <thead>
@@ -71,17 +78,17 @@ const Leaderboard = () => {
                   <p className="py-2 text-right">Rank</p>
                 </tr>
               </thead> */}
-              <tbody className="xl:border-b border-t border-gray-600 ">
+              <tbody className="xl:border-b border-t border-[#30302B] ">
                 {players
                   .slice(tableIndex * 5, (tableIndex + 1) * 5)
                   .map((player) => (
                     <tr
                       key={player.wallet}
-                      className="border-b border-gray-600 flex justify-between "
+                      className="border-b border-[#30302B] flex justify-between "
                     >
-                      <td className="flex gap-4 py-2 text-md">
-                        <p>{player.number}</p>
-                        <p>{player.wallet}</p>
+                      <td className="flex items-center gap-4 py-2">
+                        <p className="text-[#8E8E8E] font-semibold">{player.number}</p>
+                        <p className="font-medium text-[13px] xl:text-sm">{player.wallet}</p>
                       </td>
                       <td className="py-2">{getMedalIcon(player.rank)}</td>
                     </tr>
@@ -92,6 +99,7 @@ const Leaderboard = () => {
         ))}
       </div>
     </div>
+    </>
   );
 };
 

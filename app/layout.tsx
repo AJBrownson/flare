@@ -1,14 +1,38 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { Wallet } from "../components/Wallet";
-import NavBar from "../components/Navbar";
-import Footer from "../components/Footer";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const cabinet_grotesk = localFont({
+  src: [
+    {
+      path: "../public/assets/fonts/cabinet-grotesk/CabinetGrotesk-Extrabold.otf",
+      weight: "800",
+    },
+    {
+      path: "../public/assets/fonts/cabinet-grotesk/CabinetGrotesk-Bold.otf",
+      weight: "700",
+    },
+  ],
+  variable: "--font-cabinet_grotesk",
+});
+
+const sn_pro = localFont({
+  src: [
+    {
+      path: "../public/assets/fonts/sn-pro_5.0.1/ttf/sn-pro-latin-600-normal.ttf",
+      weight: "600",
+    },
+    {
+      path: "../public/assets/fonts/sn-pro_5.0.1/ttf/sn-pro-latin-500-normal.ttf",
+      weight: "500",
+    },
+  ],
+  variable: "--font-sn_pro",
+});
 
 export const metadata: Metadata = {
   title: "Solgacy",
@@ -22,13 +46,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${cabinet_grotesk} ${sn_pro}`}>
         <div>
           <Wallet>
             <div>
-              <NavBar />
               {children}
-              <Footer />
               <ToastContainer />
             </div>
           </Wallet>

@@ -1,0 +1,98 @@
+"use client";
+import { useEffect, useState } from "react";
+import Image from "next/image";
+import Medal01 from "../public/assets/icons/medal-first-place.png";
+import Medal02 from "../public/assets/icons/medal-second-place.png";
+import Medal03 from "../public/assets/icons/medal-third-place.png";
+import Medal06 from "../public/assets/icons/medal-06.png";
+
+// Define the Player type
+interface Player {
+  wallet: string;
+  rank: number;
+  number: string;
+}
+
+const Leaderboard = () => {
+  const [players, setPlayers] = useState<Player[]>([]);
+
+  // Placeholder wallet addresses
+  const placeholderData: Player[] = [
+    { number: "01", wallet: "0x5xdge...789", rank: 1 },
+    { number: "02", wallet: "0x5xdge...544", rank: 2 },
+    { number: "03", wallet: "0x5xdge...857", rank: 3 },
+    { number: "04", wallet: "0x5xdge...233", rank: 4 },
+    { number: "05", wallet: "0x5xdge...098", rank: 5 },
+    { number: "06", wallet: "0x5xdge...134", rank: 6 },
+    { number: "07", wallet: "0x5xdge...374", rank: 7 },
+    { number: "08", wallet: "0x5xdge...238", rank: 8 },
+    { number: "09", wallet: "0x5xdge...148", rank: 9 },
+    { number: "10", wallet: "0x5xdge...843", rank: 10 },
+  ];
+
+  useEffect(() => {
+    // Simulate fetching data from backend
+    // Replace with actual data fetching logic
+    setPlayers(placeholderData);
+  }, []);
+
+  const getMedalIcon = (rank: number) => {
+    switch (rank) {
+      case 1:
+        return <Image src={Medal01} alt="" className="w-7 h-7" />;
+      case 2:
+        return <Image src={Medal02} alt="" className="w-7 h-7" />;
+      case 3:
+        return <Image src={Medal03} alt="" className="w-7 h-7" />;
+      default:
+        return <Image src={Medal06} alt="" className="w-7 h-7" />;
+    }
+  };
+
+  return (
+    <div className="text-[#FFFFE3] container mx-auto">
+      {/* Table heading for smaller screens */}
+      <div className="flex justify-between xl:hidden mb-2">
+        <p className="text-left">Players</p>
+        <p className="text-right">Rank</p>
+      </div>
+      <div className="grid grid-cols-1 xl:grid-cols-2 xl:gap-4">
+        {[0, 1].map((tableIndex) => (
+          <div key={tableIndex} className="">
+            {/* table heading for larger screens*/}
+            <div className="justify-between hidden xl:flex mb-2">
+              <p className="text-left">Players</p>
+              <p className="text-right">Rank</p>
+            </div>
+            <table className="min-w-full">
+              {/* <thead>
+                <tr className="flex justify-between w-full">
+                  <p className="py-2 text-left">Player</p>
+                  <p className="py-2 text-right">Rank</p>
+                </tr>
+              </thead> */}
+              <tbody className="xl:border-b border-t border-gray-600 ">
+                {players
+                  .slice(tableIndex * 5, (tableIndex + 1) * 5)
+                  .map((player) => (
+                    <tr
+                      key={player.wallet}
+                      className="border-b border-gray-600 flex justify-between "
+                    >
+                      <td className="flex gap-4 py-2 text-md">
+                        <p>{player.number}</p>
+                        <p>{player.wallet}</p>
+                      </td>
+                      <td className="py-2">{getMedalIcon(player.rank)}</td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default Leaderboard;

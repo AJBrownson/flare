@@ -5,10 +5,9 @@ import Link from "next/link";
 // import { FaBars } from "react-icons/fa";
 import Logo from "../public/assets/logo.png";
 import { FaDiscord, FaBars, FaTimes } from "react-icons/fa";
-import Home from "../public/assets/icons/house-05.png"
-import Game from "../public/assets/icons/nintendo-switch.png"
+import Home from "../public/assets/icons/house-05.png";
+import Game from "../public/assets/icons/nintendo-switch.png";
 import Solana from "../public/assets/solana-icon.png";
-
 
 export default function NavBar() {
   const [openMobileMenu, setOpenMobileMenu] = useState(false);
@@ -24,8 +23,12 @@ export default function NavBar() {
           {/* web view */}
           <div className="hidden xl:flex justify-between items-center py-4">
             <ul className="flex gap-8">
-              <li className="flex justify-center items-center"><Image src={Home} alt='' className="w-6 h-7 mr-2" /> Home</li>
-              <button className="flex justify-center items-center border border-transparent hover:bg-[#191815] hover:border hover:border-[#2F3336] p-2 rounded-lg"><Image src={Game} alt='' className="w-6 h-7 mr-2" /> GameOn</button>
+              <li className="flex justify-center items-center">
+                <Image src={Home} alt="" className="w-6 h-7 mr-2" /> Home
+              </li>
+              <button className="flex justify-center items-center border border-transparent hover:bg-[#191815] hover:border hover:border-[#2F3336] p-2 rounded-lg">
+                <Image src={Game} alt="" className="w-6 h-7 mr-2" /> GameOn
+              </button>
             </ul>
             <div className="">
               <Image src={Logo} alt="" className="w-8 lg:w-12 rounded-full" />

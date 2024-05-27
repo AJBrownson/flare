@@ -14,6 +14,27 @@ body {
   width: 0px;
 }
 
+/* .gradient-border {
+  border: 1px solid; 
+  border-image-slice: 1;
+  border-image-source: linear-gradient(45deg, #FFFE89, #C65E34);
+} */
+
+
+
+/* .border-gradient {
+  border: 1px solid transparent;
+  transition: border-image-source 0.3s ease;
+} */
+
+.border-gradient:hover {
+  border-image-slice: 1;
+  border-radius: 8px;
+  /* background: linear-gradient(120deg, #FFFE89, #C65E34); */
+  border-image-source: linear-gradient(120deg, #FFFE89, #C65E34);
+}
+
+
 .triangle-up {
   width: 0;
   height: 0;
@@ -27,4 +48,23 @@ body {
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
   border-top: 20px solid black;
+}
+
+@keyframes slide-down {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+dialog.slide-down {
+  animation: slide-down 0.5s forwards;
 }

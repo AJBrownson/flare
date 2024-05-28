@@ -9,7 +9,8 @@ const config: Config = {
   theme: {
     extend: {
       backgroundImage: {
-        'particles': "/public/assets/particles-bg.png"
+        'particles': "/public/assets/particles-bg.png",
+        'challenge': "url('/public/assets/challenger.png')",
       },
       keyframes: {
         bounce: {

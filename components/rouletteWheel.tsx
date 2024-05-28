@@ -1,146 +1,136 @@
-"use client"
+"use client";
 import { useState } from "react";
 import Image from "next/image";
-// import Spin from "../../../public/assets/spin-logo.png"
-import Pointer from "../public/assets/pointer.png"
-import WheelBase from "../public/assets/wheel-base.png"
-import WheelStand from "../public/assets/wheel-stand.png"
+import Pointer from "../public/assets/join-default.png";
+import PointerHover from "../public/assets/join-hover.png";
+import Group from "../public/assets/Group 2.png";
+import Timer from "../public/assets/icons/timer-02.png";
 
-
+const segments = Array.from({ length: 12 });
+const circles = Array.from({ length: 12 });
 
 const RouletteWheel = () => {
-    const [isJoinClicked, setIsJoinClicked] = useState(false);
-    const [comments, setComments] = useState(false);
-    const [winners, setWinners] = useState(false);
-  
-    const handleComments = () => {
-      setComments(!comments)
-    }
-  
-    const handleWinners = () => {
-      setWinners(!winners)
-    }
-  
-    const handleImageClick = () => {
-      // On the first click, toggle between Connect and Join images
-      if (!isJoinClicked) {
-        setIsJoinClicked(true);
-      } else {
-        // On the second click (Join image), show the modal
-        document.getElementById("modal-1")?.click();
-      }
-    };
-  
-    const handleModalClose = () => {
-      // Reset state to make Connect image appear after modal is closed
-      setIsJoinClicked(false);
-    };
-  
-    return (
-      <main className="bg-black">
-        <section className="oveflow-hidden mt-28 lg:flex lg:items-center h-full">
-          <div className="flex justify-center">
-            <div className="relative px-4 rounded-full outline outline-4 outline-[#DC1FFF]">
-              <div className="flex items-center justify-center">
-                {/* <img
-                  src={Stopper}
-                  alt=""
-                  className="w-24 bottom-[22rem] absolute z-[1]"
-                /> */}
-                {/* <img src={Handle} alt="" className="w-36 bottom-[23rem] absolute" /> */}
-              </div>
-  
-              <ul className="z-0 relative w-72 lg:w-[25rem] h-72 lg:h-[25rem] border-[5px] border-[#FFFE89] border-solid mx-auto my-4 rounded-full overflow-hidden p-0">
-                <li className="bg-[#090719] border-l border-[rgb(255,254,137)] transform rotate-0 skew-y-[-60deg] overflow-hidden absolute top-0 right-0 w-[50%] h-[50%] origin-[0%_100%]">
-                <div className="absolute -left-[100%] width-[200%] height-[200%] bg-slate-600">
-                    1
-                  </div>
-                </li>
-                <li className="bg-[#090719] border-l border-[#FFFE89] transform rotate-[30deg] skew-y-[-60deg] overflow-hidden absolute top-0 right-0 w-[50%] h-[50%] origin-[0%_100%]">
-                  <div className="absolute -left-[100%] width-[200%] height-[200%]">
-                    2
-                  </div>
-                </li>
-                <li className="bg-[#090719] border-l border-[#FFFE89] transform rotate-[60deg] skew-y-[-60deg] overflow-hidden absolute top-0 right-0 w-[50%] h-[50%] origin-[0%_100%]">
-                  <div className="absolute -left-[100%] width-[200%] height-[200%]">
-                    3
-                  </div>
-                </li>
-                <li className="bg-[#090719] border-l border-[#FFFE89] transform rotate-[90deg] skew-y-[-60deg] overflow-hidden absolute top-0 right-0 w-[50%] h-[50%] origin-[0%_100%]">
-                  <div className="absolute -left-[100%] width-[200%] height-[200%]">
-                    4
-                  </div>
-                </li>
-                <li className="bg-[#090719] border-l border-[#FFFE89] transform rotate-[120deg] skew-y-[-60deg] overflow-hidden absolute top-0 right-0 w-[50%] h-[50%] origin-[0%_100%]">
-                  <div className="absolute -left-[100%] width-[200%] height-[200%]">
-                    5
-                  </div>
-                </li>
-                <li className="bg-[#090719] border-l border-[#FFFE89] transform rotate-[150deg] skew-y-[-60deg] overflow-hidden absolute top-0 right-0 w-[50%] h-[50%] origin-[0%_100%]">
-                  <div className="absolute -left-[100%] width-[200%] height-[200%]">
-                    6
-                  </div>
-                </li>
-                <li className="bg-[#090719] border-l border-[#FFFE89] transform rotate-[180deg] skew-y-[-60deg] overflow-hidden absolute top-0 right-0 w-[50%] h-[50%] origin-[0%_100%]">
-                  <div className="absolute -left-[100%] width-[200%] height-[200%]">
-                    7
-                  </div>
-                </li>
-                <li className="bg-[#090719] border-l border-[#FFFE89] transform rotate-[210deg] skew-y-[-60deg] overflow-hidden absolute top-0 right-0 w-[50%] h-[50%] origin-[0%_100%]">
-                  <div className="absolute -left-[100%] width-[200%] height-[200%]">
-                    8
-                  </div>
-                </li>
-                <li className="bg-[#090719] border-l border-[#FFFE89] transform rotate-[240deg] skew-y-[-60deg] overflow-hidden absolute top-0 right-0 w-[50%] h-[50%] origin-[0%_100%]">
-                  <div className="absolute -left-[100%] width-[200%] height-[200%]">
-                    9
-                  </div>
-                </li>
-                <li className="bg-[#090719] border-l border-[#FFFE89] transform rotate-[270deg] skew-y-[-60deg] overflow-hidden absolute top-0 right-0 w-[50%] h-[50%] origin-[0%_100%]">
-                  <div className="absolute -left-[100%] width-[200%] height-[200%]">
-                    10
-                  </div>
-                </li>
-                <li className="bg-[#090719] border-l border-[#FFFE89] transform rotate-[300deg] skew-y-[-60deg] overflow-hidden absolute top-0 right-0 w-[50%] h-[50%] origin-[0%_100%]">
-                  <div className="absolute -left-[100%] width-[200%] height-[200%]">
-                    11
-                  </div>
-                </li>
-                <li className="bg-[#090719] border-l border-[#FFFE89] transform rotate-[330deg] skew-y-[-60deg] overflow-hidden absolute top-0 right-0 w-[50%] h-[50%] origin-[0%_100%]">
-                  <div className="absolute -left-[100%] width-[200%] height-[200%]">
-                    12
-                  </div>
-                </li>
-              </ul>
-  
-              {/* div for logo */}
-              <div className="flex items-center justify-center">
-              <Image
-                src={Pointer}
-                alt=""
-                className="w-20 lg:w-[120px] absolute bottom-28 lg:bottom-[10rem]"
-                // className="w-12 lg:w-[130px] absolute bottom-28 lg:bottom-[11.5rem] lg:left-[11.75rem]"
-              />
-              </div>
+  const [isSpinning, setIsSpinning] = useState(false);
+  const [rotation, setRotation] = useState(0);
 
-              {/* wheel base */}
-              <div className="flex items-center">
+  const spin = () => {
+    if (isSpinning) return;
+    setIsSpinning(true);
+    const newRotation = rotation + 360 * 5 + Math.floor(Math.random() * 360);
+    setRotation(newRotation);
+    setTimeout(() => setIsSpinning(false), 5000);
+  };
+
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <main className="mt-10 flex flex-col justify-center items-center text-white font-space">
+      <section className="overflow-hidden lg:flex lg:items-center h-full">
+        <div className="flex justify-center bg-black rounded-full px-0">
+          <div className="z-10 relative px-4 rounded-full outline outline-4 outline-[#0091FF]">
+            <ul
+              className="z-10 relative w-72 lg:w-[23rem] h-72 lg:h-[23rem] border-[5px] border-[#FFFE89] border-solid mx-auto my-4 rounded-full overflow-hidden p-0"
+              style={{
+                transform: `rotate(${rotation}deg)`,
+                transition: isSpinning
+                  ? "transform 5s cubic-bezier(0.33, 1, 0.68, 1)"
+                  : "none",
+              }}
+            >
+              {segments.map((_, index) => (
+                <li
+                  key={index}
+                  className="bg-[#090719] border-l border-[#FFFE89] transform overflow-hidden absolute top-0 right-0 w-[50%] h-[50%] origin-[0%_100%]"
+                  style={{
+                    transform: `rotate(${index * 30}deg) skewY(-60deg)`,
+                  }}
+                >
+                  <div className="absolute -left-[100%] w-[200%] h-[200%] flex items-center justify-center">
+                    {index + 1}
+                  </div>
+                </li>
+              ))}
+            </ul>
+
+            {/* Small circles around the wheel */}
+            {circles.map((_, index) => (
+              <div
+                key={index}
+                className="z-20 absolute bg-gradient-to-r from-[#FFFE89] to-[#C65E34] w-2 h-2 rounded-full"
+                style={{
+                  top: `calc(50% + ${
+                    Math.sin((index / circles.length) * 2 * Math.PI) * 190
+                  }px)`,
+                  left: `calc(50% + ${
+                    Math.cos((index / circles.length) * 2 * Math.PI) * 190
+                  }px)`,
+                  transform: "translate(-50%, -50%)",
+                }}
+              />
+            ))}
+
+            {/* div for logo */}
+            <div className="flex items-center justify-center">
+              {/* <Image
+                onClick={spin}
+                src={Pointer}
+                alt="Pointer"
+                className="cursor-pointer z-10 w-20 lg:w-[120px] absolute bottom-28 lg:bottom-[9rem]"
+              /> */}
               <Image
-                  src={WheelStand}
-                  alt=""
-                  className="h-20 w-20 absolute left-10 lg:left-32 mt-10 lg:top-[25.5rem]"
-                />
-                <Image
-                  src={WheelBase}
-                  alt=""
-                  className="w-40 absolute left-20 lg:left-32 mt-10 lg:top-[25.5rem]"
-                />
-              </div>
+                onClick={spin}
+                src={isHovered ? PointerHover : Pointer}
+                alt="Pointer"
+                className="cursor-pointer z-10 w-20 lg:w-[120px] absolute bottom-28 lg:bottom-[9rem] transition-transform duration-300 ease-in-out"
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+              />
             </div>
           </div>
-        </section>
-      </main>
-    );
-  };
-  
-  export default RouletteWheel;
+          {/* wheel base */}
+          <div className="flex items-center">
+            <Image
+              src={Group}
+              alt="Wheel Stand"
+              className="bottom-16 left-[35.5rem] absolute"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* table for shiits max-w-lg */}
+      <div className="bg-[#10100E] p-2 border border-[#30302B] rounded-lg text-center w-full max-w-[476px] max-h-[157] mt-12 z-20 font-space">
+        <div className="flex justify-center items-center px-3 py-2 text-3xl bg-[#320554]">
+          <Image src={Timer} alt="" className="mr-2" />
+          <span className="text-white font-montserrat font-bold text-5xl">
+            10
+          </span>
+        </div>
+        <div className="grid grid-cols-4 gap-4 mt-1">
+          <div className="py-2 flex flex-col bg-[#10100E] border border-[#30302B] rounded-lg">
+            <p className="text-xs text-[#8E8E8E]">STAKES</p>
+            <span className="text-sm text-[#DC1FFF] font-montserrat font-semibold">
+              0.15 SOL
+            </span>
+          </div>
+          <div className="py-2 flex flex-col bg-[#10100E] border border-[#30302B] rounded-lg">
+            <p className="text-xs text-[#8E8E8E]">PRICE POOL</p>
+            <span className="text-sm text-[#4CC9A0] font-montserrat font-semibold">
+              1.80 SOL
+            </span>
+          </div>
+          <div className="py-2 flex flex-col bg-[#10100E] border border-[#30302B] rounded-lg">
+            <p className="text-xs text-[#8E8E8E]">ENTRIES</p>
+            <span className="text-sm font-semibold font-montserrat">0/12</span>
+          </div>
+          <div className="py-2 flex flex-col bg-[#10100E] border border-[#30302B] rounded-lg">
+            <p className="text-xs text-[#8E8E8E]">SLOT</p>
+            <span className="text-sm font-semibold font-montserrat"> - </span>
+          </div>
+        </div>
+      </div>
+    </main>
+  );
+};
+
+export default RouletteWheel;

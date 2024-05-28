@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import Link from "next/link"
 import Logo from "@/public/assets/logo.png";
 import { PiCaretDown, PiCaretUp } from "react-icons/pi";
 import Home from "@/public/assets/icons/house-05.png";
@@ -97,8 +98,7 @@ export default function NavBar() {
             }
           >
             <li className="navbar-item">Home</li>
-            <li className="navbar-item">Casino</li>
-            <li className="navbar-item">Whitepaper</li>
+            <li className="navbar-item">GameOn</li>
           </ul>
         </div>
       </nav>
@@ -116,6 +116,8 @@ export default function NavBar() {
           <h1 className="text-lg font-bold mb-8 font-montserrat">GameOn</h1>
           <div className="grid gap-4">
             <div className="grid grid-cols-3 gap-4 mb-1">
+
+              <Link href="/game">
               <div className="hover-image p-[1px] rounded-xl hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%">
                 <div className="bg-[#10100E] p-3 rounded-xl">
                   <Image src={Wheelz} alt="" />
@@ -127,6 +129,7 @@ export default function NavBar() {
                   </span>
                 </div>
               </div>
+              </Link>
 
               <div className="hover-image p-[1px] rounded-xl hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%">
                 <div className="bg-[#10100E] p-3 rounded-xl">

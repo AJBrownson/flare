@@ -24,12 +24,12 @@ const RouletteWheel = () => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <main className="mt-10 flex flex-col justify-center items-center text-white font-space">
-      <section className="overflow-hidden lg:flex lg:items-center h-full">
+    <main className="mt-20 xl:mt-10 flex flex-col justify-center items-center text-white font-space">
+      <section className="overflow-hidden xl:flex xl:items-center h-full">
         <div className="flex justify-center bg-black rounded-full px-0">
           <div className="z-10 relative px-4 rounded-full outline outline-4 outline-[#0091FF]">
             <ul
-              className="z-10 relative w-72 lg:w-[23rem] h-72 lg:h-[23rem] border-[5px] border-[#FFFE89] border-solid mx-auto my-4 rounded-full overflow-hidden p-0"
+              className="z-10 relative w-72 xl:w-[23rem] h-72 xl:h-[23rem] border-[5px] border-[#FFFE89] border-solid mx-auto my-4 rounded-full overflow-hidden p-0"
               style={{
                 transform: `rotate(${rotation}deg)`,
                 transition: isSpinning
@@ -88,18 +88,18 @@ const RouletteWheel = () => {
             </div>
           </div>
           {/* wheel base */}
-          <div className="flex items-center">
+          <div className="xl:flex items-center">
             <Image
               src={Group}
               alt="Wheel Stand"
-              className="bottom-16 left-[35.5rem] absolute"
+              className="bottom-40 left-20 xl:bottom-16 xl:left-[35.5rem] absolute"
             />
           </div>
         </div>
       </section>
 
       {/* table for shiits max-w-lg */}
-      <div className="bg-[#10100E] p-2 border border-[#30302B] rounded-lg text-center w-full max-w-[476px] max-h-[157] mt-12 z-20 font-space">
+      <div className="hidden xl:block bg-[#10100E] p-2 border border-[#30302B] rounded-lg text-center w-full max-w-[476px] max-h-[157] mt-12 z-20 font-space">
         <div className="flex justify-center items-center px-3 py-2 text-3xl bg-[#320554]">
           <Image src={Timer} alt="" className="mr-2" />
           <span className="text-white font-montserrat font-bold text-5xl">

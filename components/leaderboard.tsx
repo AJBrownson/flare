@@ -53,23 +53,23 @@ const Leaderboard = () => {
   return (
     <>
     
-    <div className="text-[#FFFFE3] container mx-auto font-sn">
+    <div className="text-[#FFFFE3] container mx-auto font-space">
     <div className="flex items-center gap-5 mb-6 xl:mb-8">
-      <h1 className="font-cabinet font-bold text-xl xl:text-2xl">Top Players</h1>
+      <h1 className="font-montserrat font-bold text-xl xl:text-2xl">Top Players</h1>
       <p className="py-2 px-3 text-sm text-[#8E8E8E] bg-[#191815] border border-[#30302B] flex items-center rounded-xl">Weekly Stats <Image src={Medal07} alt="" className="ml-2 w-5 h-5 xl:w-6 xl:h-6" /></p>
     </div>
       {/* Table heading for smaller screens */}
       <div className="flex justify-between lg:hidden mb-2">
-        <p className="text-left font-cabinet font-bold">Players</p>
-        <p className="text-right font-cabinet font-bold">Rank</p>
+        <p className="text-left font-montserrat font-bold">Players</p>
+        <p className="text-right font-montserrat font-bold">Rank</p>
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-8">
         {[0, 1].map((tableIndex) => (
           <div key={tableIndex} className="">
             {/* table heading for larger screens*/}
             <div className="justify-between hidden lg:flex mb-2">
-              <p className="text-left font-cabinet font-bold">Players</p>
-              <p className="text-right font-cabinet font-bold">Rank</p>
+              <p className="text-left font-montserrat font-bold">Players</p>
+              <p className="text-right font-montserrat font-bold">Rank</p>
             </div>
             <table className="min-w-full">
               {/* <thead>

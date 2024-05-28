@@ -29,7 +29,7 @@ const NavBar = () => {
   const [mobile, setMobile] = useState<boolean>(false);
 
   return (
-    <nav className="bg-black text-white py-1 font-sn">
+    <nav className="bg-black text-white py-1 font-space">
       <div className="flex justify-between items-center container md:px-16 mx-auto px-4">
         <div className="">
           <ul className="flex items-center md:space-x-8">

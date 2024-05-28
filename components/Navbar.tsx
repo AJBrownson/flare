@@ -1,11 +1,11 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import Logo from "../public/assets/logo.png";
+import Logo from "@/public/assets/logo.png";
 import { PiCaretDown, PiCaretUp } from "react-icons/pi";
-import Home from "../public/assets/icons/house-05.png";
-import Game from "../public/assets/icons/nintendo-switch.png";
-import Solana from "../public/assets/solana-icon.png";
+import Home from "@/public/assets/icons/house-05.png";
+import Game from "@/public/assets/icons/nintendo-switch.png";
+import Solana from "@/public/assets/solana-icon.png";
 import Wheelz from "@/public/assets/wheelz.png";
 import Tournament from "@/public/assets/tournament.png";
 import Games from "@/public/assets/games.png";
@@ -54,7 +54,7 @@ export default function NavBar() {
 
   return (
     <>
-      <nav className="font-sn">
+      <nav className="font-space">
         <div className="bg-[#10100E] border border-transparent border-b-[#2F3336] text-white">
           {/* web view */}
           <div className="hidden xl:flex justify-between items-center py-4">
@@ -103,7 +103,7 @@ export default function NavBar() {
         </div>
       </nav>
 
-      {/* Sliding Dialog bg-[#161616]*/}
+      {/* Sliding Dialog */}
       <div
         className={`fixed inset-0 bg-black bg-opacity-50 flex items-start justify-center z-50 transition-transform duration-500 ${
           isDialogOpen ? "translate-y-0" : "-translate-y-full"
@@ -113,7 +113,7 @@ export default function NavBar() {
           ref={dialogRef}
           className="bg-[#161616] border border-[#30302B] text-[#FFFFE3] w-full max-w-2xl mx-auto mt-20 p-6 rounded-lg shadow-lg"
         >
-          <h1 className="text-lg font-bold mb-8">GameOn</h1>
+          <h1 className="text-lg font-bold mb-8 font-montserrat">GameOn</h1>
           <div className="grid gap-4">
             <div className="grid grid-cols-3 gap-4 mb-1">
               <div className="hover-image p-[1px] rounded-xl hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%">

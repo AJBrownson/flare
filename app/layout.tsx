@@ -6,32 +6,28 @@ import { Wallet } from "../components/Wallet";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const cabinet_grotesk = localFont({
+const space_grotesk = localFont({
   src: [
     {
-      path: "../public/assets/fonts/cabinet-grotesk/CabinetGrotesk-Extrabold.otf",
-      weight: "800",
+      path: "../public/assets/fonts/SpaceGrotesk-Medium.ttf",
     },
     {
-      path: "../public/assets/fonts/cabinet-grotesk/CabinetGrotesk-Bold.otf",
-      weight: "700",
+      path: "../public/assets/fonts/SpaceGrotesk-Regular.ttf",
     },
   ],
-  variable: "--font-cabinet_grotesk",
+  variable: "--font-space_grotesk",
 });
 
-const sn_pro = localFont({
+const montserrat = localFont({
   src: [
     {
-      path: "../public/assets/fonts/sn-pro_5.0.1/ttf/sn-pro-latin-600-normal.ttf",
-      weight: "600",
+      path: "../public/assets/fonts/Montserrat-ExtraBold.otf",
     },
     {
-      path: "../public/assets/fonts/sn-pro_5.0.1/ttf/sn-pro-latin-500-normal.ttf",
-      weight: "500",
+      path: "../public/assets/fonts/Montserrat-Bold.otf",
     },
   ],
-  variable: "--font-sn_pro",
+  variable: "--font-montserrat",
 });
 
 export const metadata: Metadata = {
@@ -46,7 +42,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${cabinet_grotesk} ${sn_pro}`}>
+      <body className={`${space_grotesk.variable} ${montserrat.variable}`}>
         <div>
           <Wallet>
             <div>

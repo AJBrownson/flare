@@ -18,8 +18,8 @@ const config: Config = {
         },
       },
       fontFamily: {
-        cabinet: ["var(--font-cabinet_grotesk)"],
-        sn: ["var(--font-sn_pro)"],
+        montserrat: ["var(--font-montserrat)"],
+        space: ["var(--font-space_grotesk)"],
       },
       animation: {
         bounce: 'bounce 3s ease-in-out infinite',

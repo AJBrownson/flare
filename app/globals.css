@@ -34,6 +34,14 @@ body {
   border-image-source: linear-gradient(120deg, #FFFE89, #C65E34);
 }
 
+.hover-image {
+  transition: transform 0.5s ease-in-out;
+}
+
+.hover-image:hover {
+  transform: scale(1.1);
+}
+
 
 .triangle-up {
   width: 0;

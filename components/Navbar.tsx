@@ -1,9 +1,11 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import Link from "next/link"
-import Logo from "@/public/assets/logo.png";
+import Link from "next/link";
+import Logo from "@/public/assets/logo11.png";
 import { PiCaretDown, PiCaretUp } from "react-icons/pi";
+import Open from "@/public/assets/menu-bar.png";
+import Close from "@/public/assets/menu-close.png";
 import Home from "@/public/assets/icons/house-05.png";
 import Game from "@/public/assets/icons/nintendo-switch.png";
 import Solana from "@/public/assets/solana-icon.png";
@@ -79,7 +81,7 @@ export default function NavBar() {
               <Image src={Logo} alt="" className="w-8 lg:w-12 rounded-full" />
             </div>
             <div className="hidden lg:flex">
-              <button className="flex p-3 font-semibold rounded-lg items-center text-sm bg-[#0000FF] text-white">
+              <button className="flex p-3 font-semibold rounded-lg items-center text-sm bg-[#0000FF] text-[#FFFFE3]">
                 <Image src={Solana} alt="" className="w-4 h-4 mr-2" />
                 Connect Wallet
               </button>
@@ -87,19 +89,92 @@ export default function NavBar() {
           </div>
 
           {/* mobile menu div */}
-          <div onClick={handleMenuClick} className="block lg:hidden">
-            {/* {openMobileMenu ? <FaTimes size={25} /> : <FaBars size={25} />} */}
+          <div className="flex items-center justify-between py-2">
+            <div onClick={handleMenuClick} className="block xl:hidden">
+              {openMobileMenu ? (
+                <Image src={Close} alt="" />
+              ) : (
+                <Image src={Open} alt="" />
+              )}
+            </div>
+            <Link href="/">
+            <Image src={Logo} alt="" className="ml-12 w-11 h-11 rounded-full" />
+            </Link>
+            <button className="flex p-3  rounded-lg items-center text-xs bg-[#0000FF] text-[#FFFFE3]">
+              <Image src={Solana} alt="" className="w-3 h-3 mr-2" />
+              Connect Wallet
+            </button>
+
+            {/* Mobile menu dropdown */}
+            {openMobileMenu && (
+              <ul className="lg:hidden bg-[#000000] py-3 px-4 z-40 fixed left-0 top-16 w-full h-full">
+                <div>
+                  <h1 className="text-lg font-bold mb-3 font-montserrat">GameOn</h1>
+                  <div className="grid grid-cols-2 gap-2">
+                  <Link href="/game">
+                    <div className="bg-[#191815] p-3 rounded-xl">
+                      <Image src={Wheelz} alt="The Wheelz" />
+                      <span className="flex justify-between items-center mt-3">
+                        <p className="text-sm">The Wheelz</p>
+                        <p className="text-xs bg-[#191815] text-[#191815] rounded-xl py-1 px-2">
+                          Soon
+                        </p>
+                      </span>
+                    </div>
+                    </Link>
+
+                    <div className="hover-image p-[1px] rounded-xl hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%">
+                      <div className="bg-[#191815] p-3 rounded-xl">
+                        <Image src={Tournament} alt="Tournaments" />
+                        <span className="flex justify-between items-center mt-3">
+                          <p className="text-sm">Tournaments</p>
+                          <p className="text-xs bg-[#560082] text-[#C6C6C6] rounded-xl py-1 px-2">
+                            Soon
+                          </p>
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="hover-image p-[1px] rounded-xl hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%">
+                      <div className="bg-[#191815] p-3 rounded-xl">
+                        <Image src={Games} alt="More Games" />
+                        <span className="flex justify-between items-center mt-3">
+                          <p className="text-sm">More Games</p>
+                          <p className="text-xs bg-[#560082] text-[#C6C6C6] rounded-xl py-1 px-2">
+                            Soon
+                          </p>
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="hover-image p-[1px] rounded-xl hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%">
+                      <div className="bg-[#191815] p-3 rounded-xl">
+                        <Image src={NFT} alt="More Games" />
+                        <span className="flex justify-between items-center mt-3">
+                          <p className="text-sm">NFT Shop</p>
+                          <p className="text-xs bg-[#560082] text-[#C6C6C6] rounded-xl py-1 px-2">
+                            Soon
+                          </p>
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="hover-image p-[1px] rounded-xl hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%">
+                      <div className="bg-[#191815] p-3 rounded-xl">
+                        <Image src={Dex} alt="More Games" />
+                        <span className="flex justify-between items-center mt-3">
+                          <p className="text-sm">DEX</p>
+                          <p className="text-xs bg-[#560082] text-[#C6C6C6] rounded-xl py-1 px-2">
+                            Soon
+                          </p>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ul>
+            )}
           </div>
-          <ul
-            className={
-              openMobileMenu
-                ? `lg:hidden bg-[#14112D] px-3 z-40 fixed left-0 top-16 w-full h-full ease-in-out duration-500`
-                : `ease-in-out duration-500 fixed top-16 bottom-0 left-[-100%]`
-            }
-          >
-            <li className="navbar-item">Home</li>
-            <li className="navbar-item">GameOn</li>
-          </ul>
         </div>
       </nav>
 
@@ -116,19 +191,18 @@ export default function NavBar() {
           <h1 className="text-lg font-bold mb-8 font-montserrat">GameOn</h1>
           <div className="grid gap-4">
             <div className="grid grid-cols-3 gap-4 mb-1">
-
               <Link href="/game">
-              <div className="hover-image p-[1px] rounded-xl hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%">
-                <div className="bg-[#10100E] p-3 rounded-xl">
-                  <Image src={Wheelz} alt="" />
-                  <span className="flex justify-between items-center mt-3">
-                    <p className="text-sm">The Wheelz</p>
-                    <p className="text-xs bg-[#10100E] text-[#10100E] rounded-xl py-1 px-2">
-                      Soon
-                    </p>
-                  </span>
+                <div className="hover-image p-[1px] rounded-xl hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%">
+                  <div className="bg-[#10100E] p-3 rounded-xl">
+                    <Image src={Wheelz} alt="" />
+                    <span className="flex justify-between items-center mt-3">
+                      <p className="text-sm">The Wheelz</p>
+                      <p className="text-xs bg-[#10100E] text-[#10100E] rounded-xl py-1 px-2">
+                        Soon
+                      </p>
+                    </span>
+                  </div>
                 </div>
-              </div>
               </Link>
 
               <div className="hover-image p-[1px] rounded-xl hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%">

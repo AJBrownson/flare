@@ -11,7 +11,20 @@ const circles = Array.from({ length: 12 });
 const colors = ["#931892", "#000000", "#0861F4", "#058E16", "B71122", "#931892", "#000000", "#0861F4", "#058E16", "B71122",];
 
 
-
+          {/* <div className="flex items-center justify-between py-2">
+            <div onClick={handleMenuClick} className="block lg:hidden">
+              {openMobileMenu ? (
+                <Image src={Close} alt="Close Menu" />
+              ) : (
+                <Image src={Open} alt="Open Menu" />
+              )}
+            </div>
+            <Image src={Logo} alt="Logo" className="w-12 h-12 rounded-full" />
+            <button className="flex p-3 rounded-lg items-center text-xs bg-[#0000FF] text-[#FFFFE3]">
+              <Image src={Solana} alt="Solana Icon" className="w-3 h-3 mr-2" />
+              Connect Wallet
+            </button>
+          </div> */}
 
 
 const getColorForSegment = (index: number) => colors[index % (colors.length)];

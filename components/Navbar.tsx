@@ -61,10 +61,12 @@ export default function NavBar() {
         <div className="bg-[#10100E] border border-transparent border-b-[#2F3336] text-white">
           {/* web view */}
           <div className="hidden xl:flex justify-between items-center py-4">
-            <ul className="flex gap-8">
+            <ul className="flex justify-center items-center gap-8">
+              <Link href="/">
               <li className="flex justify-center items-center">
                 <Image src={Home} alt="" className="w-6 h-7 mr-2" /> Home
               </li>
+              </Link>
               <button
                 onClick={isDialogOpen ? closeDialog : openDialog}
                 className="flex justify-center items-center border border-transparent hover:bg-[#191815] hover:border hover:border-[#2F3336] p-2 rounded-lg"

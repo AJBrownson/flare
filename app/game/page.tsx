@@ -1,7 +1,7 @@
 "use client";
 import Footer from "@/components/Footer";
 import NavBar from "@/components/Navbar";
-import RouletteWheel from "@/components/rouletteWheel";
+import RouletteWheel from "@/components/tempi";
 
 export default function GameOn() {
   return (
@@ -10,7 +10,7 @@ export default function GameOn() {
         <section className="xl:bg-[url('../public/assets/challenger.png')] bg-[url('../public/assets/challenger-mobile.png')] bg-cover bg-no-repeat xl:border-l-[1px] xl:border-r-[1px] xl:border-x-blue-500 xl:shadow-glow-sides w-full max-w-full xl:max-w-[820px] px-4">
           <NavBar />
           <RouletteWheel />
-          {/* <Footer /> */}
+          <Footer />
         </section>
       </main>
     </>

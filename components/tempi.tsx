@@ -13,6 +13,7 @@ const circles = Array.from({ length: 12 });
 const RouletteWheel = () => {
   const [isSpinning, setIsSpinning] = useState(false);
   const [rotation, setRotation] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
 
   const spin = () => {
     if (isSpinning) return;
@@ -22,11 +23,9 @@ const RouletteWheel = () => {
     setTimeout(() => setIsSpinning(false), 5000);
   };
 
-  const [isHovered, setIsHovered] = useState(false);
-
   return (
-    <main className="mt-20 xl:mt-10 flex flex-col justify-center items-center text-white font-space">
-      <section className="overflow-hidden xl:flex xl:items-center h-full">
+    <main className="mt-20 xl:mt-10 flex flex-col justify-center items-center text-white font-space relative">
+      <section className="overflow-hidden flex flex-col items-center h-96 xl:h-[30rem] relative">
         <div className="flex justify-center bg-black rounded-full px-0">
           <div className="z-10 relative px-4 rounded-full outline outline-4 outline-[#0091FF]">
             <ul
@@ -60,47 +59,38 @@ const RouletteWheel = () => {
                 className="z-20 absolute bg-gradient-to-r from-[#FFFE89] to-[#C65E34] w-2 h-2 rounded-full"
                 style={{
                   top: `calc(50% + ${
-                    Math.sin((index / circles.length) * 2 * Math.PI) * 190
+                    Math.sin((index / circles.length) * 2 * Math.PI) * 150
                   }px)`,
                   left: `calc(50% + ${
-                    Math.cos((index / circles.length) * 2 * Math.PI) * 190
+                    Math.cos((index / circles.length) * 2 * Math.PI) * 150
                   }px)`,
                   transform: "translate(-50%, -50%)",
                 }}
               />
             ))}
 
-            {/* div for logo */}
-            <div className="flex items-center justify-center">
-              {/* <Image
-                onClick={spin}
-                src={Pointer}
-                alt="Pointer"
-                className="cursor-pointer z-10 w-20 lg:w-[120px] absolute bottom-28 lg:bottom-[9rem]"
-              /> */}
-              <Image
-                onClick={spin}
-                src={isHovered ? PointerHover : Pointer}
-                alt="Pointer"
-                className="cursor-pointer z-10 w-20 lg:w-[120px] absolute bottom-28 lg:bottom-[9rem] transition-transform duration-300 ease-in-out"
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}
-              />
-            </div>
-            {/* wheel base */}
-            <div className="xl:flex items-center">
-              <Image
-                src={Group}
-                alt="Wheel Stand"
-                className="bottom-40 left-20 xl:bottom-0 xl:left-[35.5rem] absolute"
-              />
-            </div>
+            {/* Pointer */}
+            <Image
+              onClick={spin}
+              src={isHovered ? Pointer : PointerHover}
+              alt="Pointer"
+              className="cursor-pointer z-10 w-20 lg:w-[120px] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-transform duration-300 ease-in-out"
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+            />
           </div>
+
+          {/* Wheel base */}
+          <Image
+            src={Group}
+            alt="Wheel Stand"
+            className="absolute bottom-0 left-1/2 transform -translate-x-1/2"
+          />
         </div>
       </section>
 
-      {/* table for shiits max-w-lg */}
-      <div className="hidden xl:block bg-[#10100E] p-2 border border-[#30302B] rounded-lg text-center w-full max-w-[476px] max-h-[157] mt-12 z-20 font-space">
+      {/* Table for statistics */}
+      <div className="block bg-[#10100E] p-2 border border-[#30302B] rounded-lg text-center w-full max-w-[476px] max-h-[157] relative -mt-3">
         <div className="flex justify-center items-center px-3 py-2 text-3xl bg-[#320554]">
           <Image src={Timer} alt="" className="mr-2" />
           <span className="text-white font-montserrat font-bold text-5xl">
@@ -131,10 +121,7 @@ const RouletteWheel = () => {
         </div>
       </div>
 
-      {/* widget for chat */}
-      <section>
-        <Image src={Chat} alt="" className="absolute bottom-0 w-16 h-16" />
-      </section>
+      {/* Widget for chat */}
     </main>
   );
 };

@@ -30,6 +30,16 @@ body {
 }
 
 
+
+@media (min-width: 1025px) {
+  .circle-large {
+    top: calc(50% + 400px) !important;
+    left: calc(50% + 400px) !important;
+  }
+}
+
+
+
 .triangle-up {
   width: 0;
   height: 0;

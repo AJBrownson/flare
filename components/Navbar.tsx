@@ -89,7 +89,7 @@ export default function NavBar() {
           </div>
 
           {/* mobile menu div */}
-          <div className="flex items-center justify-between py-2">
+          <div className="flex xl:hidden items-center justify-between py-2">
             <div onClick={handleMenuClick} className="block xl:hidden">
               {openMobileMenu ? (
                 <Image src={Close} alt="" />

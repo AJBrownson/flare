@@ -2,7 +2,8 @@
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from 'next/navigation'
+import { usePathname } from "next/navigation";
+import ModalDialog from "react-basic-modal-dialog";
 import Logo from "@/public/assets/logo11.png";
 import { PiCaretDown, PiCaretUp } from "react-icons/pi";
 import Open from "@/public/assets/menu-bar.png";
@@ -15,26 +16,32 @@ import Tournament from "@/public/assets/tournament.png";
 import Games from "@/public/assets/games.png";
 import NFT from "@/public/assets/nft.png";
 import Dex from "@/public/assets/dex.png";
+import BasicWheel from "@/public/assets/icons/basic-wheel.png";
+import ChallengerWheel from "@/public/assets/icons/challenger-wheel.png";
+import EliteWheel from "@/public/assets/icons/elite-wheel.png";
 
 export default function NavBar() {
   const [openMobileMenu, setOpenMobileMenu] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isCaretUp, setIsCaretUp] = useState(false);
   const dialogRef = useRef<HTMLDivElement>(null);
-  const pathName = usePathname()
+  const pathName = usePathname();
+  const isOnHomePage = pathName === "/";
 
-  const isOnHomePage = pathName === '/'
+  const [isDialogVisible, setIsDialogVisible] = useState(false);
+  const openDialog = () => setIsDialogVisible(true);
+  const closeDialog = () => setIsDialogVisible(false);
 
   const handleMenuClick = () => {
     setOpenMobileMenu(!openMobileMenu);
   };
 
-  const openDialog = () => {
+  const openModalDialog = () => {
     setIsDialogOpen(true);
     setIsCaretUp(true);
   };
 
-  const closeDialog = () => {
+  const closeModalDialog = () => {
     setIsDialogOpen(false);
     setIsCaretUp(false);
   };
@@ -44,7 +51,7 @@ export default function NavBar() {
       dialogRef.current &&
       !dialogRef.current.contains(event.target as Node)
     ) {
-      closeDialog();
+      closeModalDialog();
     }
   };
 
@@ -64,14 +71,18 @@ export default function NavBar() {
       <nav className="font-space">
         <div className="bg-[#10100E] border border-transparent border-b-[#2F3336] text-white">
           <div className="hidden xl:flex justify-between items-center py-4">
-            <ul className={`relative flex justify-center items-center gap-8 ${isOnHomePage ? "nav-item" : ""}`}>
-              <Link href="/" >
-              <li className="flex justify-center items-center">
-                <Image src={Home} alt="" className="w-6 h-7 mr-2" /> Home
-              </li>
+            <ul
+              className={`relative flex justify-center items-center gap-8 ${
+                isOnHomePage ? "nav-item" : ""
+              }`}
+            >
+              <Link href="/">
+                <li className="flex justify-center items-center">
+                  <Image src={Home} alt="" className="w-6 h-7 mr-2" /> Home
+                </li>
               </Link>
               <button
-                onClick={isDialogOpen ? closeDialog : openDialog}
+                onClick={isDialogOpen ? closeModalDialog : openModalDialog}
                 className="flex justify-center items-center border border-transparent hover:bg-[#191815] hover:border hover:border-[#2F3336] p-2 rounded-lg"
               >
                 <Image src={Game} alt="" className="w-6 h-7 mr-2" /> GameOn{" "}
@@ -103,7 +114,11 @@ export default function NavBar() {
               )}
             </div>
             <Link href="/">
-            <Image src={Logo} alt="" className="ml-12 w-11 h-11 rounded-full" />
+              <Image
+                src={Logo}
+                alt=""
+                className="ml-12 w-11 h-11 rounded-full"
+              />
             </Link>
             <button className="flex p-3  rounded-lg items-center text-xs bg-[#0000FF] text-[#FFFFE3]">
               <Image src={Solana} alt="" className="w-3 h-3 mr-2" />
@@ -114,19 +129,19 @@ export default function NavBar() {
             {openMobileMenu && (
               <ul className="lg:hidden bg-[#000000] py-3 px-4 z-40 fixed left-0 top-16 w-full h-full">
                 <div>
-                  <h1 className="text-lg font-bold mb-3 font-montserrat">GameOn</h1>
+                  <h1 className="text-lg font-bold mb-3 font-montserrat">
+                    GameOn
+                  </h1>
                   <div className="grid grid-cols-2 gap-2">
-                  <Link href="/game">
-                    <div className="bg-[#191815] p-3 rounded-xl">
-                      <Image src={Wheelz} alt="The Wheelz" />
-                      <span className="flex justify-between items-center mt-3">
-                        <p className="text-sm">The Wheelz</p>
-                        <p className="text-xs bg-[#191815] text-[#191815] rounded-xl py-1 px-2">
-                          Soon
-                        </p>
-                      </span>
-                    </div>
-                    </Link>
+                      <div className="bg-[#191815] p-3 rounded-xl" onClick={openDialog}>
+                        <Image src={Wheelz} alt="The Wheelz" />
+                        <span className="flex justify-between items-center mt-3">
+                          <p className="text-sm">The Wheelz</p>
+                          <p className="text-xs bg-[#191815] text-[#191815] rounded-xl py-1 px-2">
+                            Soon
+                          </p>
+                        </span>
+                      </div>
 
                     <div className="hover-image p-[1px] rounded-xl hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%">
                       <div className="bg-[#191815] p-3 rounded-xl">
@@ -183,7 +198,7 @@ export default function NavBar() {
         </div>
       </nav>
 
-      {/* Sliding Dialog */}
+      {/* Sliding Modal Dialog */}
       <div
         className={`fixed inset-0 bg-black bg-opacity-50 flex items-start justify-center z-50 transition-transform duration-500 ${
           isDialogOpen ? "translate-y-0" : "-translate-y-full"
@@ -196,19 +211,20 @@ export default function NavBar() {
           <h1 className="text-lg font-bold mb-8 font-montserrat">GameOn</h1>
           <div className="grid gap-4">
             <div className="grid grid-cols-3 gap-4 mb-1">
-              <Link href="/game">
-                <div className="hover-image p-[1px] rounded-xl hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%">
-                  <div className="bg-[#10100E] p-3 rounded-xl">
-                    <Image src={Wheelz} alt="" />
-                    <span className="flex justify-between items-center mt-3">
-                      <p className="text-sm">The Wheelz</p>
-                      <p className="text-xs bg-[#10100E] text-[#10100E] rounded-xl py-1 px-2">
-                        Soon
-                      </p>
-                    </span>
-                  </div>
+              <div
+                onClick={openDialog}
+                className="hover-image p-[1px] rounded-xl hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%"
+              >
+                <div className="bg-[#10100E] p-3 rounded-xl">
+                  <Image src={Wheelz} alt="" />
+                  <span className="flex justify-between items-center mt-3">
+                    <p className="text-sm">The Wheelz</p>
+                    <p className="text-xs bg-[#10100E] text-[#10100E] rounded-xl py-1 px-2">
+                      Soon
+                    </p>
+                  </span>
                 </div>
-              </Link>
+              </div>
 
               <div className="hover-image p-[1px] rounded-xl hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%">
                 <div className="bg-[#10100E] p-3 rounded-xl">
@@ -262,6 +278,69 @@ export default function NavBar() {
           </div>
         </div>
       </div>
+
+      {/* user's game choice dialog */}
+      <ModalDialog
+        isDialogVisible={isDialogVisible}
+        closeDialog={closeDialog}
+        dialogClassName="max-w-md rounded-xl p-0 backdrop:bg-black/60"
+        contentClassName="bg-[#161616] rounded-none p-6 gap-2 justify-between items-center"
+      >
+        <div className="bg-[#161616] text-[#FFFFE3] pt-16 pb-8 px-2 max-w-[500px]">
+        <Image onClick={closeDialog} src={Close} alt="" className="absolute cursor-pointer top-2 right-2 p-1 w-8 h-8 border hover:border-[#FFFFE3] rounded-lg" />
+          <h2 className="text-center text-lg font-montserrat">
+            Select an arena for your game
+          </h2>
+          <p className="text-xs text-center">
+            Step into your gaming arena of choice! Which one will it be?
+          </p>
+          <div className="mt-6 flex flex-col gap-1">
+            <Link href="/basic">
+            <div className="p-[1px] rounded-xl border border-[#30302B] hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%">
+              <div className="flex items-center gap-4 bg-[#161616] p-1 rounded-xl">
+                <Image src={BasicWheel} alt="" />
+                <span className="flex flex-col">
+                  <p className="text-sm font-montserrat mb-2">Basic Wheel</p>
+                  <p className="text-xs text-[#8E8E8E]">
+                    Play and earn extra rewards
+                  </p>
+                </span>
+                <p className="py-1 px-2"></p>
+              </div>
+            </div>
+            </Link>
+
+            <div className="p-[1px] rounded-xl border border-[#30302B] hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%">
+              <div className="flex items-center gap-4 bg-[#161616] p-1 rounded-xl">
+                <Image src={ChallengerWheel} alt="" />
+                <span className="flex flex-col">
+                  <p className="text-sm font-montserrat mb-2">
+                    Challenger Wheel
+                  </p>
+                  <p className="text-xs text-[#8E8E8E]">
+                    Everyone bets equally, and the winner takes it all
+                  </p>
+                </span>
+                <p className="py-1 px-2"></p>
+              </div>
+            </div>
+            <div className="p-[1px] rounded-xl border border-[#30302B] hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%">
+              <div className="flex items-center gap-4 bg-[#161616] p-1 rounded-xl">
+                <Image src={EliteWheel} alt="" />
+                <span className="flex flex-col">
+                  <p className="text-sm font-montserrat mb-2">Elite Roller</p>
+                  <p className="text-xs text-[#8E8E8E]">
+                    Players face off in a high-stakes challenge
+                  </p>
+                </span>
+                <p className="text-xs bg-[#560082] text-[#C6C6C6] rounded-xl py-1 px-2">
+                  Soon
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+       </ModalDialog>
     </>
   );
 }

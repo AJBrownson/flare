@@ -6,6 +6,7 @@ import Pointer from "@/public/assets/join-default.png";
 import PointerHover from "@/public/assets/join-hover.png";
 import Group from "@/public/assets/Group 2.png";
 import Timer from "@/public/assets/icons/timer-02.png";
+import ChatWidget from "./chatWidget";
 
 const segments = Array.from({ length: 12 });
 const circles = Array.from({ length: 12 });
@@ -14,6 +15,11 @@ const RouletteWheel = () => {
   const [isSpinning, setIsSpinning] = useState(false);
   const [rotation, setRotation] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  const [chats, setChats] = useState(false);
+
+  const handleChats = () => {
+    setChats(!chats);
+  }
 
   const spin = () => {
     if (isSpinning) return;
@@ -121,7 +127,13 @@ const RouletteWheel = () => {
         </div>
       </div>
 
-      {/* Widget for chat */}
+      {/* widget for chat */}
+      <div onClick={handleChats} className="absolute bottom-40 xl:bottom-40 right-0 z-10">
+          {chats ? <Image src={Chat} alt="" className="cursor-pointer w-12 h-12 lg:w-16 lg:h-16 xl:w-20 xl:h-20" /> : <Image src={Chat} alt="" className="cursor-pointer w-12 h-12 lg:w-16 lg:h-16 xl:w-20 xl:h-20" />}
+          </div>
+          <div className={chats ? `z-40 fixed bottom-0 ease-in-out duration-1000`: `ease-in-out duration-1000 z-40 fixed -bottom-[100%]`}>
+          <ChatWidget />
+          </div>
     </main>
   );
 };

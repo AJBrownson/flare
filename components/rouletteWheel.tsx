@@ -25,7 +25,8 @@ const RouletteWheel = () => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <main className="mt-20 xl:mt-10 flex flex-col justify-center items-center text-white font-space">
+    <main className="relative mt-20 xl:mt-10 flex flex-col justify-center items-center text-white font-space">
+      <Image src={Chat} alt="" className=" w-16 h-16" />
       <section className="overflow-hidden xl:flex xl:items-center h-full">
         <div className="flex justify-center bg-black rounded-full px-0">
           <div className="z-10 relative px-4 rounded-full outline outline-4 outline-[#0091FF]">
@@ -130,11 +131,6 @@ const RouletteWheel = () => {
           </div>
         </div>
       </div>
-
-      {/* widget for chat */}
-      <section>
-        <Image src={Chat} alt="" className="absolute bottom-0 w-16 h-16" />
-      </section>
     </main>
   );
 };

@@ -2,6 +2,7 @@
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from 'next/navigation'
 import Logo from "@/public/assets/logo11.png";
 import { PiCaretDown, PiCaretUp } from "react-icons/pi";
 import Open from "@/public/assets/menu-bar.png";
@@ -18,8 +19,11 @@ import Dex from "@/public/assets/dex.png";
 export default function NavBar() {
   const [openMobileMenu, setOpenMobileMenu] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [isCaretUp, setIsCaretUp] = useState(false); // New state variable
+  const [isCaretUp, setIsCaretUp] = useState(false);
   const dialogRef = useRef<HTMLDivElement>(null);
+  const pathName = usePathname()
+
+  const isOnHomePage = pathName === '/'
 
   const handleMenuClick = () => {
     setOpenMobileMenu(!openMobileMenu);
@@ -59,10 +63,9 @@ export default function NavBar() {
     <>
       <nav className="font-space">
         <div className="bg-[#10100E] border border-transparent border-b-[#2F3336] text-white">
-          {/* web view */}
           <div className="hidden xl:flex justify-between items-center py-4">
-            <ul className="flex justify-center items-center gap-8">
-              <Link href="/">
+            <ul className={`relative flex justify-center items-center gap-8 ${isOnHomePage ? "nav-item" : ""}`}>
+              <Link href="/" >
               <li className="flex justify-center items-center">
                 <Image src={Home} alt="" className="w-6 h-7 mr-2" /> Home
               </li>

@@ -319,6 +319,7 @@ export default function NavBar() {
               </div>
             </Link>
 
+            <Link href="/game">
             <div className="p-[1px] rounded-xl border border-[#30302B] hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%">
               <div className="flex items-center gap-4 bg-[#161616] p-1 rounded-xl">
                 <Image src={ChallengerWheel} alt="" />
@@ -333,6 +334,8 @@ export default function NavBar() {
                 <p className="py-1 px-2"></p>
               </div>
             </div>
+            </Link>
+
             <div className="p-[1px] rounded-xl border border-[#30302B] hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%">
               <div className="flex items-center gap-4 bg-[#161616] p-1 rounded-xl">
                 <Image src={EliteWheel} alt="" />

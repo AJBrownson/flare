@@ -4,17 +4,23 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Footer from "@/components/Footer";
 import NavBar from "@/components/Navbar";
-import RouletteWheel from "@/components/tempi";
+import RouletteWheel from "@/components/challengerWheel";
 import ModalDialog from "react-basic-modal-dialog";
 import Guide from "@/public/assets/icons/guide.png";
+import Cup from "@/public/assets/icons/cup.png";
 import { GiCheckMark } from "react-icons/gi";
+import Close from "@/public/assets/menu-close.png"
+import RecentWinners from "@/components/recentWinners";
 
 export default function GameOn() {
   const [isDialogVisible, setIsDialogVisible] = useState(false);
   const [checked, setChecked] = useState(false);
+  // const openDialog = () => setIsDialogVisible(true);
+  // const closeDialog = () => setIsDialogVisible(false);
 
   useEffect(() => {
-    const shouldShowPopupModal = localStorage.getItem("showPopupModal") !== "false";
+    const shouldShowPopupModal =
+      localStorage.getItem("showPopupModal") !== "false";
     if (shouldShowPopupModal) {
       setTimeout(() => {
         setIsDialogVisible(true);
@@ -34,6 +40,21 @@ export default function GameOn() {
       <main className="bg-[url('../public/assets/particles.png')] xl:w-full min-h-screen flex justify-center bg-cover bg-center bg-no-repeat font-space">
         <section className="xl:bg-[url('../public/assets/challenger.png')] bg-[url('../public/assets/challenger-mobile.png')] bg-cover bg-no-repeat xl:border-l-[1px] xl:border-r-[1px] xl:border-x-blue-500 xl:shadow-glow-sides w-full max-w-full xl:max-w-[820px] px-4">
           <NavBar />
+          
+          {/* buttons  */}
+          <div className="absolute top-24 w-full max-w-full xl:max-w-[785px] flex items-center justify-between">
+            <div className="p-[2px] w-[11rem] rounded-md bg-gradient-to-r from-[#935327] from-5% to-[#FFFE89] to-100%">
+              <button className="flex items-center rounded-md justify-between w-[11rem] py-2 px-4 text-xs xl:text-sm bg-[#fffd89c9] hover:bg-[#fffd898a] text-black">
+                <Image src={Cup} alt="" />
+                Recent Winners
+              </button>
+            </div>
+
+            <button className="text-[#FFFFE3] flex items-center justify-between py-3 px-4 text-xs bg-[#8e8e8e3f] shadow-md shadow-[#0091ff8e] rounded-md border border-[#ffffe32d]">
+              0.00 SGY | 100.00 SOL
+            </button>
+          </div>
+
           <RouletteWheel />
           <Footer />
         </section>
@@ -115,6 +136,19 @@ export default function GameOn() {
           </div>
         </div>
       </ModalDialog>
+
+      {/* <ModalDialog
+        isDialogVisible={isDialogVisible}
+        closeDialog={closeDialog}
+        dialogClassName="xl:max-w-md rounded-lg bg-transparent border-transparent p-0 backdrop:bg-black/60"
+      >
+        <div className="relative px-10">
+        <RecentWinners />
+        <button onClick={closeDialog} className="border rounded-lg p-1 absolute top-0 -right-0 ">
+            <Image src={Close} alt="" />
+          </button>
+        </div>
+      </ModalDialog> */}
     </>
   );
 }

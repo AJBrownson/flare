@@ -55,6 +55,7 @@ export default function NavBar() {
     }
   };
 
+
   useEffect(() => {
     if (isDialogOpen) {
       document.addEventListener("mousedown", handleClickOutside);
@@ -133,15 +134,18 @@ export default function NavBar() {
                     GameOn
                   </h1>
                   <div className="grid grid-cols-2 gap-2">
-                      <div className="bg-[#191815] p-3 rounded-xl" onClick={openDialog}>
-                        <Image src={Wheelz} alt="The Wheelz" />
-                        <span className="flex justify-between items-center mt-3">
-                          <p className="text-sm">The Wheelz</p>
-                          <p className="text-xs bg-[#191815] text-[#191815] rounded-xl py-1 px-2">
-                            Soon
-                          </p>
-                        </span>
-                      </div>
+                    <div
+                      className="bg-[#191815] p-3 rounded-xl"
+                      onClick={openDialog}
+                    >
+                      <Image src={Wheelz} alt="The Wheelz" />
+                      <span className="flex justify-between items-center mt-3">
+                        <p className="text-sm">The Wheelz</p>
+                        <p className="text-xs bg-[#191815] text-[#191815] rounded-xl py-1 px-2">
+                          Soon
+                        </p>
+                      </span>
+                    </div>
 
                     <div className="hover-image p-[1px] rounded-xl hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%">
                       <div className="bg-[#191815] p-3 rounded-xl">
@@ -213,7 +217,7 @@ export default function NavBar() {
             <div className="grid grid-cols-3 gap-4 mb-1">
               <div
                 onClick={openDialog}
-                className="hover-image p-[1px] rounded-xl hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%"
+                className="cursor-pointer hover-image p-[1px] rounded-xl hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%"
               >
                 <div className="bg-[#10100E] p-3 rounded-xl">
                   <Image src={Wheelz} alt="" />
@@ -287,7 +291,12 @@ export default function NavBar() {
         contentClassName="bg-[#161616] rounded-none p-6 gap-2 justify-between items-center"
       >
         <div className="bg-[#161616] text-[#FFFFE3] pt-16 pb-8 px-2 max-w-[500px]">
-        <Image onClick={closeDialog} src={Close} alt="" className="absolute cursor-pointer top-2 right-2 p-1 w-8 h-8 border hover:border-[#FFFFE3] rounded-lg" />
+          <Image
+            onClick={closeDialog}
+            src={Close}
+            alt=""
+            className="absolute cursor-pointer top-2 right-2 p-1 w-8 h-8 border hover:border-[#FFFFE3] rounded-lg"
+          />
           <h2 className="text-center text-lg font-montserrat">
             Select an arena for your game
           </h2>
@@ -296,18 +305,18 @@ export default function NavBar() {
           </p>
           <div className="mt-6 flex flex-col gap-1">
             <Link href="/basic">
-            <div className="p-[1px] rounded-xl border border-[#30302B] hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%">
-              <div className="flex items-center gap-4 bg-[#161616] p-1 rounded-xl">
-                <Image src={BasicWheel} alt="" />
-                <span className="flex flex-col">
-                  <p className="text-sm font-montserrat mb-2">Basic Wheel</p>
-                  <p className="text-xs text-[#8E8E8E]">
-                    Play and earn extra rewards
-                  </p>
-                </span>
-                <p className="py-1 px-2"></p>
+              <div className="p-[1px] rounded-xl border border-[#30302B] hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%">
+                <div className="flex items-center gap-4 bg-[#161616] p-1 rounded-xl">
+                  <Image src={BasicWheel} alt="" />
+                  <span className="flex flex-col">
+                    <p className="text-sm font-montserrat mb-2">Basic Wheel</p>
+                    <p className="text-xs text-[#8E8E8E]">
+                      Play and earn extra rewards
+                    </p>
+                  </span>
+                  <p className="py-1 px-2"></p>
+                </div>
               </div>
-            </div>
             </Link>
 
             <div className="p-[1px] rounded-xl border border-[#30302B] hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%">
@@ -340,7 +349,7 @@ export default function NavBar() {
             </div>
           </div>
         </div>
-       </ModalDialog>
+      </ModalDialog>
     </>
   );
 }

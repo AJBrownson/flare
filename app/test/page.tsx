@@ -1,32 +1,23 @@
 /* eslint-disable react/no-unescaped-entities */
 "use client";
 import { useState, useEffect } from "react";
+import Footer from "@/components/Footer";
 import NavBar from "@/components/Navbar";
 import Image from "next/image";
 import RouletteWheel from "@/components/basicWheel";
 import ModalDialog from "react-basic-modal-dialog";
-import Guide from "@/public/assets/icons/guide.png";
+import Guide from "@/public/assets/icons/guide.png"
 import { GiCheckMark } from "react-icons/gi";
 
 export default function GameOn() {
   const [isDialogVisible, setIsDialogVisible] = useState(false);
+  const closeDialog = () => setIsDialogVisible(false);
   const [checked, setChecked] = useState(false);
-  
+
   useEffect(() => {
-    const shouldShowModal = localStorage.getItem("showModal") !== "false";
-    if (shouldShowModal) {
-      setTimeout(() => {
-        setIsDialogVisible(true);
-      }, 1000);
-    }
+    setIsDialogVisible(true);
   }, []);
 
-  const closeDialog = () => {
-    if (checked) {
-      localStorage.setItem("showModal", "false");
-    }
-    setIsDialogVisible(false);
-  };
 
   return (
     <>
@@ -34,8 +25,11 @@ export default function GameOn() {
         <section className="xl:bg-[url('../public/assets/basic.png')] bg-[url('../public/assets/basic-mobile.png')] bg-cover bg-no-repeat xl:border-l-[1px] xl:border-r-[1px] xl:border-x-blue-500 xl:shadow-glow-sides w-full max-w-full xl:max-w-[820px] px-4">
           <NavBar />
           <RouletteWheel />
+          {/* <Footer /> */}
         </section>
       </main>
+
+
 
       {/* user's game preference dialog */}
       <ModalDialog
@@ -45,12 +39,12 @@ export default function GameOn() {
         contentClassName="bg-[#10100E] rounded-none p-6 gap-2 justify-between items-center"
       >
         <div className="text-[#FFFFE3]">
-          <div className="text-center py-4 px-6 bg-[#30302B]">
-            <h1 className="font-montserrat text-sm">Gameplay Guide</h1>
+          <div className="text-center p-6 bg-[#30302B]">
+            <h1 className="font-montserrat">Gameplay Guide</h1>
           </div>
           <div className="px-4">
             <span className="my-6 flex flex-col items-center">
-              <Image src={Guide} alt="Gameplay Guide" />
+              <Image src={Guide} alt="" />
             </span>
             <ul className="flex flex-col gap-4 text-white list-disc text-xs xl:text-sm pl-6">
               <li>
@@ -90,11 +84,8 @@ export default function GameOn() {
               </div>
               <span className="ml-3 text-xs xl:text-sm text-[#FFFFE3]">Don't show again</span>
             </label>
-            <div className="mt-8 mb-10 w-full">
-              <button
-                onClick={closeDialog}
-                className="text-xs xl:text-sm w-full py-2 bg-[#FFFFE3] hover:bg-[#fff] text-black rounded-lg"
-              >
+            <div className=" mt-8 mb-10 w-full">
+              <button onClick={closeDialog} className="text-xs xl:text-sm w-full py-2 bg-[#FFFFE3] hover:bg-[#fff] text-black rounded-lg">
                 Continue
               </button>
             </div>

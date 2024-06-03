@@ -173,7 +173,7 @@ export default function WheelDetails() {
                 index % 2 === 0 ? "bg-[#191815]" : "bg-[#10100E]"
               }`}
             >
-              <p className="text-sm py-[6px]">{deets.detail}</p>
+              <p className="text-xs py-[6px]">{deets.detail}</p>
             </div>
           ))}
 

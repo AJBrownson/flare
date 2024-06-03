@@ -6,10 +6,22 @@ import Pointer from "@/public/assets/pointer.png";
 import Group from "../public/assets/Group 2.png";
 import Timer from "../public/assets/icons/timer-02.png";
 
+type WagerType = "SOL" | "SGY";
 
 const segments = Array.from({ length: 12 });
 const circles = Array.from({ length: 12 });
-const colors = ["#931892", "#000000", "#0861F4", "#058E16", "#B71122", "#931892", "#000000", "#0861F4", "#058E16", "#B71122"];
+const colors = [
+  "#931892",
+  "#000000",
+  "#0861F4",
+  "#058E16",
+  "#B71122",
+  "#931892",
+  "#000000",
+  "#0861F4",
+  "#058E16",
+  "#B71122",
+];
 
 const RouletteWheel = () => {
   const [isSpinning, setIsSpinning] = useState(false);
@@ -25,36 +37,49 @@ const RouletteWheel = () => {
 
   const [isHovered, setIsHovered] = useState(false);
 
+  const [selectedWager, setSelectedWager] = useState("SOL");
 
-  const [selectedWager, setSelectedWager] = useState(null);
-
-  const handleButtonClick = (wager) => {
-    setSelectedWager(wager);
+  const handleButtonClick = (selectedWager: WagerType) => {
+    setSelectedWager(selectedWager);
   };
 
-  const getWagerAmount = () => {
-    if (selectedWager === "SOL") {
-      return {
-        stakes: "0.15 SOL",
-        pricePool: "1.80 SOL",
-      };
-    } else if (selectedWager === "SGY") {
-      return {
-        stakes: "0.20 SGY",
-        pricePool: "2.50 SGY",
-      };
-    } else {
-      return {
-        stakes: "-",
-        pricePool: "-",
-      };
-    }
-  };
+  const wagerSOL = [
+    {
+      id: 1,
+      wager: 0.015,
+    },
+    {
+      id: 2,
+      wager: 0.035,
+    },
+    {
+      id: 3,
+      wager: 0.075,
+    },
+    {
+      id: 4,
+      wager: 0.16,
+    },
+  ];
 
-  const wagerAmount = getWagerAmount();
-
-
-
+  const wagerSGY = [
+    {
+      id: 1,
+      wager: 1000,
+    },
+    {
+      id: 2,
+      wager: 1500,
+    },
+    {
+      id: 3,
+      wager: 2000,
+    },
+    {
+      id: 4,
+      wager: "Max",
+    },
+  ];
 
   return (
     <main className="mt-20 xl:mt-10 flex flex-col justify-center items-center text-white font-space">
@@ -127,46 +152,57 @@ const RouletteWheel = () => {
       </section>
 
       {/* table for wagers */}
-      <div className="hidden xl:block bg-[#10100E] p-2 border border-[#30302B] rounded-lg text-center w-full max-w-[380px] max-h-[136px] mt-12 z-20 font-space">
-      <div className="flex gap-4 justify-between px-2">
-        <button
-          onClick={() => handleButtonClick("SOL")}
-          className={`text-sm font-montserrat font-medium rounded-md w-full py-3 ${
-            selectedWager === "SOL"
-              ? "bg-gradient-to-r from-[#C65E34] to-[#FFFE89] text-black"
-              : "bg-[#10100E] text-[#8E8E8E] hover:text-[#FFFFE3]"
-          }`}
-        >
-          Wager SOL
-        </button>
-        <button
-          onClick={() => handleButtonClick("SGY")}
-          className={`text-sm font-montserrat font-medium rounded-md w-full py-3 ${
-            selectedWager === "SGY"
-              ? "bg-gradient-to-r from-[#C65E34] to-[#FFFE89] text-black"
-              : "bg-[#10100E] text-[#8E8E8E] hover:text-[#FFFFE3]"
-          }`}
-        >
-          Wager SGY
-        </button>
-      </div>
+      <div className="hidden xl:block bg-[#320554] py-2 px-2 border border-[#30302B] rounded-lg text-center w-full max-w-[380px] max-h-[145px] mt-12 z-20 font-space">
+        <div className="bg-[#10100E] flex gap-4 justify-between py-2 px-2 rounded-t-lg">
+          <button
+            onClick={() => handleButtonClick("SOL")}
+            className={`text-sm font-montserrat font-medium rounded-md w-full py-3 ${
+              selectedWager === "SOL"
+                ? "bg-gradient-to-r from-[#C65E34] to-[#FFFE89] text-black"
+                : "bg-[#10100E] text-[#8E8E8E] hover:text-[#FFFFE3]"
+            }`}
+          >
+            Wager SOL
+          </button>
+          <button
+            onClick={() => handleButtonClick("SGY")}
+            className={`text-sm font-montserrat font-medium rounded-md w-full py-3 ${
+              selectedWager === "SGY"
+                ? "bg-gradient-to-r from-[#C65E34] to-[#FFFE89] text-black"
+                : "bg-[#10100E] text-[#8E8E8E] hover:text-[#FFFFE3]"
+            }`}
+          >
+            Wager SGY
+          </button>
+        </div>
 
-      {/* Wager amount */}
-      <div className="grid grid-cols-4 gap-1 mt-1 px-2">
-        <div className="py-3 flex flex-col bg-[#DC1FFF] hover:bg-[#F2A9FF] border border-[#30302B] rounded-lg">
-          <p className="text-sm text-[#000000] font-semibold">{wagerAmount.stakes}</p>
-        </div>
-        <div className="py-3 flex flex-col bg-[#DC1FFF] hover:bg-[#F2A9FF] border border-[#30302B] rounded-lg ">
-        <p className="text-sm text-[#000000] font-semibold">{wagerAmount.pricePool}</p>
-        </div>
-        <div className="py-3 flex flex-col bg-[#DC1FFF] hover:bg-[#F2A9FF] border border-[#30302B] rounded-lg">
-          <p className="text-sm text-[#000000] font-semibold">{wagerAmount.stakes}</p>
-        </div>
-        <div className="py-3 flex flex-col bg-[#DC1FFF] hover:bg-[#F2A9FF] border border-[#30302B] rounded-lg ">
-        <p className="text-sm text-[#000000] font-semibold">{wagerAmount.pricePool}</p>
+        {/* Wager amount */}
+        <div className="grid grid-cols-4 gap-1  py-2 px-2 rounded-b-lg bg-[#560082]">
+          {selectedWager === "SOL" &&
+            wagerSOL.map((sol) => (
+              <div
+                key={sol.id}
+                className="text-center py-3 flex flex-col bg-[#DC1FFF] hover:bg-[#F2A9FF] border border-[#30302B] rounded-lg"
+              >
+                <p className="text-sm text-[#000000] font-semibold">
+                  {sol.wager}
+                </p>
+              </div>
+            ))}
+
+          {selectedWager === "SGY" &&
+            wagerSGY.map((sgy) => (
+              <div
+                key={sgy.id}
+                className="text-center py-3 flex flex-col bg-[#DC1FFF] hover:bg-[#F2A9FF] border border-[#30302B] rounded-lg"
+              >
+                <p className="text-sm text-[#000000] font-semibold">
+                  {sgy.wager}
+                </p>
+              </div>
+            ))}
         </div>
       </div>
-    </div>
     </main>
   );
 };

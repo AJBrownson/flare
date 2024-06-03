@@ -2,6 +2,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import NavBar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import Image from "next/image";
 import RouletteWheel from "@/components/basicWheel";
 import ModalDialog from "react-basic-modal-dialog";
@@ -49,13 +50,14 @@ export default function GameOn() {
               </button>
             </div>
 
-            <button className="text-[#FFFFE3] flex items-center justify-between py-3 px-4 text-xs bg-[#8e8e8e3f] shadow-md shadow-[#0091ff8e] rounded-md border border-[#ffffe32d]">
+            <button className="text-[#FFFFE3] flex items-center justify-between py-3 px-4 text-xs bg-[#8e8e8e3f] shadow-md shadow-[#dd1fff8e] rounded-md border border-[#ffffe32d]">
               0.00 SGY | 100.00 SOL
             </button>
           </div>
 
           {/* roulette wheel */}
           <RouletteWheel />
+          <Footer />
         </section>
       </main>
 

@@ -6,12 +6,16 @@ import Image from "next/image";
 import RouletteWheel from "@/components/basicWheel";
 import ModalDialog from "react-basic-modal-dialog";
 import Guide from "@/public/assets/icons/guide.png";
+import Catalogue from "@/public/assets/icons/catalogue.png";
 import { GiCheckMark } from "react-icons/gi";
+import WheelDetailsModal from "@/components/basicModals/wheelDetailsModal";
+
 
 export default function GameOn() {
   const [isDialogVisible, setIsDialogVisible] = useState(false);
   const [checked, setChecked] = useState(false);
-  
+  const [isWheelDetailsModalOpen, setWheelDetailsModalOpen] = useState(false);
+
   useEffect(() => {
     const shouldShowModal = localStorage.getItem("showModal") !== "false";
     if (shouldShowModal) {
@@ -33,9 +37,30 @@ export default function GameOn() {
       <main className="bg-[url('../public/assets/particles.png')] xl:w-full min-h-screen flex justify-center bg-cover bg-center bg-no-repeat font-space">
         <section className="xl:bg-[url('../public/assets/basic.png')] bg-[url('../public/assets/basic-mobile.png')] bg-cover bg-no-repeat xl:border-l-[1px] xl:border-r-[1px] xl:border-x-blue-500 xl:shadow-glow-sides w-full max-w-full xl:max-w-[820px] px-4">
           <NavBar />
+
+          {/* buttons  */}
+          <div className="absolute top-24 w-full max-w-full xl:max-w-[785px] flex items-center justify-between">
+            <div className="p-[2px] w-[10rem] rounded-md bg-gradient-to-r from-[#935327] from-5% to-[#FFFE89] to-100%">
+              <button 
+                onClick={() => setWheelDetailsModalOpen(true)}
+                className="flex items-center rounded-md justify-between w-[10rem] py-2 px-4 text-xs xl:text-sm bg-[#fffd89c9] hover:bg-[#fffd898a] text-black">
+                <Image src={Catalogue} alt="" />
+                Wheel Details
+              </button>
+            </div>
+
+            <button className="text-[#FFFFE3] flex items-center justify-between py-3 px-4 text-xs bg-[#8e8e8e3f] shadow-md shadow-[#0091ff8e] rounded-md border border-[#ffffe32d]">
+              0.00 SGY | 100.00 SOL
+            </button>
+          </div>
+
+          {/* roulette wheel */}
           <RouletteWheel />
         </section>
       </main>
+
+      {/* Wheel details modal */}
+      <WheelDetailsModal isOpen={isWheelDetailsModalOpen} onClose={() => setWheelDetailsModalOpen(false)} />
 
       {/* user's game preference dialog */}
       <ModalDialog
@@ -84,11 +109,16 @@ export default function GameOn() {
               >
                 {checked && (
                   <span className="text-black">
-                    <GiCheckMark color="black" className="w-2 h-2 xl:w-3 xl:h-3" />
+                    <GiCheckMark
+                      color="black"
+                      className="w-2 h-2 xl:w-3 xl:h-3"
+                    />
                   </span>
                 )}
               </div>
-              <span className="ml-3 text-xs xl:text-sm text-[#FFFFE3]">Don't show again</span>
+              <span className="ml-3 text-xs xl:text-sm text-[#FFFFE3]">
+                Don't show again
+              </span>
             </label>
             <div className="mt-8 mb-10 w-full">
               <button

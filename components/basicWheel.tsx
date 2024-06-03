@@ -6,6 +6,7 @@ import Pointer from "@/public/assets/pointer.png";
 import Group from "../public/assets/Group 2.png";
 import Timer from "../public/assets/icons/timer-02.png";
 
+
 const segments = Array.from({ length: 12 });
 const circles = Array.from({ length: 12 });
 const colors = ["#931892", "#000000", "#0861F4", "#058E16", "#B71122", "#931892", "#000000", "#0861F4", "#058E16", "#B71122"];

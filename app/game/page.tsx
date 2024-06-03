@@ -9,14 +9,14 @@ import ModalDialog from "react-basic-modal-dialog";
 import Guide from "@/public/assets/icons/guide.png";
 import Cup from "@/public/assets/icons/cup.png";
 import { GiCheckMark } from "react-icons/gi";
-import Close from "@/public/assets/menu-close.png"
-import RecentWinners from "@/components/recentWinners";
+import RecentWinnersModal from "@/components/challengerModals/recentWinnersModal";
+
+
 
 export default function GameOn() {
   const [isDialogVisible, setIsDialogVisible] = useState(false);
   const [checked, setChecked] = useState(false);
-  // const openDialog = () => setIsDialogVisible(true);
-  // const closeDialog = () => setIsDialogVisible(false);
+  const [isRecentWinnersModalOpen, setRecentWinnersModalOpen] = useState(false);
 
   useEffect(() => {
     const shouldShowPopupModal =
@@ -40,11 +40,14 @@ export default function GameOn() {
       <main className="bg-[url('../public/assets/particles.png')] xl:w-full min-h-screen flex justify-center bg-cover bg-center bg-no-repeat font-space">
         <section className="xl:bg-[url('../public/assets/challenger.png')] bg-[url('../public/assets/challenger-mobile.png')] bg-cover bg-no-repeat xl:border-l-[1px] xl:border-r-[1px] xl:border-x-blue-500 xl:shadow-glow-sides w-full max-w-full xl:max-w-[820px] px-4">
           <NavBar />
-          
+
           {/* buttons  */}
           <div className="absolute top-24 w-full max-w-full xl:max-w-[785px] flex items-center justify-between">
             <div className="p-[2px] w-[11rem] rounded-md bg-gradient-to-r from-[#935327] from-5% to-[#FFFE89] to-100%">
-              <button className="flex items-center rounded-md justify-between w-[11rem] py-2 px-4 text-xs xl:text-sm bg-[#fffd89c9] hover:bg-[#fffd898a] text-black">
+              <button
+                onClick={() => setRecentWinnersModalOpen(true)}
+                className="flex items-center rounded-md justify-between w-[11rem] py-2 px-4 text-xs xl:text-sm bg-[#fffd89c9] hover:bg-[#fffd898a] text-black"
+              >
                 <Image src={Cup} alt="" />
                 Recent Winners
               </button>
@@ -137,18 +140,11 @@ export default function GameOn() {
         </div>
       </ModalDialog>
 
-      {/* <ModalDialog
-        isDialogVisible={isDialogVisible}
-        closeDialog={closeDialog}
-        dialogClassName="xl:max-w-md rounded-lg bg-transparent border-transparent p-0 backdrop:bg-black/60"
-      >
-        <div className="relative px-10">
-        <RecentWinners />
-        <button onClick={closeDialog} className="border rounded-lg p-1 absolute top-0 -right-0 ">
-            <Image src={Close} alt="" />
-          </button>
-        </div>
-      </ModalDialog> */}
+      {/* Recent Winners modal */}
+      <RecentWinnersModal
+        isOpen={isRecentWinnersModalOpen}
+        onClose={() => setRecentWinnersModalOpen(false)}
+      />
     </>
   );
 }

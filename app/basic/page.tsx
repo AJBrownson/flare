@@ -40,12 +40,10 @@ export default function GameOn() {
           <NavBar />
 
           {/* buttons  */}
-          <div className="absolute top-24 w-full max-w-full xl:max-w-[785px] flex items-center justify-between">
-            <div className="p-[2px] w-[10rem] rounded-md bg-gradient-to-r from-[#935327] from-5% to-[#FFFE89] to-100%">
-              <button 
-                onClick={() => setWheelDetailsModalOpen(true)}
-                className="flex items-center rounded-md justify-between w-[10rem] py-2 px-4 text-xs xl:text-sm bg-[#fffd89c9] hover:bg-[#fffd898a] text-black">
-                <Image src={Catalogue} alt="" />
+          <div className="absolute top-24 w-full xl:max-w-[785px] flex items-center justify-between">
+            <div onClick={() => setWheelDetailsModalOpen(true)} className="p-[2px] xl:w-[10rem] rounded-md bg-gradient-to-r from-[#935327] from-5% to-[#FFFE89] to-100%">
+              <button className="flex items-center rounded-md justify-between xl:w-[10rem] py-2 px-4 text-xs xl:text-sm bg-[#fffd89c9] hover:bg-[#fffd898a] text-black">
+                <Image src={Catalogue} alt="" className="hidden lg:block" />
                 Wheel Details
               </button>
             </div>

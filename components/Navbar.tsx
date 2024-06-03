@@ -19,6 +19,9 @@ import Dex from "@/public/assets/dex.png";
 import BasicWheel from "@/public/assets/icons/basic-wheel.png";
 import ChallengerWheel from "@/public/assets/icons/challenger-wheel.png";
 import EliteWheel from "@/public/assets/icons/elite-wheel.png";
+import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
+import { useWallet } from "@solana/wallet-adapter-react";
+import { cn } from "@/lib/utils";
 
 export default function NavBar() {
   const [openMobileMenu, setOpenMobileMenu] = useState(false);
@@ -31,6 +34,8 @@ export default function NavBar() {
   const [isDialogVisible, setIsDialogVisible] = useState(false);
   const openDialog = () => setIsDialogVisible(true);
   const closeDialog = () => setIsDialogVisible(false);
+
+  const { connected } = useWallet();
 
   const handleMenuClick = () => {
     setOpenMobileMenu(!openMobileMenu);
@@ -96,12 +101,7 @@ export default function NavBar() {
             <div className="">
               <Image src={Logo} alt="" className="w-8 lg:w-12 rounded-full" />
             </div>
-            <div className="hidden lg:flex">
-              <button className="flex p-3 font-semibold rounded-lg items-center text-sm bg-[#0000FF] text-[#FFFFE3]">
-                <Image src={Solana} alt="" className="w-4 h-4 mr-2" />
-                Connect Wallet
-              </button>
-            </div>
+            <ConnectButton connected={connected} />
           </div>
 
           {/* mobile menu div */}
@@ -120,10 +120,8 @@ export default function NavBar() {
                 className="ml-12 w-11 h-11 rounded-full"
               />
             </Link>
-            <button className="flex p-3  rounded-lg items-center text-xs bg-[#0000FF] text-[#FFFFE3]">
-              <Image src={Solana} alt="" className="w-3 h-3 mr-2" />
-              Connect Wallet
-            </button>
+
+            <ConnectButton connected={connected} />
 
             {/* Mobile menu dropdown */}
             {openMobileMenu && (
@@ -133,15 +131,18 @@ export default function NavBar() {
                     GameOn
                   </h1>
                   <div className="grid grid-cols-2 gap-2">
-                      <div className="bg-[#191815] p-3 rounded-xl" onClick={openDialog}>
-                        <Image src={Wheelz} alt="The Wheelz" />
-                        <span className="flex justify-between items-center mt-3">
-                          <p className="text-sm">The Wheelz</p>
-                          <p className="text-xs bg-[#191815] text-[#191815] rounded-xl py-1 px-2">
-                            Soon
-                          </p>
-                        </span>
-                      </div>
+                    <div
+                      className="bg-[#191815] p-3 rounded-xl"
+                      onClick={openDialog}
+                    >
+                      <Image src={Wheelz} alt="The Wheelz" />
+                      <span className="flex justify-between items-center mt-3">
+                        <p className="text-sm">The Wheelz</p>
+                        <p className="text-xs bg-[#191815] text-[#191815] rounded-xl py-1 px-2">
+                          Soon
+                        </p>
+                      </span>
+                    </div>
 
                     <div className="hover-image p-[1px] rounded-xl hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%">
                       <div className="bg-[#191815] p-3 rounded-xl">
@@ -287,7 +288,12 @@ export default function NavBar() {
         contentClassName="bg-[#161616] rounded-none p-6 gap-2 justify-between items-center"
       >
         <div className="bg-[#161616] text-[#FFFFE3] pt-16 pb-8 px-2 max-w-[500px]">
-        <Image onClick={closeDialog} src={Close} alt="" className="absolute cursor-pointer top-2 right-2 p-1 w-8 h-8 border hover:border-[#FFFFE3] rounded-lg" />
+          <Image
+            onClick={closeDialog}
+            src={Close}
+            alt=""
+            className="absolute cursor-pointer top-2 right-2 p-1 w-8 h-8 border hover:border-[#FFFFE3] rounded-lg"
+          />
           <h2 className="text-center text-lg font-montserrat">
             Select an arena for your game
           </h2>
@@ -296,18 +302,18 @@ export default function NavBar() {
           </p>
           <div className="mt-6 flex flex-col gap-1">
             <Link href="/basic">
-            <div className="p-[1px] rounded-xl border border-[#30302B] hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%">
-              <div className="flex items-center gap-4 bg-[#161616] p-1 rounded-xl">
-                <Image src={BasicWheel} alt="" />
-                <span className="flex flex-col">
-                  <p className="text-sm font-montserrat mb-2">Basic Wheel</p>
-                  <p className="text-xs text-[#8E8E8E]">
-                    Play and earn extra rewards
-                  </p>
-                </span>
-                <p className="py-1 px-2"></p>
+              <div className="p-[1px] rounded-xl border border-[#30302B] hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%">
+                <div className="flex items-center gap-4 bg-[#161616] p-1 rounded-xl">
+                  <Image src={BasicWheel} alt="" />
+                  <span className="flex flex-col">
+                    <p className="text-sm font-montserrat mb-2">Basic Wheel</p>
+                    <p className="text-xs text-[#8E8E8E]">
+                      Play and earn extra rewards
+                    </p>
+                  </span>
+                  <p className="py-1 px-2"></p>
+                </div>
               </div>
-            </div>
             </Link>
 
             <div className="p-[1px] rounded-xl border border-[#30302B] hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%">
@@ -340,7 +346,55 @@ export default function NavBar() {
             </div>
           </div>
         </div>
-       </ModalDialog>
+      </ModalDialog>
     </>
+  );
+}
+
+function ConnectButton({ connected }: { connected: boolean }) {
+  const [hydrate, setHydrate] = useState(false);
+
+  useEffect(() => {
+    setHydrate(true);
+  }, []);
+
+  if (!hydrate) return null;
+  return (
+    <div
+      className={cn(
+        "hidden lg:flex w-max",
+        connected && "border border-[#8E8E8E] rounded-[10px]"
+      )}
+    >
+      {/* <button className="flex p-3 font-semibold rounded-lg items-center text-sm bg-[#0000FF] text-[#FFFFE3]">
+    <Image src={Solana} alt="" className="w-4 h-4 mr-2" />
+    Connect Wallet
+  </button> */}
+
+      <WalletMultiButton
+        style={{
+          backgroundColor: `${connected ? "transparent" : "#023BFF"}`,
+          fontSize: ".9rem",
+          padding: ".9rem",
+          borderRadius: "10px",
+        }}
+        // onClick={() => {
+        //   console.log("click wallet");
+        // }}
+        endIcon={
+          !connected ? (
+            <Image
+              src="/assets/solana-icon.png"
+              alt="solana"
+              width={10}
+              height={10}
+              className="w-0"
+            />
+          ) : (
+            <PiCaretDown className="ml-2" />
+          )
+        }
+      />
+    </div>
   );
 }

@@ -24,9 +24,9 @@ export default function WheelzHeader() {
   }, [connected]);
 
   return (
-    <header className="flex items-center justify-between text-black w-full">
-      <div className="p-1 bg-gradient-to-r from-[#935327] to-[#FFFE89] overflow-hidden rounded-lg text-xs sm:text-sm">
-        <button className="bg-gradient-to-r from-[#FFFE89] to-[#D7BF65] hover:opacity-70 py-2 px-5 rounded-lg flex items-center gap-2">
+    <header className="relative flex items-center justify-between text-black w-full">
+      <div className="absolute top-1/2 left-0 p-[2px] bg-gradient-to-r from-[#935327] to-[#FFFE89] overflow-hidden rounded-lg text-xs sm:text-sm">
+        <button className="bg-gradient-to-r from-[#FFFE89] to-[#D7BF65] hover:opacity-70 py-[6px] px-5 rounded-lg flex items-center gap-2">
           <Image
             src="/assets/catalogue.svg"
             alt="logue"
@@ -37,7 +37,7 @@ export default function WheelzHeader() {
         </button>
       </div>
 
-      <div className="bg-[#8E8E8E] text-white py-2 grid grid-cols-2 divide-x rounded-lg shadow-lg shadow-fuchsia-700">
+      <div className="absolute top-1/2 right-0 bg-[#8E8E8E] text-white py-2 grid grid-cols-2 divide-x rounded-lg shadow-lg shadow-fuchsia-700">
         <div className="px-4">N/A SGY</div>
         <div className="px-4">
           {connected && solBalance ? formatNumberToKM(solBalance, 2) : "N/A"}{" "}

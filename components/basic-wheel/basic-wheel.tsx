@@ -216,12 +216,12 @@ const RouletteWheel = () => {
   }, [wheelz]);
 
   return (
-    <main className=" relative px-4 sm:px-10 text-white  font-space min-h-screen conic-bg-grad ">
-      <div className="py-6">
+    <main className="relative px-4 sm:px-10 text-white  font-space min-h-screen conic-bg-grad ">
+      <div className="py-4">
         <WheelzHeader />
       </div>
 
-      <section className="relative flex flex-col items-center justify-center py-4 px-2 w-full h-full">
+      <section className="relative flex flex-col items-center justify-center py-20 xl:py-4 px-2 w-full h-full">
         <div
           className="flex justify-center bg-transparent px-0 overflow-hidden z-10"
           style={{ clipPath: "circle(60%)" }}
@@ -295,8 +295,8 @@ const RouletteWheel = () => {
             </div>
           </div>
         </div>
-        <div className="">
-          <Image src={Group} alt="Wheel Stand" className="-mt-5 w-48 sm:w-56" />
+        <div className=""> {/* -mt-5 */}
+          <Image src={Group} alt="Wheel Stand" className="-mt-10 w-48 sm:w-56" />
         </div>
 
         <WheelzPicker
@@ -313,6 +313,8 @@ const RouletteWheel = () => {
 };
 
 export default RouletteWheel;
+
+
 
 enum EWagers {
   solWager,
@@ -372,7 +374,7 @@ const WheelzPicker = ({
       <div className="bg-black grid grid-cols-2 gap-3 p-2 rounded-tr-lg rounded-tl-lg text-[#8E8E8E]">
         <button
           className={cn(
-            "rounded-lg py-3 bg-gradient-to-r",
+            "rounded-lg py-[6px] bg-gradient-to-r",
             wager == EWagers.solWager &&
               "from-[#FFFE89]  to-[#935327] text-black"
           )}
@@ -382,7 +384,7 @@ const WheelzPicker = ({
         </button>
         <button
           className={cn(
-            "rounded-lg py-3 bg-gradient-to-r",
+            "rounded-lg py-[6px] bg-gradient-to-r",
             wager == EWagers.sgyWager &&
               "from-[#FFFE89]  to-[#935327] text-black"
           )}

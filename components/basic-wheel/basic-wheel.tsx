@@ -29,6 +29,7 @@ import { GiCheckMark } from "react-icons/gi";
 import Guide from "@/public/assets/icons/guide.png";
 import ChatWidget from "./chatWidget";
 import Chat from "@/public/assets/chat btn.png"
+import Chathover from "@/public/assets/chat btn-hover.png"
 import Close from "@/public/assets/menu-close.png"
 
 
@@ -382,7 +383,7 @@ const RouletteWheel = () => {
           />
         ) : (
           <Image
-            src={Chat}
+            src={Chathover}
             alt=""
             className="cursor-pointer w-12 h-12 lg:w-16 lg:h-16 xl:w-20 xl:h-20"
           />

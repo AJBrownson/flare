@@ -63,6 +63,7 @@ export default function NavBar() {
     }
   };
 
+
   useEffect(() => {
     if (isDialogOpen) {
       document.addEventListener("mousedown", handleClickOutside);
@@ -217,7 +218,7 @@ export default function NavBar() {
             <div className="grid grid-cols-3 gap-4 mb-1">
               <div
                 onClick={openDialog}
-                className="hover-image p-[1px] rounded-xl hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%"
+                className="cursor-pointer hover-image p-[1px] rounded-xl hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%"
               >
                 <div className="bg-[#10100E] p-3 rounded-xl">
                   <Image src={Wheelz} alt="" />
@@ -319,6 +320,7 @@ export default function NavBar() {
               </div>
             </Link>
 
+            <Link href="/game">
             <div className="p-[1px] rounded-xl border border-[#30302B] hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%">
               <div className="flex items-center gap-4 bg-[#161616] p-1 rounded-xl">
                 <Image src={ChallengerWheel} alt="" />
@@ -333,6 +335,8 @@ export default function NavBar() {
                 <p className="py-1 px-2"></p>
               </div>
             </div>
+            </Link>
+
             <div className="p-[1px] rounded-xl border border-[#30302B] hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%">
               <div className="flex items-center gap-4 bg-[#161616] p-1 rounded-xl">
                 <Image src={EliteWheel} alt="" />
@@ -352,6 +356,7 @@ export default function NavBar() {
       </ModalDialog>
     </>
   );
+<<<<<<< HEAD
 }
 
 function ConnectButton({ connected }: { connected: boolean }) {
@@ -401,3 +406,6 @@ function ConnectButton({ connected }: { connected: boolean }) {
     </div>
   );
 }
+=======
+}
+>>>>>>> af6296c7881924a00cef9e94106450c1e753c6ab

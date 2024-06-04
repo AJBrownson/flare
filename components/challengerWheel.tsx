@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 "use client";
 import { useState } from "react";
 import Image from "next/image";
@@ -8,6 +9,7 @@ import Group from "@/public/assets/Group 2.png";
 import Timer from "@/public/assets/icons/timer-02.png";
 import ChatWidget from "./chatWidget";
 
+
 const segments = Array.from({ length: 12 });
 const circles = Array.from({ length: 12 });
 
@@ -17,9 +19,12 @@ const RouletteWheel = () => {
   const [isHovered, setIsHovered] = useState(false);
   const [chats, setChats] = useState(false);
 
+  // const openDialog = () => setIsDialogVisible(true);
+  // const closeDialog = () => setIsDialogVisible(false);
+
   const handleChats = () => {
     setChats(!chats);
-  }
+  };
 
   const spin = () => {
     if (isSpinning) return;
@@ -30,6 +35,7 @@ const RouletteWheel = () => {
   };
 
   return (
+    <>
     <main className="mt-20 xl:mt-10 flex flex-col justify-center items-center text-white font-space relative">
       <section className="overflow-hidden flex flex-col items-center h-96 xl:h-[30rem] relative">
         <div className="flex justify-center bg-black rounded-full px-0">
@@ -128,13 +134,35 @@ const RouletteWheel = () => {
       </div>
 
       {/* widget for chat */}
-      <div onClick={handleChats} className="absolute bottom-40 xl:bottom-40 right-0 z-10">
-          {chats ? <Image src={Chat} alt="" className="cursor-pointer w-12 h-12 lg:w-16 lg:h-16 xl:w-20 xl:h-20" /> : <Image src={Chat} alt="" className="cursor-pointer w-12 h-12 lg:w-16 lg:h-16 xl:w-20 xl:h-20" />}
-          </div>
-          <div className={chats ? `z-40 fixed bottom-0 ease-in-out duration-1000`: `ease-in-out duration-1000 z-40 fixed -bottom-[100%]`}>
-          <ChatWidget />
-          </div>
+      <div
+        onClick={handleChats}
+        className="absolute bottom-40 xl:bottom-40 right-0 z-10"
+      >
+        {chats ? (
+          <Image
+            src={Chat}
+            alt=""
+            className="cursor-pointer w-12 h-12 lg:w-16 lg:h-16 xl:w-20 xl:h-20"
+          />
+        ) : (
+          <Image
+            src={Chat}
+            alt=""
+            className="cursor-pointer w-12 h-12 lg:w-16 lg:h-16 xl:w-20 xl:h-20"
+          />
+        )}
+      </div>
+      <div
+        className={
+          chats
+            ? `z-40 fixed bottom-0 xl:left-1/2 ease-in-out duration-1000`
+            : `ease-in-out xl:left-1/2 duration-1000 z-40 fixed -bottom-[100%]`
+        }
+      >
+        <ChatWidget />
+      </div>
     </main>
+    </>
   );
 };
 

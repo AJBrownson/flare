@@ -397,7 +397,7 @@ const RouletteWheel = () => {
             <div className="mt-8 mb-10 w-full">
               <button
                 onClick={closeDialog}
-                className="text-xs xl:text-sm w-full py-2 bg-[#FFFFE3] hover:bg-[#fff] text-black rounded-lg"
+                className="text-xs xl:text-sm font-extrabold w-full py-2 bg-[#FFFFE3] hover:bg-[#fff] text-black rounded-lg"
               >
                 Continue
               </button>

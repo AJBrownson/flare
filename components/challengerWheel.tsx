@@ -7,7 +7,7 @@ import Pointer from "@/public/assets/join-default.png";
 import PointerHover from "@/public/assets/join-hover.png";
 import Group from "@/public/assets/Group 2.png";
 import Timer from "@/public/assets/icons/timer-02.png";
-import ChatWidget from "./chatWidget";
+import ChatWidget from "./challengerModals/chatWidget";
 
 
 const segments = Array.from({ length: 12 });

@@ -23,9 +23,6 @@ import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { cn } from "@/lib/utils";
 
-
-
-
 export default function NavBar() {
   const [openMobileMenu, setOpenMobileMenu] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -319,20 +316,23 @@ export default function NavBar() {
               </div>
             </Link>
 
-            <div className="p-[1px] rounded-xl border border-[#30302B] hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%">
-              <div className="flex items-center gap-4 bg-[#161616] p-1 rounded-xl">
-                <Image src={ChallengerWheel} alt="" />
-                <span className="flex flex-col">
-                  <p className="text-sm font-montserrat mb-2">
-                    Challenger Wheel
-                  </p>
-                  <p className="text-xs text-[#8E8E8E]">
-                    Everyone bets equally, and the winner takes it all
-                  </p>
-                </span>
-                <p className="py-1 px-2"></p>
+            <Link href="/game">
+              <div className="p-[1px] rounded-xl border border-[#30302B] hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%">
+                <div className="flex items-center gap-4 bg-[#161616] p-1 rounded-xl">
+                  <Image src={ChallengerWheel} alt="" />
+                  <span className="flex flex-col">
+                    <p className="text-sm font-montserrat mb-2">
+                      Challenger Wheel
+                    </p>
+                    <p className="text-xs text-[#8E8E8E]">
+                      Everyone bets equally, and the winner takes it all
+                    </p>
+                  </span>
+                  <p className="py-1 px-2"></p>
+                </div>
               </div>
-            </div>
+            </Link>
+
             <div className="p-[1px] rounded-xl border border-[#30302B] hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%">
               <div className="flex items-center gap-4 bg-[#161616] p-1 rounded-xl">
                 <Image src={EliteWheel} alt="" />

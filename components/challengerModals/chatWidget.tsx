@@ -1,8 +1,8 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
-import Emoji from "../public/assets/icons/emoji.png";
-import Send from "../public/assets/icons/send.png";
+import Emoji from "@/public/assets/icons/emoji.png";
+import Send from "@/public/assets/icons/send.png";
 import Close from "@/public/assets/menu-close.png"
 
 

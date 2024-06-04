@@ -26,20 +26,21 @@ export default function WheelzHeader() {
   return (
     <header className="relative flex items-center justify-between text-black w-full">
       <div className="absolute top-1/2 left-0 p-[2px] bg-gradient-to-r from-[#935327] to-[#FFFE89] overflow-hidden rounded-lg text-xs sm:text-sm">
-        <button className="bg-gradient-to-r from-[#FFFE89] to-[#D7BF65] hover:opacity-70 py-[6px] px-5 rounded-lg flex items-center gap-2">
+        <button className="bg-gradient-to-r from-[#FFFE89] to-[#D7BF65] hover:opacity-70 py-2 xl:py-[6px] px-5 rounded-lg flex items-center gap-2">
           <Image
             src="/assets/catalogue.svg"
             alt="logue"
             width={25}
             height={25}
+            className="hidden xl:block"
           />
           <span>Wheel Details</span>
         </button>
       </div>
 
       <div className="absolute top-1/2 right-0 bg-[#8E8E8E] text-white py-2 grid grid-cols-2 divide-x rounded-lg shadow-lg shadow-fuchsia-700">
-        <div className="px-4">N/A SGY</div>
-        <div className="px-4">
+        <div className="px-2 xl:px-4">N/A SGY</div>
+        <div className="px-2 xl:px-4">
           {connected && solBalance ? formatNumberToKM(solBalance, 2) : "N/A"}{" "}
           SOL
         </div>

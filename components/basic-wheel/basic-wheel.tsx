@@ -28,8 +28,6 @@ import ModalDialog from "react-basic-modal-dialog";
 import { GiCheckMark } from "react-icons/gi";
 import Guide from "@/public/assets/icons/guide.png";
 
-
-
 const segments = Array.from({ length: 12 });
 const circles = Array.from({ length: 12 });
 
@@ -224,7 +222,6 @@ const RouletteWheel = () => {
     }
   }, [wheelz]);
 
-
   useEffect(() => {
     const shouldShowModal = localStorage.getItem("showModal") !== "false";
     if (shouldShowModal) {
@@ -321,8 +318,14 @@ const RouletteWheel = () => {
             </div>
           </div>
         </div>
-        <div className=""> {/* -mt-5 */}
-          <Image src={Group} alt="Wheel Stand" className="-mt-10 w-48 sm:w-56" />
+        <div className="">
+          {" "}
+          {/* -mt-5 */}
+          <Image
+            src={Group}
+            alt="Wheel Stand"
+            className="-mt-10 w-48 sm:w-56"
+          />
         </div>
 
         <WheelzPicker
@@ -333,8 +336,8 @@ const RouletteWheel = () => {
         />
       </section>
 
-            {/* Gameplay guide modal */}
-            <ModalDialog
+      {/* Gameplay guide modal */}
+      <ModalDialog
         isDialogVisible={isDialogVisible}
         closeDialog={closeDialog}
         dialogClassName="xl:max-w-md rounded-lg p-0 bg-[#10100E] backdrop:bg-black/60"
@@ -407,8 +410,6 @@ const RouletteWheel = () => {
 };
 
 export default RouletteWheel;
-
-
 
 enum EWagers {
   solWager,

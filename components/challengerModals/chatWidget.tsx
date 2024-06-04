@@ -75,7 +75,8 @@ export default function ChatWidget() {
           </div>
         </div>
 
-        <div className="px-5">
+        {/* Comment content */}
+        {/* <div className="px-5">
           {commentsData.map((comment) => (
             <div key={comment.id}>
               <div className="flex items-center mb-1">
@@ -85,7 +86,23 @@ export default function ChatWidget() {
                   <p className="text-xs ml-2 text-[#8E8E8E]">{comment.time}</p>
                 </div>
               </div>
-              {/* Comment content */}
+              <p className="mb-4 text-xs">{comment.comment}</p>
+            </div>
+          ))}
+        </div> */}
+
+        {/* Comment content  */}
+        <div className="px-5 relative">
+          <div className="absolute top-0 left-0 w-full h-10 bg-gradient-to-b from-[#191815] to-transparent"></div>
+          {commentsData.map((comment) => (
+            <div key={comment.id}>
+              <div className="flex items-center mb-1">
+                <div className="flex items-center text-sm font-bold text-[#DC1FFF]">
+                  <p>{comment.name}</p>
+                  <p className="text-xs ml-3 text-[#8E8E8E]">{comment.date}</p>
+                  <p className="text-xs ml-2 text-[#8E8E8E]">{comment.time}</p>
+                </div>
+              </div>
               <p className="mb-4 text-xs">{comment.comment}</p>
             </div>
           ))}

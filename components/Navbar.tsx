@@ -23,6 +23,9 @@ import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { cn } from "@/lib/utils";
 
+
+
+
 export default function NavBar() {
   const [openMobileMenu, setOpenMobileMenu] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);

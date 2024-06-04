@@ -488,7 +488,36 @@ const WheelzPicker = ({
           Wager SGY
         </button>
       </div>
-      <div
+      <div className="relative group">
+        <div
+          className={cn(
+            "grid grid-cols-4 gap-3 bg-[#560082] p-2 rounded-br-lg rounded-bl-lg",
+            wager === EWagers.sgyWager && "group-hover:blur-sm"
+          )}
+        >
+          {allWagers[wager].map((wage, i) => (
+            <button
+              className={cn(
+                "bg-[#DC1FFF] rounded-lg py-2",
+                wage.wheel === wheelz && "bg-[#F2A9FF]"
+              )}
+              onClick={() => changeWager(wage.wheel)}
+              disabled={wager === EWagers.sgyWager}
+              key={i}
+            >
+              {wage.name}
+            </button>
+          ))}
+        </div>
+
+        {wager === EWagers.sgyWager && (
+          <p className="text-[#FFFFE3] font-light text-sm absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 hidden group-hover:block z-10">
+            Not available
+          </p>
+        )}
+      </div>
+
+      {/* <div
         className={cn(
           "grid grid-cols-4 gap-3 bg-[#560082] p-2 rounded-br-lg rounded-bl-lg relative",
           wager === EWagers.sgyWager && "hover:blur-sm"
@@ -514,7 +543,7 @@ const WheelzPicker = ({
             {wage.name}
           </button>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };

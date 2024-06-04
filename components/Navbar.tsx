@@ -19,6 +19,12 @@ import Dex from "@/public/assets/dex.png";
 import BasicWheel from "@/public/assets/icons/basic-wheel.png";
 import ChallengerWheel from "@/public/assets/icons/challenger-wheel.png";
 import EliteWheel from "@/public/assets/icons/elite-wheel.png";
+import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
+import { useWallet } from "@solana/wallet-adapter-react";
+import { cn } from "@/lib/utils";
+
+
+
 
 export default function NavBar() {
   const [openMobileMenu, setOpenMobileMenu] = useState(false);
@@ -31,6 +37,8 @@ export default function NavBar() {
   const [isDialogVisible, setIsDialogVisible] = useState(false);
   const openDialog = () => setIsDialogVisible(true);
   const closeDialog = () => setIsDialogVisible(false);
+
+  const { connected } = useWallet();
 
   const handleMenuClick = () => {
     setOpenMobileMenu(!openMobileMenu);
@@ -54,7 +62,6 @@ export default function NavBar() {
       closeModalDialog();
     }
   };
-
 
   useEffect(() => {
     if (isDialogOpen) {
@@ -97,12 +104,7 @@ export default function NavBar() {
             <div className="">
               <Image src={Logo} alt="" className="w-8 lg:w-12 rounded-full" />
             </div>
-            <div className="hidden lg:flex">
-              <button className="flex p-3 font-semibold rounded-lg items-center text-sm bg-[#0000FF] text-[#FFFFE3]">
-                <Image src={Solana} alt="" className="w-4 h-4 mr-2" />
-                Connect Wallet
-              </button>
-            </div>
+            <ConnectButton connected={connected} />
           </div>
 
           {/* mobile menu div */}
@@ -121,10 +123,8 @@ export default function NavBar() {
                 className="ml-12 w-11 h-11 rounded-full"
               />
             </Link>
-            <button className="flex p-3  rounded-lg items-center text-xs bg-[#0000FF] text-[#FFFFE3]">
-              <Image src={Solana} alt="" className="w-3 h-3 mr-2" />
-              Connect Wallet
-            </button>
+
+            <ConnectButton connected={connected} />
 
             {/* Mobile menu dropdown */}
             {openMobileMenu && (
@@ -217,7 +217,7 @@ export default function NavBar() {
             <div className="grid grid-cols-3 gap-4 mb-1">
               <div
                 onClick={openDialog}
-                className="cursor-pointer hover-image p-[1px] rounded-xl hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%"
+                className="hover-image p-[1px] rounded-xl hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%"
               >
                 <div className="bg-[#10100E] p-3 rounded-xl">
                   <Image src={Wheelz} alt="" />
@@ -319,7 +319,6 @@ export default function NavBar() {
               </div>
             </Link>
 
-            <Link href="/game">
             <div className="p-[1px] rounded-xl border border-[#30302B] hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%">
               <div className="flex items-center gap-4 bg-[#161616] p-1 rounded-xl">
                 <Image src={ChallengerWheel} alt="" />
@@ -334,8 +333,6 @@ export default function NavBar() {
                 <p className="py-1 px-2"></p>
               </div>
             </div>
-            </Link>
-
             <div className="p-[1px] rounded-xl border border-[#30302B] hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%">
               <div className="flex items-center gap-4 bg-[#161616] p-1 rounded-xl">
                 <Image src={EliteWheel} alt="" />
@@ -354,5 +351,53 @@ export default function NavBar() {
         </div>
       </ModalDialog>
     </>
+  );
+}
+
+function ConnectButton({ connected }: { connected: boolean }) {
+  const [hydrate, setHydrate] = useState(false);
+
+  useEffect(() => {
+    setHydrate(true);
+  }, []);
+
+  if (!hydrate) return null;
+  return (
+    <div
+      className={cn(
+        "hidden lg:flex w-max",
+        connected && "border border-[#8E8E8E] rounded-[10px]"
+      )}
+    >
+      {/* <button className="flex p-3 font-semibold rounded-lg items-center text-sm bg-[#0000FF] text-[#FFFFE3]">
+    <Image src={Solana} alt="" className="w-4 h-4 mr-2" />
+    Connect Wallet
+  </button> */}
+
+      <WalletMultiButton
+        style={{
+          backgroundColor: `${connected ? "transparent" : "#023BFF"}`,
+          fontSize: ".9rem",
+          padding: ".9rem",
+          borderRadius: "10px",
+        }}
+        // onClick={() => {
+        //   console.log("click wallet");
+        // }}
+        endIcon={
+          !connected ? (
+            <Image
+              src="/assets/solana-icon.png"
+              alt="solana"
+              width={10}
+              height={10}
+              className="w-0"
+            />
+          ) : (
+            <PiCaretDown className="ml-2" />
+          )
+        }
+      />
+    </div>
   );
 }

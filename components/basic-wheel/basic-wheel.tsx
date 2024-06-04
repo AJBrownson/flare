@@ -28,12 +28,9 @@ import ModalDialog from "react-basic-modal-dialog";
 import { GiCheckMark } from "react-icons/gi";
 import Guide from "@/public/assets/icons/guide.png";
 import ChatWidget from "./chatWidget";
-import Chat from "@/public/assets/chat btn.png"
-import Chathover from "@/public/assets/chat btn-hover.png"
-import Close from "@/public/assets/menu-close.png"
-
-
-
+import Chat from "@/public/assets/chat btn.png";
+import Chathover from "@/public/assets/chat btn-hover.png";
+import Close from "@/public/assets/menu-close.png";
 
 const segments = Array.from({ length: 12 });
 const circles = Array.from({ length: 12 });
@@ -253,10 +250,7 @@ const RouletteWheel = () => {
   const modalRef = useRef<HTMLDivElement>(null);
 
   const handleClickOutside = (event: MouseEvent) => {
-    if (
-      modalRef.current &&
-      !modalRef.current.contains(event.target as Node)
-    ) {
+    if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
       handleChats();
     }
   };
@@ -273,7 +267,8 @@ const RouletteWheel = () => {
   }, [chats]);
 
   return (
-    <main className="relative px-4 sm:px-10 text-white font-space min-h-screen conic-bg-grad ">
+    // px-4 sm:px-10
+    <main className="relative px-4 text-white font-space min-h-screen conic-bg-grad ">
       <div className="h-14 py-4">
         <WheelzHeader />
       </div>
@@ -288,28 +283,22 @@ const RouletteWheel = () => {
             style={{ borderRadius: "50%" }}
           >
             <div className="roulette-ring" ref={rouletteRingRef}>
-              {/* {circles.map((_, index) => {
-            const rect = rouletteRingRef.current?.getBoundingClientRect() || {
-              width: 240,
-            };
-            return (
-              <div
-                key={index}
-                className="z-20 absolute bg-gradient-to-r from-[#FFFE89] to-[#C65E34] w-2 h-2 rounded-full"
-                style={{
-                  top: `calc(50% + ${
-                    Math.sin((index / circles.length) * 2 * Math.PI) *
-                    rect.width
-                  }px)`,
-                  left: `calc(50% + ${
-                    Math.cos((index / circles.length) * 2 * Math.PI) *
-                    rect.width
-                  }px)`,
-                  transform: "translate(-50%, -50%)",
-                }}
-              />
-            );
-          })} */}
+              {/* Small circles around the wheel */}
+              {/* {circles.map((_, index) => (
+                <div
+                  key={index}
+                  className="z-20 absolute bg-gradient-to-r from-[#FFFE89] to-[#C65E34] w-2 h-2 rounded-full"
+                  style={{
+                    top: `calc(50% + ${
+                      Math.sin((index / circles.length) * 2 * Math.PI) * 195
+                    }px)`,
+                    left: `calc(50% + ${
+                      Math.cos((index / circles.length) * 2 * Math.PI) * 195
+                    }px)`,
+                    transform: "translate(-50%, -50%)",
+                  }}
+                />
+              ))} */}
 
               <Image
                 onClick={spinWheel}
@@ -337,10 +326,9 @@ const RouletteWheel = () => {
                       >
                         <span
                           style={{ color: item.textColor }}
-                          className="transform rotate-45 w-full text-end 
-                                                               pr-[1.55rem] sm:pr-[1.9rem]"
+                          className="transform rotate-45 w-full text-end pr-8 xl:pr-14"
                         >
-                          <p className="text-[0.77rem] sm:text-[0.86rem]">
+                          <p className="text-xs xl:text-sm">
                             {item.name}
                           </p>
                         </span>
@@ -354,7 +342,7 @@ const RouletteWheel = () => {
         </div>
         <div className="">
           {" "}
-          {/* -mt-5 */}
+          {/* -mt-5 pr-[1.55rem] sm:pr-[1.9rem] text-[0.77rem] sm:text-[0.86rem] */}
           <Image
             src={Group}
             alt="Wheel Stand"
@@ -397,7 +385,10 @@ const RouletteWheel = () => {
         }
         ref={modalRef}
       >
-        <button onClick={handleChats} className="lg:hidden absolute top-0 right-0 border border-[#FFFFE3] p-1 rounded">
+        <button
+          onClick={handleChats}
+          className="lg:hidden absolute top-0 right-0 border border-[#FFFFE3] p-1 rounded"
+        >
           <Image src={Close} alt="" />
         </button>
         <ChatWidget />

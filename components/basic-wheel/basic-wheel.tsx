@@ -27,6 +27,12 @@ import { chargeAddress, paymentAddress } from "@/lib/utils";
 import ModalDialog from "react-basic-modal-dialog";
 import { GiCheckMark } from "react-icons/gi";
 import Guide from "@/public/assets/icons/guide.png";
+import ChatWidget from "./chatWidget";
+import Chat from "@/public/assets/chat btn.png"
+import Close from "@/public/assets/menu-close.png"
+
+
+
 
 const segments = Array.from({ length: 12 });
 const circles = Array.from({ length: 12 });
@@ -67,6 +73,11 @@ const RouletteWheel = () => {
   const wheelRef = useRef<HTMLDivElement>(null);
 
   const rouletteRingRef = useRef<HTMLDivElement>(null);
+
+  const [chats, setChats] = useState(false);
+  const handleChats = () => {
+    setChats(!chats);
+  };
 
   const sendPayment = async () => {
     try {
@@ -238,8 +249,30 @@ const RouletteWheel = () => {
     setIsDialogVisible(false);
   };
 
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      modalRef.current &&
+      !modalRef.current.contains(event.target as Node)
+    ) {
+      handleChats();
+    }
+  };
+
+  useEffect(() => {
+    if (chats) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [chats]);
+
   return (
-    <main className="px-4 sm:px-10 text-white  font-space min-h-screen conic-bg-grad ">
+    <main className="relative px-4 sm:px-10 text-white font-space min-h-screen conic-bg-grad ">
       <div className="h-14 py-4">
         <WheelzHeader />
       </div>
@@ -335,6 +368,39 @@ const RouletteWheel = () => {
           wheelRef={wheelRef}
         />
       </section>
+
+      {/* widget for chat */}
+      <div
+        onClick={handleChats}
+        className="absolute bottom-[32%] xl:bottom-40 right-5 z-10"
+      >
+        {chats ? (
+          <Image
+            src={Chat}
+            alt=""
+            className="cursor-pointer w-12 h-12 lg:w-16 lg:h-16 xl:w-20 xl:h-20"
+          />
+        ) : (
+          <Image
+            src={Chat}
+            alt=""
+            className="cursor-pointer w-12 h-12 lg:w-16 lg:h-16 xl:w-20 xl:h-20"
+          />
+        )}
+      </div>
+      <div
+        className={
+          chats
+            ? `z-40 fixed bottom-0 xl:left-[56%] ease-in-out duration-300`
+            : `ease-in-out xl:left-[56%] duration-300 z-40 fixed -bottom-[100%]`
+        }
+        ref={modalRef}
+      >
+        <button onClick={handleChats} className="lg:hidden absolute top-0 right-0 border border-[#FFFFE3] p-1 rounded">
+          <Image src={Close} alt="" />
+        </button>
+        <ChatWidget />
+      </div>
 
       {/* Gameplay guide modal */}
       <ModalDialog

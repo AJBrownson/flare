@@ -356,7 +356,6 @@ export default function NavBar() {
       </ModalDialog>
     </>
   );
-<<<<<<< HEAD
 }
 
 function ConnectButton({ connected }: { connected: boolean }) {
@@ -406,6 +405,3 @@ function ConnectButton({ connected }: { connected: boolean }) {
     </div>
   );
 }
-=======
-}
->>>>>>> af6296c7881924a00cef9e94106450c1e753c6ab

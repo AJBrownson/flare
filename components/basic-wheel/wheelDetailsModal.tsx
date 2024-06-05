@@ -5,6 +5,7 @@ import Close from "@/public/assets/menu-close.png"
 import WheelDetails from "./wheelDetails"
 
 
+
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;

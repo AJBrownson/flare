@@ -1,23 +1,17 @@
-              {/* {circles.map((_, index) => {
-            const rect = rouletteRingRef.current?.getBoundingClientRect() || {
-              width: 240,
-            };
-            return (
-              <div
-                key={index}
-                className="z-20 absolute bg-gradient-to-r from-[#FFFE89] to-[#C65E34] w-2 h-2 rounded-full"
-                style={{
-                  top: `calc(50% + ${
-                    Math.sin((index / circles.length) * 2 * Math.PI) *
-                    rect.width
-                  }px)`,
-                  left: `calc(50% + ${
-                    Math.cos((index / circles.length) * 2 * Math.PI) *
-                    rect.width
-                  }px)`,
-                  transform: "translate(-50%, -50%)",
-                }}
-              />
-            );
-          })} */}
+import Footer from "@/components/Footer";
+import NavBar from "@/components/Navbar";
+import Users from "@/components/userComponent/users";
 
+export default function User() {
+  return (
+    <>
+      <main className="bg-[url('../public/assets/particles.png')] w-full min-h-screen flex justify-center bg-cover bg-center bg-no-repeat font-space">
+        <section className="bg-cover bg-no-repeat xl:border-l-[1px] xl:border-r-[1px] xl:border-x-blue-500 bg-[#191815] xl:shadow-glow-sides w-full max-w-full xl:max-w-[820px]">
+          <NavBar />
+          <Users />
+          <Footer />
+        </section>
+      </main>
+    </>
+  );
+}

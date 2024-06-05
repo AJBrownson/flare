@@ -3,6 +3,17 @@ import { useState } from "react";
 
 type SelectionType = "Details" | "Recent";
 
+type RecentSpinData = {
+  id: number;
+  name: string;
+  score: "WIN" | "LOSE";
+  winnings: number;
+}[];
+
+type WheelData = {
+  id: number;
+  detail: string;
+}[];
 
 export default function WheelDetails() {
   const [selection, setSelection] = useState("Details");
@@ -11,7 +22,7 @@ export default function WheelDetails() {
     setSelection(selection);
   };
 
-  const recentSpin = [
+  const recentSpin: RecentSpinData = [
     {
       id: 1,
       name: "0x45fg...A5qu",
@@ -68,7 +79,7 @@ export default function WheelDetails() {
     },
   ];
 
-  const wheelDetails = [
+  const wheelDetails0015: WheelData = [
     {
       id: 1,
       detail: "6000 $SGY",
@@ -116,6 +127,159 @@ export default function WheelDetails() {
     {
       id: 12,
       detail: "Crashed",
+    },
+  ];
+
+  const wheelDetails0035: WheelData = [
+    {
+      id: 1,
+      detail: "Crashed",
+    },
+    {
+      id: 2,
+      detail: "10X SOL",
+    },
+    {
+      id: 3,
+      detail: "Crashed",
+    },
+    {
+      id: 4,
+      detail: "1X SOL",
+    },
+    {
+      id: 5,
+      detail: "0.20 SOL",
+    },
+    {
+      id: 6,
+      detail: "0.16 SOL",
+    },
+    {
+      id: 7,
+      detail: "Crashed",
+    },
+    {
+      id: 8,
+      detail: "12000 $SGY",
+    },
+    {
+      id: 9,
+      detail: "3X SOL",
+    },
+    {
+      id: 10,
+      detail: "Crashed",
+    },
+    {
+      id: 11,
+      detail: "Whitelist",
+    },
+    {
+      id: 12,
+      detail: "2X SOL",
+    },
+  ];
+
+  const wheelDetails0075: WheelData = [
+    {
+      id: 1,
+      detail: "Crashed",
+    },
+    {
+      id: 2,
+      detail: "24000 $SGY",
+    },
+    {
+      id: 3,
+      detail: "0.16 SOL",
+    },
+    {
+      id: 4,
+      detail: "0.20 SOL",
+    },
+    {
+      id: 5,
+      detail: "0.23 SOL",
+    },
+    {
+      id: 6,
+      detail: "Crashed",
+    },
+    {
+      id: 7,
+      detail: "5X SOL",
+    },
+    {
+      id: 8,
+      detail: "Crashed",
+    },
+    {
+      id: 9,
+      detail: "3X SOL",
+    },
+    {
+      id: 10,
+      detail: "VIP Card",
+    },
+    {
+      id: 11,
+      detail: "Whitelist",
+    },
+    {
+      id: 12,
+      detail: "1X SOL",
+    },
+  ];
+
+  const wheelDetails016: WheelData = [
+    {
+      id: 1,
+      detail: "1X SOL",
+    },
+    {
+      id: 2,
+      detail: "Crashed",
+    },
+    {
+      id: 3,
+      detail: "36000 $SGY",
+    },
+    {
+      id: 4,
+      detail: "1X VIP Card",
+    },
+    {
+      id: 5,
+      detail: "0.23 SOL",
+    },
+    {
+      id: 6,
+      detail: "0.26 SOL",
+    },
+    {
+      id: 7,
+      detail: "Crashed",
+    },
+    {
+      id: 8,
+      detail: "10X SOL",
+    },
+    {
+      id: 9,
+      detail: "VIP Card",
+    },
+    {
+      id: 10,
+      detail: "Crashed",
+    },
+    {
+      id: 11,
+      detail: "5X SOL",
+    },
+    {
+      id: 12,
+      detail: "Whitelist",
     },
   ];
 
@@ -167,9 +331,10 @@ export default function WheelDetails() {
 
         {/* data */}
         {selection === "Details" &&
-          wheelDetails.map((deets, index) => (
-            <div key={deets.id}
-            className={`px-5 ${
+          wheelDetails0015.map((deets, index) => (
+            <div
+              key={deets.id}
+              className={`px-5 ${
                 index % 2 === 0 ? "bg-[#191815]" : "bg-[#10100E]"
               }`}
             >
@@ -179,8 +344,9 @@ export default function WheelDetails() {
 
         {selection === "Recent" &&
           recentSpin.map((winnings, index) => (
-            <div key={winnings.id}
-            className={`px-5 pb-1 ${
+            <div
+              key={winnings.id}
+              className={`px-5 pb-1 ${
                 index % 2 === 0 ? "bg-[#10100E]" : "bg-[#191815]"
               }`}
             >

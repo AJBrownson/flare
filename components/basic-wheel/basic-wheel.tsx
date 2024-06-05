@@ -328,9 +328,7 @@ const RouletteWheel = () => {
                           style={{ color: item.textColor }}
                           className="transform rotate-45 w-full text-end pr-8 xl:pr-14"
                         >
-                          <p className="text-xs xl:text-sm">
-                            {item.name}
-                          </p>
+                          <p className="text-xs">{item.name}</p>
                         </span>
                       </div>
                     );

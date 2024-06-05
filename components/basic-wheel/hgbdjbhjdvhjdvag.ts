@@ -116,7 +116,7 @@ export const basicWheelzData = {
         background: "#058E16",
       },
       {
-        name: "0.16 SOL",
+        name: "0.001 SOL",
         textColor: "",
         ang: ang[9],
         background: "#000000",
@@ -141,9 +141,99 @@ export const basicWheelzData = {
         code: ang[4],
       },
       {
+        name: "1X SOL",
+        outcome: OUTCOME.WIN,
+        code: ang[5],
+      },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[8],
+      },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[11],
+      },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[4],
+      },
+      {
+        name: "0.001 SOL",
+        outcome: OUTCOME.WIN,
+        code: ang[9],
+      },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[8],
+      },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[4],
+      },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[2],
+      },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[4],
+      },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[4],
+      },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[11],
+      },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[11],
+      },
+      {
         name: "3X SOL",
         outcome: OUTCOME.WIN,
         code: ang[10],
+      },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[11],
+      },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[4],
+      },
+      {
+        name: "0.001 SOL",
+        outcome: OUTCOME.WIN,
+        code: ang[9],
+      },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[4],
+      },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[2],
+      },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[11],
       },
     ],
   },
@@ -174,7 +264,7 @@ export const basicWheelzData = {
         background: "#000000",
       },
       {
-        name: "0.16 SOL",
+        name: "0.035 SOL",
         textColor: "",
         ang: ang[4],
         background: "#B71122",
@@ -228,10 +318,91 @@ export const basicWheelzData = {
         outcome: OUTCOME.LOSE,
         code: ang[0],
       },
+
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[11],
+      },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[5],
+      },
       {
         name: "3X SOL",
         outcome: OUTCOME.WIN,
         code: ang[7],
+      },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[8],
+      },
+      {
+        name: "1X SOL",
+        outcome: OUTCOME.WIN,
+        code: ang[11],
+      },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[5],
+      },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[0],
+      },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[5],
+      },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[0],
+      },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[8],
+      },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[11],
+      },
+      {
+        name: "0.035 SOL",
+        outcome: OUTCOME.WIN,
+        code: ang[4],
+      },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[11],
+      },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[0],
+      },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[8],
+      },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[0],
+      },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[11],
       },
     ],
   },
@@ -250,13 +421,13 @@ export const basicWheelzData = {
         background: "#0861F4",
       },
       {
-        name: "0.16 SOL",
+        name: "0.075 SOL",
         textColor: "",
         ang: ang[2],
         background: "#058E16",
       },
       {
-        name: "0.20 SOL",
+        name: "0.10 SOL",
         textColor: "",
         ang: ang[3],
         background: "#000000",
@@ -317,9 +488,94 @@ export const basicWheelzData = {
         code: ang[0],
       },
       {
-        name: "0.16 SOL",
+        name: "0.75 SOL",
         outcome: OUTCOME.WIN,
         code: ang[2],
+      },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[0],
+      },
+      {
+        name: "1X SOL",
+        outcome: OUTCOME.WIN,
+        code: ang[11],
+      },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[7],
+      },
+      {
+        name: "0.10 SOL",
+        outcome: OUTCOME.WIN,
+        code: ang[3],
+      },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[5],
+      },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[0],
+      },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[5],
+      },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[7],
+      },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[5],
+      },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[0],
+      },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[0],
+      },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[5],
+      },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[7],
+      },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[7],
+      },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[7],
+      },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[5],
+      },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[0],
       },
     ],
   },
@@ -408,6 +664,86 @@ export const basicWheelzData = {
         name: "1X SOL",
         outcome: OUTCOME.WIN,
         code: ang[0],
+      },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[9],
+      },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[1],
+      },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[6],
+      },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[9],
+      },
+      {
+        name: "0.23 SOL",
+        outcome: OUTCOME.WIN,
+        code: ang[4],
+      },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[6],
+      },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[6],
+      },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[1],
+      },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[1],
+      },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[1],
+      },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[6],
+      },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[9],
+      },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[6],
+      },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[9],
+      },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[1],
+      },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[1],
       },
     ],
   },

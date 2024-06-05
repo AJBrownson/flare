@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image"
 import Close from "@/public/assets/menu-close.png"
-import RecentWinners from "../recentWinners";
+import RecentWinners from "./recentWinners";
 
 
 interface ModalProps {

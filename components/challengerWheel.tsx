@@ -1,13 +1,13 @@
 /* eslint-disable react/no-unescaped-entities */
 "use client";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Chat from "@/public/assets/chat btn.png";
 import Pointer from "@/public/assets/join-default.png";
 import PointerHover from "@/public/assets/join-hover.png";
 import Group from "@/public/assets/Group 2.png";
 import Timer from "@/public/assets/icons/timer-02.png";
-import ChatWidget from "./chatWidget";
+import ChatWidget from "./challengerModals/chatWidget";
 
 
 const segments = Array.from({ length: 12 });
@@ -22,9 +22,31 @@ const RouletteWheel = () => {
   // const openDialog = () => setIsDialogVisible(true);
   // const closeDialog = () => setIsDialogVisible(false);
 
-  const handleChats = () => {
+  const handleOpenChats = () => {
     setChats(!chats);
   };
+
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      modalRef.current &&
+      !modalRef.current.contains(event.target as Node)
+    ) {
+      handleOpenChats();
+    }
+  };
+
+  useEffect(() => {
+    if (chats) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [chats]);
 
   const spin = () => {
     if (isSpinning) return;
@@ -36,7 +58,7 @@ const RouletteWheel = () => {
 
   return (
     <>
-    <main className="mt-20 xl:mt-10 flex flex-col justify-center items-center text-white font-space relative">
+    <main  className="mt-20 xl:mt-10 flex flex-col justify-center items-center text-white font-space relative">
       <section className="overflow-hidden flex flex-col items-center h-96 xl:h-[30rem] relative">
         <div className="flex justify-center bg-black rounded-full px-0">
           <div className="z-10 relative px-4 rounded-full outline outline-4 outline-[#0091FF]">
@@ -135,7 +157,7 @@ const RouletteWheel = () => {
 
       {/* widget for chat */}
       <div
-        onClick={handleChats}
+        onClick={handleOpenChats}
         className="absolute bottom-40 xl:bottom-40 right-0 z-10"
       >
         {chats ? (
@@ -158,6 +180,7 @@ const RouletteWheel = () => {
             ? `z-40 fixed bottom-0 xl:left-1/2 ease-in-out duration-1000`
             : `ease-in-out xl:left-1/2 duration-1000 z-40 fixed -bottom-[100%]`
         }
+        ref={modalRef}
       >
         <ChatWidget />
       </div>

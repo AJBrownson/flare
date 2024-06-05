@@ -1,5 +1,5 @@
-/* eslint-disable react/no-unescaped-entities */
 "use client";
+
 import { useState, useEffect } from "react";
 import NavBar from "@/components/Navbar";
 import Footer from "@/components/Footer";

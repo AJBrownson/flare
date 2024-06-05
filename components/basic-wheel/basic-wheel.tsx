@@ -12,6 +12,7 @@ import {
   solWager,
   sgyWager,
   allWagers,
+  OUTCOME,
 } from "./hgbdjbhjdvhjdvag";
 import WheelzHeader from "./wheelz-header";
 import { cn } from "@/lib/utils";
@@ -23,10 +24,17 @@ import {
 } from "@solana/web3.js";
 import { useWallet, useConnection } from "@solana/wallet-adapter-react";
 import * as bs58 from "bs58";
-import { chargeAddress, paymentAddress } from "@/lib/utils";
+import { chargeAddress, paymentAddress, getRandomInt } from "@/lib/utils";
 import ModalDialog from "react-basic-modal-dialog";
 import { GiCheckMark } from "react-icons/gi";
 import Guide from "@/public/assets/icons/guide.png";
+import ChatWidget from "./chatWidget";
+import Chat from "@/public/assets/chat btn.png";
+import Chathover from "@/public/assets/chat btn-hover.png";
+import Close from "@/public/assets/menu-close.png";
+import PrizeModal from "./prize-modal";
+import { gamesKey, prizesKey } from "@/lib/utils";
+import { useSWRConfig } from "swr";
 
 const segments = Array.from({ length: 12 });
 const circles = Array.from({ length: 12 });
@@ -48,25 +56,30 @@ const RouletteWheel = () => {
     numOfSpins + randomer(basicWheelzData[wheelz].out[count].code)
   );
 
-  const [win, setWin] = useState<{ outcome: string; name: string }>({
+  const [win, setWin] = useState<{ outcome: OUTCOME; name: string }>({
     name: basicWheelzData[wheelz].out[count].name,
     outcome: basicWheelzData[wheelz].out[count].outcome,
   });
 
   const [prizeOpener, setPrizeOpener] = useState<boolean>(false);
   const [currentPrize, setCurrentPrize] = useState<{
-    outcome: string;
+    outcome: OUTCOME;
     name: string;
   }>();
 
   const [isHovered, setIsHovered] = useState(false);
 
-  const { sendTransaction, publicKey } = useWallet();
+  const { sendTransaction, publicKey, connected } = useWallet();
   const { connection } = useConnection();
+
+  const { mutate } = useSWRConfig();
 
   const wheelRef = useRef<HTMLDivElement>(null);
 
-  const rouletteRingRef = useRef<HTMLDivElement>(null);
+  const [chats, setChats] = useState(false);
+  const handleChats = () => {
+    setChats(!chats);
+  };
 
   const sendPayment = async () => {
     try {
@@ -129,79 +142,85 @@ const RouletteWheel = () => {
     }
   };
 
-  const spinWheel = async () => {
-    console.log("before", spinner);
+  const spinWheel = async (random: boolean) => {
+    if (connected && publicKey) {
+      try {
+        const spin_wheel = wheelRef.current;
 
-    try {
-      const spin_wheel = wheelRef.current;
+        const transac = await sendPayment();
 
-      const transac = await sendPayment();
+        if (spin_wheel && transac) {
+          spin_wheel.classList.add("wheel-spinner-timer");
 
-      if (spin_wheel && transac) {
-        spin_wheel.classList.add("wheel-spinner-timer");
+          console.log("counter win", win);
+          if (spinner >= Number.MAX_SAFE_INTEGER - 10000) {
+            spin_wheel.style.removeProperty("transform");
+            window.location.reload();
+            return;
+          }
+          // console.log('before spinning', spinner);
+          const auds = new Audio("/audio/win-sound.mp3");
+          spin_wheel.style.transform = `rotate(${spinner}deg)`;
+          setDisable(true);
+          setCurrentPrize(win);
+          setTimeout(async () => {
+            setDisable(false);
+            setPrizeOpener(true);
+            auds.play();
+            try {
+              const res = await fetch("/api/games", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  address: publicKey?.toBase58(),
+                  outcome: win.outcome,
+                  name: win.name,
+                  wager: wheelz,
+                  trans: transac,
+                }),
+              });
 
-        // console.log('counter win', win);
-        if (spinner >= Number.MAX_SAFE_INTEGER - 10000) {
-          spin_wheel.style.removeProperty("transform");
-          window.location.reload();
-          return;
-        }
-        // console.log('before spinning', spinner);
-        // const auds = new Audio("/audio/win-sound.mp3");
-        spin_wheel.style.transform = `rotate(${spinner}deg)`;
-        setDisable(true);
-        // setCurrentPrize(win);
-        // setTimeout(async () => {
-        //   setDisable(false);
-        //   setPrizeOpener(true);
-        //   auds.play();
-        //   try {
-        //     const res = await fetch("/api/games", {
-        //       method: "POST",
-        //       headers: {
-        //         "Content-Type": "application/json",
-        //       },
-        //       body: JSON.stringify({
-        //         address: address.trim(),
-        //         outcome: win.outcome,
-        //         name: win.name,
-        //         wager: wheelz,
-        //         trans: transac,
-        //       }),
-        //     });
+              if (res.status === 200) {
+                await mutate(gamesKey);
+                // await mutate(prizesKey(publicKey.toBase58()));
+              }
+            } catch (error) {}
+          }, 6300);
 
-        //     if (res.status === 200) {
-        //       await mutate(gamesKey);
-        //       await mutate(prizesKey(address));
-        //     }
-        //   } catch (error) {}
-        // }, 6300);
+          setCount((prev) => {
+            const next =
+              prev >= basicWheelzData[wheelz].out.length - 1
+                ? 0
+                : random
+                ? getRandomInt(prev + 1, basicWheelzData[wheelz].out.length - 1)
+                : prev + 1;
+            localStorage.setItem(counter, next.toString());
+            console.log("previous bitch", prev);
+            console.log("next bitch", next);
 
-        setCount((prev) => {
-          const next =
-            prev >= basicWheelzData[wheelz].out.length - 1 ? 0 : prev + 1;
-          localStorage.setItem(counter, next.toString());
+            setWin({
+              name: basicWheelzData[wheelz].out[next].name,
+              outcome: basicWheelzData[wheelz].out[next].outcome,
+            });
 
-          // setWin({
-          //   name: AdaWheelz[wheelz].out[next].name,
-          //   outcome: AdaWheelz[wheelz].out[next].outcome,
-          // });
+            setSpinner((prevSpinner) => {
+              const remainder = prevSpinner % numOfSpins;
+              prevSpinner = prevSpinner - remainder;
 
-          setSpinner((prevSpinner) => {
-            const remainder = prevSpinner % numOfSpins;
-            prevSpinner = prevSpinner - remainder;
+              const nextSpinner =
+                numOfSpins + randomer(basicWheelzData[wheelz].out[next].code);
 
-            const nextSpinner =
-              numOfSpins + randomer(basicWheelzData[wheelz].out[next].code);
+              return (prevSpinner += nextSpinner);
+            });
 
-            return (prevSpinner += nextSpinner);
+            return next;
           });
-
-          return next;
-        });
+        }
+      } catch (error: any) {
+        console.log(error);
       }
-    } catch (error: any) {
-      console.log(error);
     }
   };
 
@@ -238,10 +257,30 @@ const RouletteWheel = () => {
     setIsDialogVisible(false);
   };
 
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+      handleChats();
+    }
+  };
+
+  useEffect(() => {
+    if (chats) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [chats]);
+
   return (
-    <main className="px-4 sm:px-10 text-white  font-space min-h-screen conic-bg-grad ">
+    // px-4 sm:px-10
+    <main className="relative px-4 text-white font-space min-h-screen conic-bg-grad ">
       <div className="h-14 py-4">
-        <WheelzHeader />
+        <WheelzHeader wheelz={wheelz} />
       </div>
 
       <section className="relative flex flex-col items-center justify-center py-10 xl:py-0 px-2 w-full h-full">
@@ -249,36 +288,16 @@ const RouletteWheel = () => {
           className="flex justify-center bg-transparent px-0 overflow-hidden z-10"
           style={{ clipPath: "circle(60%)" }}
         >
-          <div
-            className=" outline outline-4 outline-[#DC1FFF] p-[0.4rem]"
-            style={{ borderRadius: "50%" }}
-          >
-            <div className="roulette-ring" ref={rouletteRingRef}>
-              {/* {circles.map((_, index) => {
-            const rect = rouletteRingRef.current?.getBoundingClientRect() || {
-              width: 240,
-            };
-            return (
-              <div
-                key={index}
-                className="z-20 absolute bg-gradient-to-r from-[#FFFE89] to-[#C65E34] w-2 h-2 rounded-full"
-                style={{
-                  top: `calc(50% + ${
-                    Math.sin((index / circles.length) * 2 * Math.PI) *
-                    rect.width
-                  }px)`,
-                  left: `calc(50% + ${
-                    Math.cos((index / circles.length) * 2 * Math.PI) *
-                    rect.width
-                  }px)`,
-                  transform: "translate(-50%, -50%)",
-                }}
-              />
-            );
-          })} */}
-
+          <div className="p-[0.4rem] relative" style={{ borderRadius: "50%" }}>
+            <Image
+              src="/roulette-arch.svg"
+              alt="roulette"
+              fill
+              className="absolute z-10"
+            />
+            <div className="roulette-ring">
               <Image
-                onClick={spinWheel}
+                onClick={disable ? () => {} : () => spinWheel(true)}
                 src={isHovered ? PointerHover : Pointer}
                 alt="Pointer"
                 style={{ transform: "translate(-50%, -50%)}" }}
@@ -303,12 +322,9 @@ const RouletteWheel = () => {
                       >
                         <span
                           style={{ color: item.textColor }}
-                          className="transform rotate-45 w-full text-end 
-                                                               pr-[1.55rem] sm:pr-[1.9rem]"
+                          className="transform rotate-45 w-full text-end pr-8 xl:pr-14"
                         >
-                          <p className="text-[0.77rem] sm:text-[0.86rem]">
-                            {item.name}
-                          </p>
+                          <p className="text-xs xl:text-sm">{item.name}</p>
                         </span>
                       </div>
                     );
@@ -320,7 +336,7 @@ const RouletteWheel = () => {
         </div>
         <div className="">
           {" "}
-          {/* -mt-5 */}
+          {/* -mt-5 pr-[1.55rem] sm:pr-[1.9rem] text-[0.77rem] sm:text-[0.86rem] */}
           <Image
             src={Group}
             alt="Wheel Stand"
@@ -333,8 +349,47 @@ const RouletteWheel = () => {
           setWheelz={setWheelz}
           setSpinner={setSpinner}
           wheelRef={wheelRef}
+          setWin={setWin}
+          setCount={setCount}
+          setDisable={setDisable}
         />
       </section>
+
+      {/* widget for chat */}
+      <div
+        onClick={handleChats}
+        className="absolute bottom-[32%] xl:bottom-40 right-5 z-10"
+      >
+        {chats ? (
+          <Image
+            src={Chat}
+            alt=""
+            className="cursor-pointer w-12 h-12 lg:w-16 lg:h-16 xl:w-20 xl:h-20"
+          />
+        ) : (
+          <Image
+            src={Chathover}
+            alt=""
+            className="cursor-pointer w-12 h-12 lg:w-16 lg:h-16 xl:w-20 xl:h-20"
+          />
+        )}
+      </div>
+      <div
+        className={
+          chats
+            ? `z-40 fixed bottom-0 xl:left-[56%] ease-in-out duration-300`
+            : `ease-in-out xl:left-[56%] duration-300 z-40 fixed -bottom-[100%]`
+        }
+        ref={modalRef}
+      >
+        <button
+          onClick={handleChats}
+          className="lg:hidden absolute top-0 right-0 border border-[#FFFFE3] p-1 rounded"
+        >
+          <Image src={Close} alt="" />
+        </button>
+        <ChatWidget />
+      </div>
 
       {/* Gameplay guide modal */}
       <ModalDialog
@@ -397,7 +452,7 @@ const RouletteWheel = () => {
             <div className="mt-8 mb-10 w-full">
               <button
                 onClick={closeDialog}
-                className="text-xs xl:text-sm w-full py-2 bg-[#FFFFE3] hover:bg-[#fff] text-black rounded-lg"
+                className="text-xs xl:text-sm font-extrabold w-full py-2 bg-[#FFFFE3] hover:bg-[#fff] text-black rounded-lg"
               >
                 Continue
               </button>
@@ -405,6 +460,14 @@ const RouletteWheel = () => {
           </div>
         </div>
       </ModalDialog>
+
+      {/* Prize modal */}
+      <PrizeModal
+        won={currentPrize?.name}
+        outcome={currentPrize?.outcome}
+        opener={prizeOpener}
+        setOpener={setPrizeOpener}
+      />
     </main>
   );
 };
@@ -419,10 +482,10 @@ enum EWagers {
 type WheelzPickerProps = {
   wheelz: WHEELZ;
   setWheelz: (wheelz: WHEELZ) => void;
-  // setWin: ({ name, outcome }: { name: string; outcome: string }) => void;
+  setWin: ({ name, outcome }: { name: string; outcome: OUTCOME }) => void;
   setSpinner: (spinner: (p: number) => number) => void;
-  // setCount: (counter: number) => void;
-  // setDisable: (disa: boolean) => void;
+  setCount: (counter: number) => void;
+  setDisable: (disa: boolean) => void;
   wheelRef: RefObject<HTMLDivElement> | null;
 };
 
@@ -431,6 +494,8 @@ const WheelzPicker = ({
   setWheelz,
   wheelz,
   setSpinner,
+  setWin,
+  setCount,
 }: WheelzPickerProps) => {
   const [wager, setWager] = useState<EWagers>(EWagers.solWager);
 
@@ -445,21 +510,18 @@ const WheelzPicker = ({
     if (DivWheel && window) {
       DivWheel.classList.remove("wheel-spinner-timer");
 
-      // setCount(0)
-      localStorage.removeItem(counter);
       setSpinner((prev) => {
         const remainder = prev % numOfSpins;
         prev = prev - remainder;
-        // const turnto = 360 - remainder
 
         DivWheel.style.removeProperty("transform");
 
         return numOfSpins + randomer(basicWheelzData[wheel].out[0].code);
       });
-      // setWin({
-      //   name: AdaWheelz[wheel].out[0].name,
-      //   outcome: AdaWheelz[wheel].out[0].outcome,
-      // });
+      setWin({
+        name: basicWheelzData[wheel].out[0].name,
+        outcome: basicWheelzData[wheel].out[0].outcome,
+      });
       setWheelz(wheel);
     }
   };
@@ -488,32 +550,33 @@ const WheelzPicker = ({
           Wager SGY
         </button>
       </div>
-      <div
-        className={cn(
-          "grid grid-cols-4 gap-3 bg-[#560082] p-2 rounded-br-lg rounded-bl-lg relative",
-          wager === EWagers.sgyWager && "hover:blur-sm"
-        )}
-      >
+      <div className="relative group">
+        <div
+          className={cn(
+            "grid grid-cols-4 gap-3 bg-[#560082] p-2 rounded-br-lg rounded-bl-lg",
+            wager === EWagers.sgyWager && "group-hover:blur-sm"
+          )}
+        >
+          {allWagers[wager].map((wage, i) => (
+            <button
+              className={cn(
+                "bg-[#DC1FFF] rounded-lg py-2",
+                wage.wheel === wheelz && "bg-[#F2A9FF]"
+              )}
+              onClick={() => changeWager(wage.wheel)}
+              disabled={wager === EWagers.sgyWager}
+              key={i}
+            >
+              {wage.name}
+            </button>
+          ))}
+        </div>
+
         {wager === EWagers.sgyWager && (
-          <p className="text-white absolute inset-x-0 inset-y-0 m-auto">
-            {" "}
-            Not Available{" "}
+          <p className="text-[#FFFFE3] font-light text-sm absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 hidden group-hover:block z-10">
+            Not available
           </p>
         )}
-
-        {allWagers[wager].map((wage, i) => (
-          <button
-            className={cn(
-              "bg-[#DC1FFF] rounded-lg py-2",
-              wage.wheel === wheelz && "bg-[#F2A9FF]"
-            )}
-            onClick={() => changeWager(wage.wheel)}
-            disabled={wager === EWagers.sgyWager}
-            key={i}
-          >
-            {wage.name}
-          </button>
-        ))}
       </div>
     </div>
   );

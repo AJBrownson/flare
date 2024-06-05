@@ -46,12 +46,6 @@ body {
   transform: scale(1.1);
 }
 
-<<<<<<< HEAD
-=======
-
-
-
->>>>>>> af6296c7881924a00cef9e94106450c1e753c6ab
 @media (min-width: 1025px) {
   .circle-large {
     top: calc(50% + 400px) !important;

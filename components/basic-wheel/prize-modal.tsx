@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import { createPortal } from "react-dom";
 import { OUTCOME } from "./hgbdjbhjdvhjdvag";
 import { memo } from "react";

@@ -8,7 +8,7 @@ interface ModalProps {
   onClose: () => void;
 }
 
-export default function InsufficientFundsModa({ isOpen, onClose }: ModalProps) {
+export default function InsufficientFundsModal({ isOpen, onClose }: ModalProps) {
   const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {

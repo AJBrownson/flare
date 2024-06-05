@@ -1,10 +1,14 @@
 "use client";
-import Footer from "@/components/Footer";
+
+import { useState, useEffect } from "react";
 import NavBar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import RouletteWheel from "@/components/basic-wheel/basic-wheel";
 
 
+
 export default function GameOn() {
+
   return (
     <>
       <main className="bg-[url('../public/assets/particles.png')] w-full min-h-screen flex justify-center bg-cover bg-center bg-no-repeat font-space">

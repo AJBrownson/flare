@@ -6,8 +6,9 @@ import { LAMPORTS_PER_SOL } from "@solana/web3.js";
 import { formatNumberToKM } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import WheelDetailsModal from "./wheelDetailsModal";
+import { WHEELZ } from "./hgbdjbhjdvhjdvag";
 
-export default function WheelzHeader() {
+export default function WheelzHeader({ wheelz }: { wheelz: WHEELZ }) {
   const { publicKey, connected } = useWallet();
   const { connection } = useConnection();
 
@@ -57,6 +58,7 @@ export default function WheelzHeader() {
       <WheelDetailsModal
         isOpen={isWheelDetailsModalOpen}
         onClose={() => setWheelDetailsModalOpen(false)}
+        wheelz={wheelz}
       />
     </>
   );

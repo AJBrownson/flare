@@ -1,0 +1,57 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native", "darwin-arm64"]
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+enum CLAIMED {
+  YES
+  NO
+  NEVER
+}
+
+enum OUTCOME {
+  WIN
+  LOSE
+}
+
+
+model Game {
+  id      String  @id @default(auto()) @map("_id") @db.ObjectId
+  address String
+  outcome OUTCOME
+  wager   String?
+  name    String
+  trans   String?
+  claimed CLAIMED @default(NO)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+}
+
+model Chat {
+  id      String  @id @default(auto()) @map("_id") @db.ObjectId
+  message String
+  address String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+}
+
+model Whitelist {
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  address String @unique
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+}

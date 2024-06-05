@@ -8,6 +8,8 @@ import Timer from "/public/assets/icons/timer-02.png";
 import { WHEELZ } from "./hgbdjbhjdvhjdvag";
 import WheelzHeader from "./wheelz-header";
 
+type WagerType = "SOL" | "SGY";
+
 const segments = Array.from({ length: 12 });
 const circles = Array.from({ length: 12 });
 const colors = [
@@ -38,6 +40,7 @@ const RouletteWheel = () => {
 
   const [isHovered, setIsHovered] = useState(false);
 
+<<<<<<< HEAD:components/basic-wheel/former-wheel.tsx
   const [selectedWager, setSelectedWager] = useState(null);
 
   const handleButtonClick = (wager: any) => {
@@ -64,6 +67,51 @@ const RouletteWheel = () => {
   };
 
   const wagerAmount = getWagerAmount();
+=======
+  const [selectedWager, setSelectedWager] = useState("SOL");
+
+  const handleButtonClick = (selectedWager: WagerType) => {
+    setSelectedWager(selectedWager);
+  };
+
+  const wagerSOL = [
+    {
+      id: 1,
+      wager: 0.015,
+    },
+    {
+      id: 2,
+      wager: 0.035,
+    },
+    {
+      id: 3,
+      wager: 0.075,
+    },
+    {
+      id: 4,
+      wager: 0.16,
+    },
+  ];
+
+  const wagerSGY = [
+    {
+      id: 1,
+      wager: 1000,
+    },
+    {
+      id: 2,
+      wager: 1500,
+    },
+    {
+      id: 3,
+      wager: 2000,
+    },
+    {
+      id: 4,
+      wager: "Max",
+    },
+  ];
+>>>>>>> af6296c7881924a00cef9e94106450c1e753c6ab:components/basicWheel.tsx
 
   return (
     <main className="mt-5 xl:mt-10 flex flex-col justify-center items-center text-white font-space">
@@ -140,8 +188,13 @@ const RouletteWheel = () => {
       </section>
 
       {/* table for wagers */}
+<<<<<<< HEAD:components/basic-wheel/former-wheel.tsx
       {/* <div className="hidden xl:block bg-[#10100E] p-2 border border-[#30302B] rounded-lg text-center w-full max-w-[380px] max-h-[136px] mt-12 z-20 font-space">
         <div className="flex gap-4 justify-between px-2">
+=======
+      <div className="hidden xl:block bg-[#320554] py-2 px-2 border border-[#30302B] rounded-lg text-center w-full max-w-[380px] max-h-[145px] mt-12 z-20 font-space">
+        <div className="bg-[#10100E] flex gap-4 justify-between py-2 px-2 rounded-t-lg">
+>>>>>>> af6296c7881924a00cef9e94106450c1e753c6ab:components/basicWheel.tsx
           <button
             onClick={() => handleButtonClick("SOL")}
             className={`text-sm font-montserrat font-medium rounded-md w-full py-3 ${
@@ -164,6 +217,7 @@ const RouletteWheel = () => {
           </button>
         </div>
 
+<<<<<<< HEAD:components/basic-wheel/former-wheel.tsx
         <div className="grid grid-cols-4 gap-1 mt-1 px-2">
           <div className="py-3 flex flex-col bg-[#DC1FFF] hover:bg-[#F2A9FF] border border-[#30302B] rounded-lg">
             <p className="text-sm text-[#000000] font-semibold">
@@ -187,6 +241,35 @@ const RouletteWheel = () => {
           </div>
         </div>
       </div> */}
+=======
+        {/* Wager amount */}
+        <div className="grid grid-cols-4 gap-1  py-2 px-2 rounded-b-lg bg-[#560082]">
+          {selectedWager === "SOL" &&
+            wagerSOL.map((sol) => (
+              <div
+                key={sol.id}
+                className="text-center py-3 flex flex-col bg-[#DC1FFF] hover:bg-[#F2A9FF] border border-[#30302B] rounded-lg"
+              >
+                <p className="text-sm text-[#000000] font-semibold">
+                  {sol.wager}
+                </p>
+              </div>
+            ))}
+
+          {selectedWager === "SGY" &&
+            wagerSGY.map((sgy) => (
+              <div
+                key={sgy.id}
+                className="text-center py-3 flex flex-col bg-[#DC1FFF] hover:bg-[#F2A9FF] border border-[#30302B] rounded-lg"
+              >
+                <p className="text-sm text-[#000000] font-semibold">
+                  {sgy.wager}
+                </p>
+              </div>
+            ))}
+        </div>
+      </div>
+>>>>>>> af6296c7881924a00cef9e94106450c1e753c6ab:components/basicWheel.tsx
     </main>
   );
 };

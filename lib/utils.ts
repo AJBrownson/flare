@@ -8,6 +8,15 @@ export function cn(...inputs: ClassValue[]) {
 export const chargeAddress = "EcNK5Lt7ftEk4wydT8yEMwuuGCnofM6N6bZmGTY8radM";
 export const paymentAddress = "EcNK5Lt7ftEk4wydT8yEMwuuGCnofM6N6bZmGTY8radM";
 
+export const gamesKey = "/api/games";
+export const leadersKey = "/api/leaders";
+
+export const prizesKey = (add: string) => `/api/prizes?address=${add}`;
+
+export async function fetcher(url: string) {
+  return (await fetch(url)).json();
+}
+
 export function formatToTime(isoDateString: Date): string {
   // Parse the ISO date string
   const mongoDate = new Date(isoDateString);
@@ -92,4 +101,10 @@ export function formatNumberToKM(number: number | undefined, deci?: number) {
 
   // If the number is undefined or 0, return '0.0'
   return "0.0";
+}
+
+export function getRandomInt(min: number, max: number) {
+  min = Math.ceil(min); // Ensure the minimum value is rounded up to the nearest integer
+  max = Math.floor(max); // Ensure the maximum value is rounded down to the nearest integer
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }

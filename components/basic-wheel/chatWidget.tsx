@@ -3,12 +3,9 @@ import { useState } from "react";
 import Image from "next/image";
 import Emoji from "@/public/assets/icons/emoji.png";
 import Send from "@/public/assets/icons/send.png";
-import Close from "@/public/assets/menu-close.png"
-
-
+import Close from "@/public/assets/menu-close.png";
 
 export default function ChatWidget() {
-
   const commentsData = [
     {
       id: 1,
@@ -78,8 +75,8 @@ export default function ChatWidget() {
         {/* Comment content  */}
         <div className="px-5 relative">
           <div className="absolute top-0 left-0 w-full h-10 bg-gradient-to-b from-[#191815] to-transparent"></div>
-          {commentsData.map((comment) => (
-            <div key={comment.id}>
+          {commentsData.map((comment, i) => (
+            <div key={i}>
               <div className="flex items-center mb-1">
                 <div className="flex items-center text-sm font-bold text-[#DC1FFF]">
                   <p>{comment.name}</p>
@@ -99,8 +96,16 @@ export default function ChatWidget() {
             placeholder="Enter Message"
             className="placeholder:text-[#8E8E8E] text-xs w-full rounded-lg pl-8 py-3 border border-[#30302B] bg-[#191815]"
           />
-          <Image src={Emoji} alt="" className="absolute left-7 top-1/2 transform -translate-y-1/2" />
-          <Image src={Send} alt="" className="absolute right-7 top-1/2 transform -translate-y-1/2" />
+          <Image
+            src={Emoji}
+            alt=""
+            className="absolute left-7 top-1/2 transform -translate-y-1/2"
+          />
+          <Image
+            src={Send}
+            alt=""
+            className="absolute right-7 top-1/2 transform -translate-y-1/2"
+          />
         </div>
       </div>
     </>

@@ -1,28 +1,17 @@
 "use client";
 import { useState } from "react";
-
+import { WHEELZ, basicWheelzData } from "./hgbdjbhjdvhjdvag";
 type SelectionType = "Details" | "Recent";
+import RecentSpin from "./recent-spin";
 
-type RecentSpinData = {
-  id: number;
-  name: string;
-  score: "WIN" | "LOSE";
-  winnings: number;
-}[];
-
-type WheelData = {
-  id: number;
-  detail: string;
-}[];
-
-export default function WheelDetails() {
+export default function WheelDetails({ wheelz }: { wheelz: WHEELZ }) {
   const [selection, setSelection] = useState("Details");
 
   const handleButtonClick = (selection: SelectionType) => {
     setSelection(selection);
   };
 
-  const recentSpin: RecentSpinData = [
+  const recentSpin = [
     {
       id: 1,
       name: "0x45fg...A5qu",
@@ -79,209 +68,7 @@ export default function WheelDetails() {
     },
   ];
 
-  const wheelDetails0015: WheelData = [
-    {
-      id: 1,
-      detail: "6000 $SGY",
-    },
-    {
-      id: 2,
-      detail: "0.075 SOL",
-    },
-    {
-      id: 3,
-      detail: "Crashed",
-    },
-    {
-      id: 4,
-      detail: "Whitelist",
-    },
-    {
-      id: 5,
-      detail: "Crashed",
-    },
-    {
-      id: 6,
-      detail: "1X SOL",
-    },
-    {
-      id: 7,
-      detail: "5X SOL",
-    },
-    {
-      id: 8,
-      detail: "1X Whitelist",
-    },
-    {
-      id: 9,
-      detail: "Crashed",
-    },
-    {
-      id: 10,
-      detail: "0.16 SOL",
-    },
-    {
-      id: 11,
-      detail: "3X SOL",
-    },
-    {
-      id: 12,
-      detail: "Crashed",
-    },
-  ];
-
-  const wheelDetails0035: WheelData = [
-    {
-      id: 1,
-      detail: "Crashed",
-    },
-    {
-      id: 2,
-      detail: "10X SOL",
-    },
-    {
-      id: 3,
-      detail: "Crashed",
-    },
-    {
-      id: 4,
-      detail: "1X SOL",
-    },
-    {
-      id: 5,
-      detail: "0.20 SOL",
-    },
-    {
-      id: 6,
-      detail: "0.16 SOL",
-    },
-    {
-      id: 7,
-      detail: "Crashed",
-    },
-    {
-      id: 8,
-      detail: "12000 $SGY",
-    },
-    {
-      id: 9,
-      detail: "3X SOL",
-    },
-    {
-      id: 10,
-      detail: "Crashed",
-    },
-    {
-      id: 11,
-      detail: "Whitelist",
-    },
-    {
-      id: 12,
-      detail: "2X SOL",
-    },
-  ];
-
-  const wheelDetails0075: WheelData = [
-    {
-      id: 1,
-      detail: "Crashed",
-    },
-    {
-      id: 2,
-      detail: "24000 $SGY",
-    },
-    {
-      id: 3,
-      detail: "0.16 SOL",
-    },
-    {
-      id: 4,
-      detail: "0.20 SOL",
-    },
-    {
-      id: 5,
-      detail: "0.23 SOL",
-    },
-    {
-      id: 6,
-      detail: "Crashed",
-    },
-    {
-      id: 7,
-      detail: "5X SOL",
-    },
-    {
-      id: 8,
-      detail: "Crashed",
-    },
-    {
-      id: 9,
-      detail: "3X SOL",
-    },
-    {
-      id: 10,
-      detail: "VIP Card",
-    },
-    {
-      id: 11,
-      detail: "Whitelist",
-    },
-    {
-      id: 12,
-      detail: "1X SOL",
-    },
-  ];
-
-  const wheelDetails016: WheelData = [
-    {
-      id: 1,
-      detail: "1X SOL",
-    },
-    {
-      id: 2,
-      detail: "Crashed",
-    },
-    {
-      id: 3,
-      detail: "36000 $SGY",
-    },
-    {
-      id: 4,
-      detail: "1X VIP Card",
-    },
-    {
-      id: 5,
-      detail: "0.23 SOL",
-    },
-    {
-      id: 6,
-      detail: "0.26 SOL",
-    },
-    {
-      id: 7,
-      detail: "Crashed",
-    },
-    {
-      id: 8,
-      detail: "10X SOL",
-    },
-    {
-      id: 9,
-      detail: "VIP Card",
-    },
-    {
-      id: 10,
-      detail: "Crashed",
-    },
-    {
-      id: 11,
-      detail: "5X SOL",
-    },
-    {
-      id: 12,
-      detail: "Whitelist",
-    },
-  ];
+  const wheelDetails = basicWheelzData[wheelz].wheel;
 
   return (
     <main className="flex justify-center">
@@ -331,46 +118,18 @@ export default function WheelDetails() {
 
         {/* data */}
         {selection === "Details" &&
-          wheelDetails0015.map((deets, index) => (
+          wheelDetails.map((deets, index) => (
             <div
-              key={deets.id}
+              key={index}
               className={`px-5 ${
                 index % 2 === 0 ? "bg-[#191815]" : "bg-[#10100E]"
               }`}
             >
-              <p className="text-xs py-[6px]">{deets.detail}</p>
+              <p className="text-xs py-[6px]">{deets.name}</p>
             </div>
           ))}
 
-        {selection === "Recent" &&
-          recentSpin.map((winnings, index) => (
-            <div
-              key={winnings.id}
-              className={`px-5 pb-1 ${
-                index % 2 === 0 ? "bg-[#10100E]" : "bg-[#191815]"
-              }`}
-            >
-              <div className="flex justify-between items-center w-full py-2 rounded-md">
-                <p className="text-xs text-white w-1/3">{winnings.name}</p>
-
-                <div className="px-5 border border-transparent border-x-[#30302B] flex items-center gap-1">
-                  <p
-                    className={`text-xs font-semibold text-center rounded-3xl ${
-                      winnings.score === "WIN"
-                        ? "bg-[#8DD6AF] text-[#1B874D] py-[2px] px-3 w-16"
-                        : "bg-[#FFD6C5] text-[#FF4E00] py-[2px] px-3 w-16"
-                    }`}
-                  >
-                    {winnings.score}
-                  </p>
-                </div>
-
-                <p className="ml-4 text-xs text-white">
-                  {winnings.winnings} SOL
-                </p>
-              </div>
-            </div>
-          ))}
+        {selection === "Recent" && <RecentSpin />}
       </div>
     </main>
   );

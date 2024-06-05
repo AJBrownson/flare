@@ -30,7 +30,11 @@ export const Wallet: FC<Props> = ({ children }) => {
 
   // This is a quicknode mainnet rpc
   // "https://wispy-green-glade.solana-mainnet.quiknode.pro/4b3f864453cae039adf27ecdf9de9d529cb45b38"
-  const endpoint = useMemo(() => clusterApiUrl(network), [network]);
+  const endpoint = useMemo(
+    () =>
+      "https://wispy-green-glade.solana-mainnet.quiknode.pro/4b3f864453cae039adf27ecdf9de9d529cb45b38",
+    [network]
+  );
 
   const wallets = useMemo(
     () => [

@@ -1,8 +1,16 @@
 "use client";
-import Footer from "@/components/Footer";
-import NavBar from "@/components/Navbar";
-import RouletteWheel from "@/components/basic-wheel/basic-wheel";
 
+import { useState, useEffect } from "react";
+import NavBar from "@/components/Navbar";
+
+import RouletteWheel from "@/components/basic-wheel/basic-wheel";
+import Image from "next/image";
+
+import Footer from "@/components/Footer";
+import ModalDialog from "react-basic-modal-dialog";
+import Guide from "@/public/assets/icons/guide.png";
+import Catalogue from "@/public/assets/icons/catalogue.png";
+import { GiCheckMark } from "react-icons/gi";
 
 export default function GameOn() {
   return (

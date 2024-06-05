@@ -1,0 +1,95 @@
+"use client";
+import { useRef, useEffect } from "react";
+import Image from "next/image";
+import GoldCup from "@/public/assets/icons/gold-cup.png";
+import Empty from "@/public/assets/icons/empty.png";
+import Close from "@/public/assets/menu-close.png";
+
+interface ModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+export default function ClaimPageModal({ isOpen, onClose }: ModalProps) {
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleOutsideClick = (event: MouseEvent) => {
+      if (
+        modalRef.current &&
+        !modalRef.current.contains(event.target as Node)
+      ) {
+        onClose();
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener("mousedown", handleOutsideClick);
+    } else {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, [isOpen, onClose]);
+
+  if (!isOpen) return null;
+
+  // dummy data
+  const winnings = [
+    {
+      id: 1,
+      name: "0.1 SOL",
+    },
+    {
+      id: 2,
+      name: "Whitelist",
+    },
+  ];
+
+  return (
+    <>
+      <div className="z-50 fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+        <div ref={modalRef} className="relative xl:px-16">
+          <button
+            onClick={onClose}
+            className="absolute xl:top-10 right-0 xl:right-4 border border-[#FFFFE3] p-1 rounded"
+          >
+            <Image src={Close} alt="" />
+          </button>
+
+          <div className="font-space w-[330px] xl:max-w-[340px] h-[551px] bg-[#191815] rounded-2xl mt-10 pb-8 text-[#FFFFE3]">
+            <div className="bg-[#30302B] flex items-center justify-center py-3 rounded-tl-2xl rounded-tr-2xl">
+              <Image src={GoldCup} alt="" className="mr-2" />
+              <h1 className="text-[#FFFFE3] text-xs font-montserrat">
+                Your Prize
+              </h1>
+            </div>
+
+            <section className="mt-10 flex flex-col justify-center items-center">
+              <Image src={Empty} alt="" />
+              <span className="mt-10 text-center flex flex-col justify-center">
+                <p className="text-[#FFFFE3] text-sm">
+                  You haven&apos;t won anything yet.
+                </p>
+                <h1 className="font-montserrat font-bold text-2xl text-transparent bg-clip-text bg-gradient-to-r from-[#FFFE89] from-1% to-[#C65E34] to-100%">
+                  SPIN
+                </h1>
+                <p className="text-[#FFFFE3] text-sm">
+                  for a chance to win cool prizes!
+                </p>
+              </span>
+            </section>
+
+            {/* {winnings.map((wins) => (
+              <div key={wins.id} className="px-5 pb-1">
+                <p>{winnings.name}</p>
+              </div>
+            ))} */}
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}

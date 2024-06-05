@@ -1,17 +1,24 @@
-import Footer from "@/components/Footer";
-import NavBar from "@/components/Navbar";
-import Users from "@/components/userComponent/users";
+"use client";
+import { useState } from "react";
+import InsufficientFundsModal from "@/components/basic-wheel/insufficientFundsModal"
+import WalletConnectionModal from "@/components/basic-wheel/walletConnectModal";
 
-export default function User() {
+export default function Testing() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <>
-      <main className="bg-[url('../public/assets/particles.png')] w-full min-h-screen flex justify-center bg-cover bg-center bg-no-repeat font-space">
-        <section className="bg-cover bg-no-repeat xl:border-l-[1px] xl:border-r-[1px] xl:border-x-blue-500 bg-[#10100E] xl:shadow-glow-sides w-full max-w-full xl:max-w-[820px]">
-          <NavBar />
-          <Users />
-          <Footer />
-        </section>
-      </main>
+      <button onClick={openModal}>CLICK ME</button>
+      <InsufficientFundsModal isOpen={isModalOpen} onClose={closeModal} />
+      {/* <WalletConnectionModal isOpen={isModalOpen} onClose={closeModal} /> */}
     </>
   );
 }

@@ -13,7 +13,7 @@ export default function RecentSpin() {
 
   return (
     <>
-      {isLoading && !data?.data ? (
+      {isLoading || !data?.data ? (
         <div className="flex items-center justify-center">loading...</div>
       ) : (
         data.data.map((spin: Spin, i: number) => (

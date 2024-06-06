@@ -22,11 +22,9 @@ import EliteWheel from "@/public/assets/icons/elite-wheel.png";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { cn } from "@/lib/utils";
+import ClaimPageModal from "./basic-wheel/claimPageModal";
 
-
-
-
-export default function NavBar() {
+export default function NavBar({ showClaim }: { showClaim?: boolean }) {
   const [openMobileMenu, setOpenMobileMenu] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isCaretUp, setIsCaretUp] = useState(false);
@@ -54,6 +52,16 @@ export default function NavBar() {
     setIsCaretUp(false);
   };
 
+  const [isClaimModalOpen, setIsClaimModalOpen] = useState(false);
+
+  const openClaimModal = () => {
+    setIsClaimModalOpen(true);
+  };
+
+  const closeClaimModal = () => {
+    setIsClaimModalOpen(false);
+  };
+
   const handleClickOutside = (event: MouseEvent) => {
     if (
       dialogRef.current &&
@@ -77,7 +85,7 @@ export default function NavBar() {
   return (
     <>
       <nav className="font-space">
-        <div className="bg-[#10100E] border border-transparent border-b-[#2F3336] text-white">
+        <div className="bg-[#10100E] border border-transparent border-b-[#2F3336] text-white px-2">
           <div className="hidden xl:flex justify-between items-center py-4">
             <ul
               className={`relative flex justify-center items-center gap-8 ${
@@ -104,7 +112,22 @@ export default function NavBar() {
             <div className="">
               <Image src={Logo} alt="" className="w-8 lg:w-12 rounded-full" />
             </div>
-            <ConnectButton connected={connected} />
+
+            <div className="flex items-center gap-2">
+              {showClaim && (
+                <button className="flex items-center gap-2 bg-[#1B874D] rounded-lg p-2">
+                  <span>Claim</span>{" "}
+                  <Image
+                    src="/money-bag.svg"
+                    alt="money-bag"
+                    width={30}
+                    height={30}
+                  />
+                </button>
+              )}
+
+              <ConnectButton connected={connected} />
+            </div>
           </div>
 
           {/* mobile menu div */}
@@ -124,7 +147,24 @@ export default function NavBar() {
               />
             </Link>
 
-            <ConnectButton connected={connected} />
+            <div className="flex items-center gap-2">
+              {showClaim && (
+                <button
+                  className="flex items-center gap-2 bg-[#1B874D] rounded-lg p-2"
+                  onClick={openClaimModal}
+                >
+                  <span>Claim</span>{" "}
+                  <Image
+                    src="/money-bag.svg"
+                    alt="money-bag"
+                    width={30}
+                    height={30}
+                  />
+                </button>
+              )}
+
+              <ConnectButton connected={connected} />
+            </div>
 
             {/* Mobile menu dropdown */}
             {openMobileMenu && (
@@ -353,6 +393,8 @@ export default function NavBar() {
           </div>
         </div>
       </ModalDialog>
+      {/* Claim Modal */}
+      <ClaimPageModal isOpen={isClaimModalOpen} onClose={closeClaimModal} />
     </>
   );
 }

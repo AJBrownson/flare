@@ -1,5 +1,6 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { Connection, PublicKey, LAMPORTS_PER_SOL } from "@solana/web3.js";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -11,11 +12,20 @@ export const paymentAddress = "EcNK5Lt7ftEk4wydT8yEMwuuGCnofM6N6bZmGTY8radM";
 export const gamesKey = "/api/games";
 export const leadersKey = "/api/leaders";
 
-export const prizesKey = (add: string) => `/api/prizes?address=${add}`;
+export const prizesKey = (add: string) => `/api/prize?address=${add}`;
 
 export async function fetcher(url: string) {
   return (await fetch(url)).json();
 }
+
+export const getBalance = async (
+  connection: Connection,
+  publicKey: PublicKey
+) => {
+  const balance = (await connection.getBalance(publicKey)) / LAMPORTS_PER_SOL;
+
+  return balance;
+};
 
 export function formatToTime(isoDateString: Date): string {
   // Parse the ISO date string

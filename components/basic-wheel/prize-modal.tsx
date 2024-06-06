@@ -14,8 +14,6 @@ type Props = {
 };
 
 export default memo(function PrizeModal({ opener, setOpener, outcome }: Props) {
-  console.log();
-
   return (
     <ModalDialog
       isDialogVisible={opener}

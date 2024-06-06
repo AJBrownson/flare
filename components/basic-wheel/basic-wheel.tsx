@@ -21,6 +21,7 @@ import {
   Transaction,
   SystemProgram,
   PublicKey,
+  Connection,
 } from "@solana/web3.js";
 import { useWallet, useConnection } from "@solana/wallet-adapter-react";
 import * as bs58 from "bs58";
@@ -33,8 +34,9 @@ import Chat from "@/public/assets/chat btn.png";
 import Chathover from "@/public/assets/chat btn-hover.png";
 import Close from "@/public/assets/menu-close.png";
 import PrizeModal from "./prize-modal";
-import { gamesKey, prizesKey } from "@/lib/utils";
+import { gamesKey, prizesKey, getBalance } from "@/lib/utils";
 import { useSWRConfig } from "swr";
+import InsufficientFundsModal from "./insufficientFundsModal";
 
 const segments = Array.from({ length: 12 });
 const circles = Array.from({ length: 12 });
@@ -48,6 +50,16 @@ const RouletteWheel = () => {
   const [wheelz, setWheelz] = useState<WHEELZ>(WHEELZ.o_one_five);
   const [count, setCount] = useState<number>(0);
   const [disable, setDisable] = useState<boolean>(false);
+
+  const [isInsufficientModalOpen, setIsInsufficientModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsInsufficientModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsInsufficientModalOpen(false);
+  };
 
   const [isDialogVisible, setIsDialogVisible] = useState(false);
   const [checked, setChecked] = useState(false);
@@ -112,6 +124,14 @@ const RouletteWheel = () => {
             amount = 0.015;
             break;
         }
+
+        const balance = await getBalance(connection, publicKey);
+
+        if (balance < amount) {
+          openModal();
+          return null;
+        }
+
         const tx = new Transaction();
 
         tx.add(
@@ -123,11 +143,11 @@ const RouletteWheel = () => {
           SystemProgram.transfer({
             fromPubkey: publicKey,
             toPubkey: new PublicKey(bs58.decode(chargeAddress)),
-            lamports: 0.001 * LAMPORTS_PER_SOL,
+            lamports: 0.01 * LAMPORTS_PER_SOL,
           })
         );
         const data = await sendTransaction(tx, connection);
-        console.log("transac data", data);
+        // console.log("transac data", data);
         return data;
       } else if (
         wheelz === WHEELZ.one_thousand ||
@@ -138,6 +158,8 @@ const RouletteWheel = () => {
         return null;
       }
     } catch (error) {
+      // console.log(error);
+
       return null;
     }
   };
@@ -152,7 +174,6 @@ const RouletteWheel = () => {
         if (spin_wheel && transac) {
           spin_wheel.classList.add("wheel-spinner-timer");
 
-          console.log("counter win", win);
           if (spinner >= Number.MAX_SAFE_INTEGER - 10000) {
             spin_wheel.style.removeProperty("transform");
             window.location.reload();
@@ -178,13 +199,13 @@ const RouletteWheel = () => {
                   outcome: win.outcome,
                   name: win.name,
                   wager: wheelz,
-                  trans: transac,
+                  trans: "transac",
                 }),
               });
 
               if (res.status === 200) {
                 await mutate(gamesKey);
-                // await mutate(prizesKey(publicKey.toBase58()));
+                await mutate(prizesKey(publicKey.toBase58()));
               }
             } catch (error) {}
           }, 6300);
@@ -197,8 +218,6 @@ const RouletteWheel = () => {
                 ? getRandomInt(prev + 1, basicWheelzData[wheelz].out.length - 1)
                 : prev + 1;
             localStorage.setItem(counter, next.toString());
-            console.log("previous bitch", prev);
-            console.log("next bitch", next);
 
             setWin({
               name: basicWheelzData[wheelz].out[next].name,
@@ -219,7 +238,7 @@ const RouletteWheel = () => {
           });
         }
       } catch (error: any) {
-        console.log(error);
+        // console.log(error);
       }
     }
   };
@@ -233,10 +252,10 @@ const RouletteWheel = () => {
           numOfSpins +
             randomer(basicWheelzData[wheelz].out[Number(leftof)].code)
         );
-        // setWin({
-        //   name: basicWheelzData[wheelz].out[Number(leftof)].name,
-        //   outcome: basicWheelzData[wheelz].out[Number(leftof)].outcome,
-        // });
+        setWin({
+          name: basicWheelzData[wheelz].out[Number(leftof)].name,
+          outcome: basicWheelzData[wheelz].out[Number(leftof)].outcome,
+        });
       }
     }
   }, [wheelz]);
@@ -468,6 +487,12 @@ const RouletteWheel = () => {
         opener={prizeOpener}
         setOpener={setPrizeOpener}
       />
+
+      {/* INsufficient funds modal*/}
+      <InsufficientFundsModal
+        isOpen={isInsufficientModalOpen}
+        onClose={closeModal}
+      />
     </main>
   );
 };
@@ -496,16 +521,17 @@ const WheelzPicker = ({
   setSpinner,
   setWin,
   setCount,
+  setDisable,
 }: WheelzPickerProps) => {
   const [wager, setWager] = useState<EWagers>(EWagers.solWager);
 
   const changeWager = (wheel: WHEELZ) => {
-    // setDisable(true);
+    setDisable(true);
     const DivWheel = wheelRef?.current;
 
-    // setTimeout(() => {
-    //   setDisable(false);
-    // }, 500);
+    setTimeout(() => {
+      setDisable(false);
+    }, 500);
 
     if (DivWheel && window) {
       DivWheel.classList.remove("wheel-spinner-timer");

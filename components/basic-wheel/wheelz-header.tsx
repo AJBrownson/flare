@@ -48,7 +48,9 @@ export default function WheelzHeader({ wheelz }: { wheelz: WHEELZ }) {
         <div className="absolute top-1/2 right-0 bg-[#10100E] border-2 border-[#30302B] text-white py-2 grid grid-cols-2 divide-x divide-[#8E8E8E] rounded-lg shadow-lg shadow-fuchsia-700">
           <div className="text-sm px-2 xl:px-4">N/A SGY</div>
           <div className="text-sm px-2 xl:px-4">
-            {connected && solBalance ? formatNumberToKM(solBalance, 2) : "N/A"}{" "}
+            {connected && solBalance !== null
+              ? formatNumberToKM(solBalance, 2)
+              : "N/A"}{" "}
             SOL
           </div>
         </div>

@@ -404,6 +404,16 @@ export const basicWheelzData = {
         outcome: OUTCOME.LOSE,
         code: ang[11],
       },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[0],
+      },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[8],
+      },
     ],
   },
   o_seven_five: {
@@ -577,6 +587,11 @@ export const basicWheelzData = {
         outcome: OUTCOME.LOSE,
         code: ang[0],
       },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[7],
+      },
     ],
   },
   one_six: {
@@ -744,6 +759,16 @@ export const basicWheelzData = {
         name: "Crashed",
         outcome: OUTCOME.LOSE,
         code: ang[1],
+      },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[9],
+      },
+      {
+        name: "Crashed",
+        outcome: OUTCOME.LOSE,
+        code: ang[6],
       },
     ],
   },

@@ -45,17 +45,17 @@ export default function WalletConnectionModal({ isOpen, onClose }: ModalProps) {
             <Image src={Close} alt="" />
           </button>
 
-          <section className="text-center w-[330px] xl:w-[464px] rounded-lg bg-[#CFAEA0] text-[#000]">
-            <div className="font-bold text-base py-4">
+          <section className="font-space text-center w-[330px] xl:w-[464px] rounded-lg bg-[#CFAEA0] text-[#000]">
+            <div className="font-bold text-sm xl:text-lg py-4">
               <h1>Wallet Connection Required</h1>
             </div>
             <div className="py-10 bg-[#000] text-[#FFFFE3] rounded-b-lg px-6">
-              <p>
+              <p className="text-sm xl:text-base">
                 Connect your wallet to unlock exciting rewards and dive into the
                 action!
               </p>
               <div className="flex justify-center mt-12">
-                <button className="py-3 bg-[#FFFFE3] hover:bg-[#fff] rounded-lg w-64 text-[#000] text-xs xl:text-sm font-extrabold">
+                <button className="py-3 bg-[#FFFFE3] hover:bg-[#fff] rounded-lg w-64 text-[#000] text-xs xl:text-sm font-semibold">
                   Connect Wallet
                 </button>
               </div>

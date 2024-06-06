@@ -8,45 +8,54 @@ import Timer from "@/public/assets/icons/timer-02.png";
 
 interface UserDetails {
   id: number;
-  username: string;
   userRank: number;
   walletAddress: string;
   walletState: string;
 }
 
-export default function Profile({ params }: { params: { username: string } }) {
-  const { username } = params;
+export default function Profile({ params }: { params: { userRank: number } }) {
+  const { userRank } = params;
   const [userDetails, setUserDetails] = useState<UserDetails | null>(null);
 
   // Dummy data
   const dummyData: UserDetails[] = [
     {
       id: 1,
-      username: "johndoe",
       userRank: 100,
       walletAddress: "0xc574...A578",
       walletState: "Connected",
     },
     {
       id: 2,
-      username: "janesmith",
       userRank: 243,
-      walletAddress: "0xc574...A578",
+      walletAddress: "0x82A9...B24C",
       walletState: "Disconnected",
     },
     {
       id: 3,
-      username: "alicejohnson",
-      userRank: 768,
-      walletAddress: "0xc574...A578",
+      userRank: 758,
+      walletAddress: "0xD10A...7A81",
+      walletState: "Connected",
+    },
+    {
+      id: 4,
+      userRank: 762,
+      walletAddress: "0x1E32...5D09",
+      walletState: "Connected",
+    },
+    {
+      id: 5,
+      userRank: 601,
+      walletAddress: "0x9B87...F1A5",
       walletState: "Connected",
     },
   ];
-
+  
   useEffect(() => {
-    const user = dummyData.find((user) => user.username === username);
+    // const userRankNumber = parseInt(userRank, 10);
+    const user = dummyData.find((user) => user.userRank === userRank);
     setUserDetails(user || null);
-  }, [username]);
+  }, [userRank]);
 
   const rankSuffix = (number: number) => {
     const lastDigit = number % 10;

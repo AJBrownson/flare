@@ -23,9 +23,6 @@ import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { cn } from "@/lib/utils";
 
-
-
-
 export default function NavBar() {
   const [openMobileMenu, setOpenMobileMenu] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -283,33 +280,35 @@ export default function NavBar() {
         </div>
       </div>
 
-      {/* user's game choice dialog */}
+      {/* user's game choice dialog max-w-md*/}
       <ModalDialog
         isDialogVisible={isDialogVisible}
         closeDialog={closeDialog}
-        dialogClassName="max-w-md rounded-xl p-0 backdrop:bg-black/60"
+        dialogClassName="max-w-md xl:max-w-xl bg-transparent rounded-xl pt-8 xl:p-12 backdrop:bg-black/60"
         contentClassName="bg-[#161616] rounded-none p-6 gap-2 justify-between items-center"
       >
-        <div className="bg-[#161616] text-[#FFFFE3] pt-16 pb-8 px-2 max-w-[500px]">
+        <div>
           <Image
             onClick={closeDialog}
             src={Close}
             alt=""
-            className="absolute cursor-pointer top-2 right-2 p-1 w-8 h-8 border hover:border-[#FFFFE3] rounded-lg"
+            className="absolute cursor-pointer top-0 xl:top-12 right-1 xl:right-2 p-1 w-8 h-8 border hover:border-[#FFFFE3] rounded-lg"
           />
+        </div>
+        <div className="bg-[#161616] rounded-lg text-[#FFFFE3] pt-6 pb-8 px-4 xl:max-w-[460px]">
           <h2 className="text-center text-lg font-montserrat">
             Select an arena for your game
           </h2>
           <p className="text-xs text-center">
             Step into your gaming arena of choice! Which one will it be?
           </p>
-          <div className="mt-6 flex flex-col gap-1">
+          <div className="mt-6 flex flex-col gap-[6px]">
             <Link href="/basic">
               <div className="p-[1px] rounded-xl border border-[#30302B] hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%">
                 <div className="flex items-center gap-4 bg-[#161616] p-1 rounded-xl">
                   <Image src={BasicWheel} alt="" />
                   <span className="flex flex-col">
-                    <p className="text-sm font-montserrat mb-2">Basic Wheel</p>
+                    <p className="text-sm font-medium font-montserrat mb-1">Basic Wheel</p>
                     <p className="text-xs text-[#8E8E8E]">
                       Play and earn extra rewards
                     </p>
@@ -319,35 +318,43 @@ export default function NavBar() {
               </div>
             </Link>
 
-            <Link href="/game">
-              <div className="p-[1px] rounded-xl border border-[#30302B] hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%">
-                <div className="flex items-center gap-4 bg-[#161616] p-1 rounded-xl">
-                  <Image src={ChallengerWheel} alt="" />
-                  <span className="flex flex-col">
-                    <p className="text-sm font-montserrat mb-2">
-                      Challenger Wheel
-                    </p>
-                    <p className="text-xs text-[#8E8E8E]">
-                      Everyone bets equally, and the winner takes it all
-                    </p>
-                  </span>
-                  <p className="py-1 px-2"></p>
-                </div>
-              </div>
-            </Link>
-
+            {/* <Link href="/game"> */}
             <div className="p-[1px] rounded-xl border border-[#30302B] hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%">
-              <div className="flex items-center gap-4 bg-[#161616] p-1 rounded-xl">
-                <Image src={EliteWheel} alt="" />
+              <div className="flex justify-between items-center gap-4 bg-[#161616] p-1 rounded-xl">
+                <Image src={ChallengerWheel} alt="" />
                 <span className="flex flex-col">
-                  <p className="text-sm font-montserrat mb-2">Elite Roller</p>
-                  <p className="text-xs text-[#8E8E8E]">
-                    Players face off in a high-stakes challenge
+                  <p className="text-sm font-montserrat mb-1">
+                    Challenger Wheel
+                  </p>
+                  <p className=" text-xs text-[#8E8E8E]">
+                    Everyone bets equally, and the winner takes it all
                   </p>
                 </span>
                 <p className="text-xs bg-[#560082] text-[#C6C6C6] rounded-xl py-1 px-2">
                   Soon
                 </p>
+              </div>
+            </div>
+            {/* </Link> */}
+
+            <div className="p-[1px] rounded-xl border border-[#30302B] hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%">
+              <div className="flex items-center gap-4 bg-[#161616] p-1 rounded-xl">
+                <Image src={EliteWheel} alt="" />
+
+                <div className="flex justify-between xl:gap-11 items-center">
+                <span className="flex flex-col">
+                  <p className="text-sm font-montserrat mb-1">
+                    Elite Wheel
+                  </p>
+                  <p className=" text-xs text-[#8E8E8E]">
+                  Players face off in a high-stakes challenge
+                  </p>
+                </span>
+                <p className="text-xs bg-[#560082] text-[#C6C6C6] rounded-xl py-1 px-2">
+                  Soon
+                </p>
+                </div>
+
               </div>
             </div>
           </div>

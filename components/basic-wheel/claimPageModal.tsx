@@ -141,7 +141,7 @@ export default function ClaimPageModal({ isOpen, onClose }: ModalProps) {
                 <p className="text-[#FFFFE3] text-sm">
                   You haven&apos;t won anything yet.
                 </p>
-                <h1 className="font-montserrat font-bold text-2xl text-transparent bg-clip-text bg-gradient-to-r from-[#FFFE89] from-1% to-[#C65E34] to-100%">
+                <h1 className="font-montserrat font-black text-2xl text-transparent bg-clip-text bg-gradient-to-r from-[#FFFE89] from-35% to-[#C65E34] to-100%">
                   SPIN
                 </h1>
                 <p className="text-[#FFFFE3] text-sm">

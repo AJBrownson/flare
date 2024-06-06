@@ -4,27 +4,48 @@ import Image from "next/image";
 import ProfilePic from "@/public/assets/icons/basic-wheel.png";
 import Medal from "@/public/assets/icons/medal-07.png";
 import Timer from "@/public/assets/icons/timer-02.png";
+import UserAirdropModal from "@/components/userComponent/userAirdropModal";
+// import Navbar from "@/components/Navbar"
+// import Footer from "@/components/Footer";
 
-export default function Users() {
-  const userRank = "100";
-  const [rank, setRank] = useState(userRank);
+export default function ProductDetails({
+  params,
+}: {
+  params: { userRank: string };
+}) {
+  const { userRank } = params;
   const walletAddress = "0xc574...A578";
   const walletState = "Connected";
 
   const rankSuffix = (number: number) => {
     const lastDigit = number % 10;
-    if (lastDigit === 1 && number == 11) {
-      return "st";
-    } else if (lastDigit === 2 && number == 12) {
-      return "nd";
-    } else if (lastDigit === 3 && number == 13) {
-      return "rd";
-    } else {
+    const lastTwoDigits = number % 100;
+
+    if (lastTwoDigits >= 11 && lastTwoDigits <= 13) {
       return "th";
     }
+    if (lastDigit === 1) {
+      return "st";
+    }
+    if (lastDigit === 2) {
+      return "nd";
+    }
+    if (lastDigit === 3) {
+      return "rd";
+    }
+    return "th";
+  };
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
   };
   return (
     <>
+    {/* <Navbar /> */}
       <div className="bg-[#10100E] text-[#FFFFE3] px-6 xl:px-12 font-space">
         {/* user info */}
         <section className="py-6 flex justify-center items-center">
@@ -40,8 +61,8 @@ export default function Users() {
                 <p>Player&apos;s Rank</p>
               </span>
               <p className="rounded-full text-center w-24 text-sm py-1 text-transparent font-bold bg-clip-text bg-gradient-to-b from-[#FFFE89] from-10% to-[#C65E34] to-100%">
-                {rank}
-                {rankSuffix(parseInt(rank))}
+                {userRank}
+                {rankSuffix(parseInt(userRank))}
               </p>
             </div>
             <div className="p-4 flex justify-between items-center border-t border-[#30302B] w-full">
@@ -69,7 +90,10 @@ export default function Users() {
               miss out—take action to meet the requirements and secure your spot
               for the airdrop!
             </p>
-            <button className="text-sm rounded-lg bg-[#30302B] hover:bg-[#000] py-3 w-28 border border-[#30302B]">
+            <button
+              onClick={openModal}
+              className="text-sm rounded-lg bg-[#30302B] hover:bg-[#000] py-3 w-28 border border-[#30302B]"
+            >
               Check How
             </button>
           </div>
@@ -92,6 +116,8 @@ export default function Users() {
           </div>
         </section>
       </div>
+      {/* <Footer /> */}
+      <UserAirdropModal isOpen={isModalOpen} onClose={closeModal} />
     </>
   );
 }

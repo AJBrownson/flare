@@ -36,18 +36,6 @@ export default function ClaimPageModal({ isOpen, onClose }: ModalProps) {
 
   if (!isOpen) return null;
 
-  // dummy data
-  const winnings = [
-    {
-      id: 1,
-      name: "0.1 SOL",
-    },
-    {
-      id: 2,
-      name: "Whitelist",
-    },
-  ];
-
   return (
     <>
       <div className="z-50 fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
@@ -73,7 +61,7 @@ export default function ClaimPageModal({ isOpen, onClose }: ModalProps) {
                 <p className="text-[#FFFFE3] text-sm">
                   You haven&apos;t won anything yet.
                 </p>
-                <h1 className="font-montserrat font-bold text-2xl text-transparent bg-clip-text bg-gradient-to-r from-[#FFFE89] from-1% to-[#C65E34] to-100%">
+                <h1 className="font-montserrat font-black text-2xl text-transparent bg-clip-text bg-gradient-to-r from-[#FFFE89] from-35% to-[#C65E34] to-100%">
                   SPIN
                 </h1>
                 <p className="text-[#FFFFE3] text-sm">
@@ -81,12 +69,6 @@ export default function ClaimPageModal({ isOpen, onClose }: ModalProps) {
                 </p>
               </span>
             </section>
-
-            {/* {winnings.map((wins) => (
-              <div key={wins.id} className="px-5 pb-1">
-                <p>{winnings.name}</p>
-              </div>
-            ))} */}
           </div>
         </div>
       </div>

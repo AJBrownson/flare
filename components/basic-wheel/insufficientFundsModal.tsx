@@ -44,7 +44,7 @@ export default function InsufficientFundsModal({ isOpen, onClose }: ModalProps) 
             <Image src={Close} alt="" />
           </button>
 
-          <section className="text-center w-[330px] xl:w-[464px] rounded-lg bg-[#CFAEA0] text-[#000]">
+          <section className="font-space text-center w-[330px] xl:w-[464px] rounded-lg bg-[#CFAEA0] text-[#000]">
             <div className="font-bold text-sm xl:text-lg py-4">
               <h1>Oops!</h1>
             </div>

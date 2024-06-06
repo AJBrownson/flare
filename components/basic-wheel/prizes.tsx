@@ -2,13 +2,15 @@
 import { useRef, useEffect } from "react";
 import Image from "next/image";
 import Close from "@/public/assets/menu-close.png";
+import Confetti from "@/public/assets/icons/confetti.svg";
+import Winner from "@/public/assets/icons/winner.svg";
 
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-export default function WalletConnectionModal({ isOpen, onClose }: ModalProps) {
+export default function PrizeModal({ isOpen, onClose }: ModalProps) {
   const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -45,22 +47,28 @@ export default function WalletConnectionModal({ isOpen, onClose }: ModalProps) {
             <Image src={Close} alt="" />
           </button>
 
-          <section className="font-space text-center w-[330px] xl:w-[464px] rounded-lg bg-[#CFAEA0] text-[#000]">
-            <div className="font-bold text-sm xl:text-lg py-4">
-              <h1>Wallet Connection Required</h1>
-            </div>
-            <div className="py-10 bg-[#000] text-[#FFFFE3] rounded-b-lg px-6">
-              <p className="text-sm xl:text-base">
-                Connect your wallet to unlock exciting rewards and dive into the
-                action!
+          <section className="p-4 sm:p-10 bg-transparent relative">
+          <Image
+            src={Confetti}
+            alt="confetti"
+            fill
+            className="absolute w-full"
+          />
+          <div className="text-white bg-gradient-to-r from-[#FFFE89] to-[#C65E34] p-1 rounded-lg whitespace-nowrap">
+            <div className="font-space px-10 py-8 flex flex-col justify-center items-center text-center w-[330px] xl:w-[464px] rounded-lg bg-[#000000] text-[#FFFFE3]">
+              <p className="py-4 font-extrabold font-montserrat text-transparent bg-clip-text bg-gradient-to-r from-[#FFFE89] from-30% to-[#C65E34] to-100% text-xl xl:text-3xl ">
+                Jackpot!
               </p>
-              <div className="flex justify-center mt-12">
-                <button className="py-3 bg-[#FFFFE3] hover:bg-[#fff] rounded-lg w-64 text-[#000] text-xs xl:text-sm font-semibold">
-                  Connect Wallet
-                </button>
-              </div>
+              <Image src={Winner} alt="" />
+              <p className="pt-4 flex justify-center text-sm xl:text-base font-bold">
+                You&apos;re a winner!
+              </p>
+              <p className="font-medium">
+                Lady Luck is smiling upon you today!
+              </p>
             </div>
-          </section>
+          </div>
+        </section>
         </div>
       </div>
     </>

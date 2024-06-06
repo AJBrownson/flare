@@ -4,7 +4,8 @@ import Image from "next/image"
 import InsufficientFundsModal from "@/components/basic-wheel/insufficientFundsModal"
 import WalletConnectionModal from "@/components/basic-wheel/walletConnectModal";
 import ClaimPageModal from "@/components/basic-wheel/claimPageModal";
-import PrizeModal from "@/components/challengerModals/prizes";
+
+
 
 export default function Testing() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -21,7 +22,7 @@ export default function Testing() {
     <>
       <button onClick={openModal}>CLICK ME</button>
       {/* <ClaimPageModal isOpen={isModalOpen} onClose={closeModal} /> */}
-      <PrizeModal isOpen={isModalOpen} onClose={closeModal} />
+      {/* <PrizeModal isOpen={isModalOpen} onClose={closeModal} /> */}
       {/* <InsufficientFundsModal isOpen={isModalOpen} onClose={closeModal} /> */}
       {/* <div className="bg-black flex flex-col justify-center items-center gap-6 px-28 py-16 text-white">
           <h1 className="text-6xl">OOPS!</h1>

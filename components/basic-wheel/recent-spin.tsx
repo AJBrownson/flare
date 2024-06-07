@@ -11,12 +11,29 @@ type Spin = {
 export default function RecentSpin() {
   const { data, isLoading } = useSWR(gamesKey, fetcher);
 
+  const skeletonLoader = (
+    <div className="animate-pulse px-5 pb-1 bg-[#10100E]">
+      <div className="flex justify-between items-center w-full py-2 rounded-md">
+        <div className="h-4 bg-gray-700 rounded w-1/3"></div>
+        <div className="px-5 flex items-center gap-1">
+          <div className="h-4 bg-gray-700 rounded w-16"></div>
+        </div>
+        <div className="h-4 bg-gray-700 rounded w-1/3"></div>
+      </div>
+    </div>
+  );
+
   return (
     <>
       {isLoading && !data?.data ? (
-        <div className="flex justify-center items-center h-full">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#FFFFE3]"></div>
-        </div>
+        <>
+          {skeletonLoader}
+          {skeletonLoader}
+          {skeletonLoader}
+          {skeletonLoader}
+          {skeletonLoader}
+          {skeletonLoader}
+        </>
       ) : (
         data.data.map((spin: Spin, i: number) => (
           <div

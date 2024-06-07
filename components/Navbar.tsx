@@ -39,9 +39,6 @@ export default function NavBar({ showClaim }: { showClaim?: boolean }) {
 
   const { connected } = useWallet();
 
-  // const handleMenuClick = () => {
-  //   setOpenMobileMenu(!openMobileMenu);
-  // };
   const handleMenuClick = () => {
     setOpenMobileMenu(!openMobileMenu);
     if (!openMobileMenu) {
@@ -417,6 +414,7 @@ export default function NavBar({ showClaim }: { showClaim?: boolean }) {
           </div>
         </div>
       </ModalDialog>
+      
       {/* Claim Modal */}
       <ClaimPageModal isOpen={isClaimModalOpen} onClose={closeClaimModal} />
     </>

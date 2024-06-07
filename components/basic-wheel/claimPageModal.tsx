@@ -82,18 +82,6 @@ export default function ClaimPageModal({ isOpen, onClose }: ModalProps) {
 
   if (!isOpen) return null;
 
-  // dummy data
-  const winnings = [
-    {
-      id: 1,
-      name: "0.1 SOL",
-    },
-    {
-      id: 2,
-      name: "Whitelist",
-    },
-  ];
-
   if (!connected && !publicKey) {
     return (
       <div className="z-50 fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">

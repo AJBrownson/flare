@@ -323,11 +323,11 @@ export default function NavBar({ showClaim }: { showClaim?: boolean }) {
         </div>
       </div>
 
-      {/* user's game choice dialog max-w-md*/}
+      {/* user's game choice dialog */}
       <ModalDialog
         isDialogVisible={isDialogVisible}
         closeDialog={closeDialog}
-        dialogClassName="max-w-md xl:max-w-xl bg-transparent rounded-xl pt-8 xl:p-12 backdrop:bg-black/60"
+        dialogClassName="bg-transparent rounded-xl pt-8 xl:p-12 backdrop:bg-black/60"
         contentClassName="bg-[#161616] rounded-none p-6 gap-2 justify-between items-center"
       >
         <div>
@@ -338,14 +338,15 @@ export default function NavBar({ showClaim }: { showClaim?: boolean }) {
             className="absolute cursor-pointer top-0 xl:top-12 right-1 xl:right-2 p-1 w-8 h-8 border hover:border-[#FFFFE3] rounded-lg"
           />
         </div>
-        <div className="bg-[#161616] rounded-lg text-[#FFFFE3] pt-6 pb-8 px-4 xl:max-w-[460px]">
+        <div className="bg-[#161616] rounded-lg text-[#FFFFE3] pt-6 pb-8 px-4 xl:max-w-[460px] h-[550px] xl:max-h-[375px]">
           <h2 className="text-center text-lg font-montserrat">
             Select an arena for your game
           </h2>
           <p className="text-xs text-center">
             Step into your gaming arena of choice! Which one will it be?
           </p>
-          <div className="mt-6 flex flex-col gap-[6px]">
+          
+          <div className="mt-8 flex flex-col gap-[6px]">
             <Link href="/basic">
               <div className="p-[1px] rounded-xl border border-[#30302B] hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%">
                 <div className="flex items-center gap-4 bg-[#161616] p-1 rounded-xl">
@@ -419,8 +420,8 @@ function ConnectButton({ connected }: { connected: boolean }) {
   return (
     <div
       className={cn(
-        "hidden lg:flex w-max",
-        connected && "border border-[#8E8E8E] rounded-[10px]"
+        "flex",
+        connected && "border border-[#8E8E8E] rounded-lg"
       )}
     >
       {/* <button className="flex p-3 font-semibold rounded-lg items-center text-sm bg-[#0000FF] text-[#FFFFE3]">
@@ -430,28 +431,29 @@ function ConnectButton({ connected }: { connected: boolean }) {
 
       <WalletMultiButton
         style={{
-          backgroundColor: `${connected ? "transparent" : "#023BFF"}`,
+          backgroundColor: `${connected ? "transparent" : "#0000FF"}`,
           fontSize: ".9rem",
-          padding: ".9rem",
-          borderRadius: "10px",
+          padding: ".75rem",
+          borderRadius: ".5rem",
         }}
+        
         // onClick={() => {
         //   console.log("click wallet");
         // }}
-        endIcon={
-          !connected ? (
-            <Image
-              src="/assets/solana-icon.png"
-              alt="solana"
-              width={10}
-              height={10}
-              className="w-0"
-            />
-          ) : (
-            <PiCaretDown className="ml-2" />
-          )
-        }
+        // endIcon={
+        //   !connected ? (
+        //     <Image
+        //       src={Solana}
+        //       alt="solana icon button"
+        //       className="hidden"
+        //     />
+            
+        //   ) : (
+        //     <PiCaretDown className="ml-2" />
+        //   )
+        // }
       />
+
     </div>
   );
 }

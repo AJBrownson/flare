@@ -296,13 +296,13 @@ const RouletteWheel = () => {
   }, [chats]);
 
   return (
-    // px-4 sm:px-10
-    <main className="relative px-4 text-white font-space min-h-screen conic-bg-grad ">
+    // px-4 sm:px-10 min-h-screen h-full
+    <main className="relative px-4 text-white font-space conic-bg-grad ">
       <div className="h-14 py-4">
         <WheelzHeader wheelz={wheelz} />
       </div>
 
-      <section className="relative flex flex-col items-center justify-center py-10 xl:py-0 px-2 w-full h-full">
+      <section className="relative flex flex-col items-center justify-center py-10 xl:py-0 px-2 w-full">
         <div
           className="flex justify-center bg-transparent px-0 overflow-hidden z-10"
           style={{ clipPath: "circle(60%)" }}
@@ -359,7 +359,7 @@ const RouletteWheel = () => {
           <Image
             src={Group}
             alt="Wheel Stand"
-            className="-mt-10 w-48 sm:w-56"
+            className="-mt-5 xl:-mt-10 w-48 sm:w-56"
           />
         </div>
 
@@ -377,7 +377,7 @@ const RouletteWheel = () => {
       {/* widget for chat */}
       <div
         onClick={handleChats}
-        className="absolute bottom-[32%] xl:bottom-40 right-5 z-10"
+        className="absolute bottom-[32%] xl:bottom-40 right-5 z-10 transform translate-y-9 xl:translate-y-0 translate-x-[10%] xl:translate-x-0"
       >
         {chats ? (
           <Image

@@ -121,7 +121,10 @@ export default function NavBar({ showClaim }: { showClaim?: boolean }) {
 
             <div className="flex items-center gap-2">
               {showClaim && (
-                <button className="flex items-center gap-2 bg-[#1B874D] rounded-lg p-2 h-[2.4rem] text-base">
+                <button
+                  className="flex items-center gap-2 bg-[#1B874D] rounded-lg p-2 h-[2.4rem] text-base"
+                  onClick={openClaimModal}
+                >
                   <span>Claim</span>{" "}
                   <Image
                     src="/money-bag.svg"

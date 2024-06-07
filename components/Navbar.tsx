@@ -10,7 +10,7 @@ import Open from "@/public/assets/menu-bar.png";
 import Close from "@/public/assets/menu-close.png";
 import Home from "@/public/assets/icons/house-05.png";
 import Game from "@/public/assets/icons/nintendo-switch.png";
-import Solana from "@/public/assets/solana-icon.png";
+import MoneyBag from "@/public/money-bag.svg"
 import Wheelz from "@/public/assets/wheelz.png";
 import Tournament from "@/public/assets/tournament.png";
 import Games from "@/public/assets/games.png";
@@ -119,18 +119,17 @@ export default function NavBar({ showClaim }: { showClaim?: boolean }) {
               <Image src={Logo} alt="" className="w-8 lg:w-12 rounded-full" />
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-10">
               {showClaim && (
                 <button
-                  className="flex items-center gap-2 bg-[#1B874D] rounded-lg p-2 h-[2.4rem] text-base"
+                  className="flex items-center gap-2 bg-[#1B874D] rounded-lg px-2 py-2 text-xs xl:text-sm"
                   onClick={openClaimModal}
                 >
                   <span>Claim</span>{" "}
                   <Image
-                    src="/money-bag.svg"
+                    src={MoneyBag}
                     alt="money-bag"
-                    width={25}
-                    height={25}
+                    className="w-2 h-2 xl:w-4 xl:h-4"
                   />
                 </button>
               )}

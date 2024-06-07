@@ -19,7 +19,8 @@ import Dex from "@/public/assets/dex.png";
 import BasicWheel from "@/public/assets/icons/basic-wheel.png";
 import ChallengerWheel from "@/public/assets/icons/challenger-wheel.png";
 import EliteWheel from "@/public/assets/icons/elite-wheel.png";
-import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
+import { WalletMultiButton } from "@/components/connect-wallet/connect-button";
+import { useWalletConnectButton } from "@solana/wallet-adapter-base-ui";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { cn } from "@/lib/utils";
 import ClaimPageModal from "./basic-wheel/claimPageModal";
@@ -424,6 +425,8 @@ export default function NavBar({ showClaim }: { showClaim?: boolean }) {
 function ConnectButton({ connected }: { connected: boolean }) {
   const [hydrate, setHydrate] = useState(false);
 
+  const { buttonState } = useWalletConnectButton();
+
   useEffect(() => {
     setHydrate(true);
   }, []);
@@ -447,22 +450,6 @@ function ConnectButton({ connected }: { connected: boolean }) {
           borderRadius: ".5rem",
           height: "2.4rem",
         }}
-
-        // onClick={() => {
-        //   console.log("click wallet");
-        // }}
-        // endIcon={
-        //   !connected ? (
-        //     <Image
-        //       src={Solana}
-        //       alt="solana icon button"
-        //       className="hidden"
-        //     />
-
-        //   ) : (
-        //     <PiCaretDown className="ml-2" />
-        //   )
-        // }
       />
     </div>
   );

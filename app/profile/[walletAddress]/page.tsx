@@ -5,17 +5,23 @@ import ProfilePic from "@/public/assets/icons/basic-wheel.png";
 import Medal from "@/public/assets/icons/medal-07.png";
 import Timer from "@/public/assets/icons/timer-02.png";
 import UserAirdropModal from "@/components/userComponent/userAirdropModal";
-// import Navbar from "@/components/Navbar"
+import Navbar from "@/components/Navbar";
+import { useWallet } from "@solana/wallet-adapter-react";
+import { cn } from "@/lib/utils";
 // import Footer from "@/components/Footer";
 
 export default function ProductDetails({
   params,
 }: {
-  params: { userRank: string };
+  params: { walletAddress: string };
 }) {
-  const { userRank } = params;
-  const walletAddress = "0xc574...A578";
+  const { walletAddress } = params;
+  const userRank = "1";
   const walletState = "Connected";
+
+  console.log(params);
+
+  const { connected } = useWallet();
 
   const rankSuffix = (number: number) => {
     const lastDigit = number % 10;
@@ -45,7 +51,7 @@ export default function ProductDetails({
   };
   return (
     <>
-    {/* <Navbar /> */}
+      <Navbar />
       <div className="bg-[#10100E] text-[#FFFFE3] px-6 xl:px-12 font-space">
         {/* user info */}
         <section className="py-6 flex justify-center items-center">
@@ -66,12 +72,19 @@ export default function ProductDetails({
               </p>
             </div>
             <div className="p-4 flex justify-between items-center border-t border-[#30302B] w-full">
-              <span className="flex justify-between items-center gap-1">
+              <span className="flex justify-between items-center gap-1 ">
                 <Image src={Medal} alt="" />
-                <p>{walletAddress}</p>
+                <p>
+                  {walletAddress.slice(0, 4)}...{walletAddress.slice(-4)}
+                </p>
               </span>
-              <p className="border border-[#30302B] rounded-full text-center w-24 text-sm py-1 text-transparent font-bold bg-clip-text bg-[#87E8B4]">
-                {walletState}
+              <p
+                className={cn(
+                  "border border-[#30302B] rounded-full text-center w-24 text-sm py-1 text-transparent font-bold bg-clip-text whitespace-nowrap",
+                  connected ? "bg-[#87E8B4]" : "bg-red-500"
+                )}
+              >
+                {connected ? "connected" : "not connected"}
               </p>
             </div>
           </div>

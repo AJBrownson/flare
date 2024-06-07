@@ -47,6 +47,11 @@ const counter = "hgfjhhgfghfjyfjyt";
 const randomer = (num: number) => Math.random() * (num + 24 - num) + num;
 
 const RouletteWheel = () => {
+
+
+
+
+
   const [wheelz, setWheelz] = useState<WHEELZ>(WHEELZ.o_one_five);
   const [count, setCount] = useState<number>(0);
   const [disable, setDisable] = useState<boolean>(false);

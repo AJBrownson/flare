@@ -123,7 +123,7 @@ export default function NavBar({ showClaim }: { showClaim?: boolean }) {
 
             <div className="flex items-center gap-2">
               {showClaim && (
-                <button className="flex items-center gap-2 bg-[#1B874D] rounded-lg p-2 text-base">
+                <button className="flex items-center gap-2 bg-[#1B874D] rounded-lg p-2 h-[2.4rem] text-base">
                   <span>Claim</span>{" "}
                   <Image
                     src="/money-bag.svg"
@@ -152,7 +152,7 @@ export default function NavBar({ showClaim }: { showClaim?: boolean }) {
 
               {showClaim && (
                 <button
-                  className="flex items-center gap-2 bg-[#1B874D] rounded-lg p-2 text-base"
+                  className="flex items-center gap-2 bg-[#1B874D] rounded-lg p-2 h-[2.4rem] text-base"
                   onClick={openClaimModal}
                 >
                   <span>Claim</span>{" "}
@@ -445,7 +445,7 @@ function ConnectButton({ connected }: { connected: boolean }) {
           fontWeight: "500",
           padding: ".7rem",
           borderRadius: ".5rem",
-          height: "2.5rem",
+          height: "2.4rem",
         }}
 
         // onClick={() => {

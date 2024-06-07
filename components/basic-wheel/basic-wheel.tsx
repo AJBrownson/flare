@@ -557,7 +557,7 @@ const WheelzPicker = ({
       <div className="bg-black grid grid-cols-2 gap-3 p-2 rounded-tr-lg rounded-tl-lg text-[#8E8E8E]">
         <button
           className={cn(
-            "rounded-lg py-[6px] bg-gradient-to-r",
+            "text-xs xl:text-[16px] rounded-lg py-[10px] xl:py-3 bg-gradient-to-r",
             wager == EWagers.solWager &&
               "from-[#FFFE89]  to-[#935327] text-black"
           )}
@@ -567,7 +567,7 @@ const WheelzPicker = ({
         </button>
         <button
           className={cn(
-            "rounded-lg py-[6px] bg-gradient-to-r",
+            "text-xs xl:text-[16px] rounded-lg py-[10px] xl:py-3 bg-gradient-to-r",
             wager == EWagers.sgyWager &&
               "from-[#FFFE89]  to-[#935327] text-black"
           )}
@@ -586,7 +586,7 @@ const WheelzPicker = ({
           {allWagers[wager].map((wage, i) => (
             <button
               className={cn(
-                "bg-[#DC1FFF] rounded-lg py-2",
+                "bg-[#DC1FFF] rounded-lg py-[10px] xl:py-3 text-xs xl:text-sm",
                 wage.wheel === wheelz && "bg-[#F2A9FF]"
               )}
               onClick={() => changeWager(wage.wheel)}

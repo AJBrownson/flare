@@ -187,7 +187,7 @@ export default function NavBar({ showClaim }: { showClaim?: boolean }) {
                       </span>
                     </div>
 
-                    <div className="hover-image p-[1px] rounded-xl hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%">
+                    <div className="xl:hover-image p-[1px] rounded-xl hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%">
                       <div className="bg-[#191815] p-3 rounded-xl">
                         <Image src={Tournament} alt="Tournaments" />
                         <span className="flex justify-between items-center mt-3">
@@ -199,7 +199,7 @@ export default function NavBar({ showClaim }: { showClaim?: boolean }) {
                       </div>
                     </div>
 
-                    <div className="hover-image p-[1px] rounded-xl hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%">
+                    <div className="xl:hover-image p-[1px] rounded-xl hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%">
                       <div className="bg-[#191815] p-3 rounded-xl">
                         <Image src={Games} alt="More Games" />
                         <span className="flex justify-between items-center mt-3">
@@ -211,7 +211,7 @@ export default function NavBar({ showClaim }: { showClaim?: boolean }) {
                       </div>
                     </div>
 
-                    <div className="hover-image p-[1px] rounded-xl hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%">
+                    <div className="xl:hover-image p-[1px] rounded-xl hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%">
                       <div className="bg-[#191815] p-3 rounded-xl">
                         <Image src={NFT} alt="More Games" />
                         <span className="flex justify-between items-center mt-3">
@@ -223,7 +223,7 @@ export default function NavBar({ showClaim }: { showClaim?: boolean }) {
                       </div>
                     </div>
 
-                    <div className="hover-image p-[1px] rounded-xl hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%">
+                    <div className="xl:hover-image p-[1px] rounded-xl hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%">
                       <div className="bg-[#191815] p-3 rounded-xl">
                         <Image src={Dex} alt="More Games" />
                         <span className="flex justify-between items-center mt-3">
@@ -436,7 +436,7 @@ function ConnectButton({ connected }: { connected: boolean }) {
           padding: ".75rem",
           borderRadius: ".5rem",
         }}
-        
+
         // onClick={() => {
         //   console.log("click wallet");
         // }}

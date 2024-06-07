@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
 import Genie from "../public/assets/genie.png";
 import Text from "../public/assets/text-box.png";
 import TextMobile from "../public/assets/textm.png";
@@ -39,9 +40,11 @@ export default function Home() {
               alt=""
               className="mt-16 xl:-mt-10 w-60 h-60 z-10"
             />
+            <Link href="https://solgacy.gitbook.io/whitepaper" rel="noopener noreferrer" target="_blank">
             <button className="bg-[#FFFFE3] px-8 py-3 xl:px-14 rounded-lg text-[13px] font-semibold">
               Read Whitepaper
             </button>
+            </Link>
           </div>
 
           {/* cards section */}
@@ -119,8 +122,10 @@ export default function Home() {
 
           {/* socials section */}
           <div className="w-full justify-center flex items-center gap-x-5 mt-10">
-            <Image src={Xbtn} alt="" className="w-12 h-12" />
+            <Link href="https://x.com/solgacy" rel="noopener noreferrer" target="_blank"><Image src={Xbtn} alt="" className="w-12 h-12" /></Link>
+            <Link href="https://discord.gg/GWbWspXDgF" rel="noopener noreferrer" target="_blank">
             <Image src={Discordbtn} alt="" className="w-12 h-12" />
+            </Link>
           </div>
 
           <Footer />

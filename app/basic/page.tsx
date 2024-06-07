@@ -13,7 +13,6 @@ export default function GameOn() {
           <div className="px-0 md:px-4">
             <NavBar showClaim />
           </div>
-
           <RouletteWheel />
           <Footer />
         </section>

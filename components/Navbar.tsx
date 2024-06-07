@@ -436,6 +436,7 @@ function ConnectButton({ connected }: { connected: boolean }) {
           padding: ".75rem",
           borderRadius: ".5rem",
         }}
+        
         // onClick={() => {
         //   console.log("click wallet");
         // }}

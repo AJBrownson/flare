@@ -5,7 +5,6 @@ import Image from "next/image";
 import PointerHover from "/public/assets/pointer-hover.png";
 import Pointer from "/public/assets/pointer.png";
 import Group from "/public/assets/Group 2.png";
-import Timer from "/public/assets/icons/timer-02.png";
 import {
   WHEELZ,
   basicWheelzData,

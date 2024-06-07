@@ -1,4 +1,6 @@
 "use client";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import Genie from "../public/assets/genie.png";
@@ -12,10 +14,38 @@ import Xbtn from "../public/assets/X btn.png";
 import ExtLink from "../public/assets/icons/link.png";
 import Footer from "@/components/Footer";
 import NavBar from "@/components/Navbar";
-
-
+import { useWallet } from "@solana/wallet-adapter-react";
+import WalletConnectionModal from "@/components/basic-wheel/walletConnectModal";
 
 export default function Home() {
+  const [isWalletConnectModalOpen, setIsWalletConnectModalOpen] =
+    useState(false);
+  const { connected, publicKey } = useWallet();
+  const router = useRouter();
+
+  const openWalletConnectModal = () => {
+    setIsWalletConnectModalOpen(true);
+  };
+
+  const closeWalletConnectModal = () => {
+    setIsWalletConnectModalOpen(false);
+  };
+
+  const handleProfileLink = () => {
+    if (publicKey) {
+      const walletAddress = publicKey.toString();
+      router.push(`/profile/${walletAddress}`);
+    }
+  };
+
+  const handleConnectProfile = () => {
+    if (!connected) {
+      openWalletConnectModal();
+      return;
+    }
+    handleProfileLink();
+  };
+
   return (
     <>
       <main className="bg-[url('../public/assets/particles.png')] bg-[#231828] w-full min-h-screen flex justify-center bg-cover bg-center bg-no-repeat font-space">
@@ -40,10 +70,14 @@ export default function Home() {
               alt=""
               className="mt-16 xl:-mt-10 w-60 h-60 z-10"
             />
-            <Link href="https://solgacy.gitbook.io/whitepaper" rel="noopener noreferrer" target="_blank">
-            <button className="bg-[#FFFFE3] px-8 py-3 xl:px-14 rounded-lg text-[13px] font-semibold">
-              Read Whitepaper
-            </button>
+            <Link
+              href="https://solgacy.gitbook.io/whitepaper"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <button className="bg-[#FFFFE3] hover:bg-[#FFFFFF] px-8 py-3 xl:px-14 rounded-lg text-[13px] font-semibold">
+                Read Whitepaper
+              </button>
             </Link>
           </div>
 
@@ -61,11 +95,17 @@ export default function Home() {
                     movement
                   </div>
 
-                  <div className="mt-8 xl:mb-4">
-                    <button className="rounded-md text-white font-medium bg-[#30302B] w-40 xl:w-44 px-10 py-3 text-[13px] xl:text-md hover:bg-[#191815] border border-transparent hover:border-[#30302B]">
-                      Join Now!
-                    </button>
-                  </div>
+                  <Link
+                    href="https://discord.gg/GWbWspXDgF"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    <div className="mt-8 xl:mb-4">
+                      <button className="rounded-md text-white font-medium bg-[#30302B] w-40 xl:w-44 px-10 py-3 text-[13px] xl:text-md hover:bg-[#191815] border border-transparent hover:border-[#30302B]">
+                        Join Now!
+                      </button>
+                    </div>
+                  </Link>
                 </div>
 
                 <div>
@@ -87,7 +127,10 @@ export default function Home() {
                   </div>
 
                   <div className="mt-8 xl:mb-4">
-                    <button className="flex gap-2 justify-center items-center rounded-md font-medium text-white bg-[#30302B] w-40 xl:w-44 px-3 py-3 text-[13px] hover:bg-[#191815] border border-transparent hover:border-[#30302B]">
+                    <button
+                      onClick={handleConnectProfile}
+                      className="flex gap-2 justify-center items-center rounded-md font-medium text-white bg-[#30302B] w-40 xl:w-44 px-3 py-3 text-[13px] hover:bg-[#191815] border border-transparent hover:border-[#30302B]"
+                    >
                       Check your profile
                       <Image src={ExtLink} alt="" />
                     </button>
@@ -122,14 +165,28 @@ export default function Home() {
 
           {/* socials section */}
           <div className="w-full justify-center flex items-center gap-x-5 mt-10">
-            <Link href="https://x.com/solgacy" rel="noopener noreferrer" target="_blank"><Image src={Xbtn} alt="" className="w-12 h-12" /></Link>
-            <Link href="https://discord.gg/GWbWspXDgF" rel="noopener noreferrer" target="_blank">
-            <Image src={Discordbtn} alt="" className="w-12 h-12" />
+            <Link
+              href="https://x.com/solgacy"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <Image src={Xbtn} alt="" className="w-12 h-12" />
+            </Link>
+            <Link
+              href="https://discord.gg/GWbWspXDgF"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <Image src={Discordbtn} alt="" className="w-12 h-12" />
             </Link>
           </div>
 
           <Footer />
         </section>
+        <WalletConnectionModal
+          isOpen={isWalletConnectModalOpen}
+          onClose={closeWalletConnectModal}
+        />
       </main>
     </>
   );

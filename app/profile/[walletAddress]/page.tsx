@@ -10,7 +10,7 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import { cn } from "@/lib/utils";
 import Footer from "@/components/Footer";
 
-export default function ProductDetails({
+export default function UserProfile({
   params,
 }: {
   params: { walletAddress: string };

@@ -51,7 +51,6 @@ export default function Home() {
       <main className="bg-[url('../public/assets/particles.png')] bg-[#231828] w-full min-h-screen flex justify-center bg-cover bg-center bg-no-repeat font-space">
         <section className="bg-[#10100E] xl:border-l-[1px] xl:border-r-[1px] xl:border-x-blue-500 xl:shadow-glow-sides w-full max-w-full xl:max-w-[820px] px-4">
           <NavBar />
-          {/* <SlideDownDialog /> */}
           {/* hero image */}
           <div className="flex flex-col justify-center items-center relative mt-8">
             <Image

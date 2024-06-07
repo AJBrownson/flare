@@ -36,7 +36,11 @@ import Close from "@/public/assets/menu-close.png";
 import PrizeModal from "./prize-modal";
 import { gamesKey, prizesKey, getBalance } from "@/lib/utils";
 import { useSWRConfig } from "swr";
+import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import InsufficientFundsModal from "./insufficientFundsModal";
+import WalletConnectionModal from "./walletConnectModal";
+
+
 
 const segments = Array.from({ length: 12 });
 const circles = Array.from({ length: 12 });
@@ -47,16 +51,12 @@ const counter = "hgfjhhgfghfjyfjyt";
 const randomer = (num: number) => Math.random() * (num + 24 - num) + num;
 
 const RouletteWheel = () => {
-
-
-
-
-
   const [wheelz, setWheelz] = useState<WHEELZ>(WHEELZ.o_one_five);
   const [count, setCount] = useState<number>(0);
   const [disable, setDisable] = useState<boolean>(false);
 
   const [isInsufficientModalOpen, setIsInsufficientModalOpen] = useState(false);
+  const [isWalletConnectModalOpen, setIsWalletConnectModalOpen] = useState(false)
 
   const openModal = () => {
     setIsInsufficientModalOpen(true);
@@ -64,6 +64,14 @@ const RouletteWheel = () => {
 
   const closeModal = () => {
     setIsInsufficientModalOpen(false);
+  };
+
+  const openWalletConnectModal = () => {
+    setIsWalletConnectModalOpen(true);
+  };
+
+  const closeWalletConnectModal = () => {
+    setIsWalletConnectModalOpen(false);
   };
 
   const [isDialogVisible, setIsDialogVisible] = useState(false);
@@ -170,6 +178,11 @@ const RouletteWheel = () => {
   };
 
   const spinWheel = async (random: boolean) => {
+    if (!connected || !publicKey) {
+      openWalletConnectModal();
+      return;
+    }
+
     if (connected && publicKey) {
       try {
         const spin_wheel = wheelRef.current;
@@ -245,6 +258,9 @@ const RouletteWheel = () => {
       } catch (error: any) {
         // console.log(error);
       }
+    }
+    if (!connected) {
+
     }
   };
 
@@ -498,6 +514,8 @@ const RouletteWheel = () => {
         isOpen={isInsufficientModalOpen}
         onClose={closeModal}
       />
+
+    <WalletConnectionModal isOpen={isWalletConnectModalOpen} onClose={closeWalletConnectModal} />
     </main>
   );
 };
@@ -612,3 +630,32 @@ const WheelzPicker = ({
     </div>
   );
 };
+
+
+
+function ConnectButton({ connected }: { connected: boolean }) {
+  const [hydrate, setHydrate] = useState(false);
+
+  useEffect(() => {
+    setHydrate(true);
+  }, []);
+
+  if (!hydrate) return null;
+  return (
+    <div
+      className={cn("flex", connected && "border border-[#8E8E8E] rounded-lg")}
+    >
+
+      <WalletMultiButton
+        style={{
+          backgroundColor: `${connected ? "transparent" : "#0000FF"}`,
+          fontSize: ".8rem",
+          fontWeight: "500",
+          padding: ".7rem",
+          borderRadius: ".5rem",
+          height: "2.4rem",
+        }}
+      />
+    </div>
+  );
+}

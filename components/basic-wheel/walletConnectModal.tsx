@@ -1,7 +1,10 @@
 "use client";
-import { useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Close from "@/public/assets/menu-close.png";
+import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
+import { useWallet } from "@solana/wallet-adapter-react";
+import { cn } from "@/lib/utils";
 
 interface ModalProps {
   isOpen: boolean;
@@ -10,6 +13,7 @@ interface ModalProps {
 
 export default function WalletConnectionModal({ isOpen, onClose }: ModalProps) {
   const modalRef = useRef<HTMLDivElement>(null);
+  const { connected } = useWallet();
 
   useEffect(() => {
     const handleOutsideClick = (event: MouseEvent) => {
@@ -34,6 +38,7 @@ export default function WalletConnectionModal({ isOpen, onClose }: ModalProps) {
 
   if (!isOpen) return null;
 
+  
   return (
     <>
       <div className="z-50 fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
@@ -45,8 +50,8 @@ export default function WalletConnectionModal({ isOpen, onClose }: ModalProps) {
             <Image src={Close} alt="" />
           </button>
 
-          <section className="font-space text-center w-[330px] xl:w-[464px] rounded-lg bg-[#CFAEA0] text-[#000]">
-            <div className="font-bold text-sm xl:text-lg py-4">
+          <section className="font-space text-center w-[330px] xl:w-[464px] rounded-lg bg-[#30302B] text-[#FFFFE3]">
+            <div className="font-bold text-sm xl:text-base py-4">
               <h1>Wallet Connection Required</h1>
             </div>
             <div className="py-10 bg-[#000] text-[#FFFFE3] rounded-b-lg px-6">
@@ -55,14 +60,32 @@ export default function WalletConnectionModal({ isOpen, onClose }: ModalProps) {
                 action!
               </p>
               <div className="flex justify-center mt-12">
-                <button className="py-3 bg-[#FFFFE3] hover:bg-[#fff] rounded-lg w-64 text-[#000] text-xs xl:text-sm font-semibold">
+                {/* <button className="py-3 bg-[#FFFFE3] hover:bg-[#fff] rounded-lg w-64 text-[#000] text-xs xl:text-sm font-semibold">
                   Connect Wallet
-                </button>
+                </button> */}
+                <ConnectButton connected={connected} />
               </div>
             </div>
           </section>
         </div>
       </div>
     </>
+  );
+}
+
+function ConnectButton({ connected }: { connected: boolean }) {
+  const [hydrate, setHydrate] = useState(false);
+
+  useEffect(() => {
+    setHydrate(true);
+  }, []);
+
+  if (!hydrate) return null;
+  return (
+    <div
+      className={cn("flex", connected && "border border-[#8E8E8E] rounded-lg")}
+    >
+      <WalletMultiButton />
+    </div>
   );
 }

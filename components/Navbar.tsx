@@ -123,13 +123,13 @@ export default function NavBar({ showClaim }: { showClaim?: boolean }) {
 
             <div className="flex items-center gap-2">
               {showClaim && (
-                <button className="flex items-center gap-2 bg-[#1B874D] rounded-lg p-2">
+                <button className="flex items-center gap-2 bg-[#1B874D] rounded-lg p-2 h-[2.4rem] text-base">
                   <span>Claim</span>{" "}
                   <Image
                     src="/money-bag.svg"
                     alt="money-bag"
-                    width={30}
-                    height={30}
+                    width={25}
+                    height={25}
                   />
                 </button>
               )}
@@ -140,13 +140,32 @@ export default function NavBar({ showClaim }: { showClaim?: boolean }) {
 
           {/* mobile menu div */}
           <div className="flex xl:hidden items-center justify-between py-2">
-            <div onClick={handleMenuClick} className="block xl:hidden">
+            <div
+              onClick={handleMenuClick}
+              className="xl:hidden flex items-center gap-2"
+            >
               {openMobileMenu ? (
                 <Image src={Close} alt="" />
               ) : (
                 <Image src={Open} alt="" />
               )}
+
+              {showClaim && (
+                <button
+                  className="flex items-center gap-2 bg-[#1B874D] rounded-lg p-2 h-[2.4rem] text-base"
+                  onClick={openClaimModal}
+                >
+                  <span>Claim</span>{" "}
+                  <Image
+                    src="/money-bag.svg"
+                    alt="money-bag"
+                    width={25}
+                    height={25}
+                  />
+                </button>
+              )}
             </div>
+
             <Link href="/">
               <Image
                 src={Logo}
@@ -155,22 +174,7 @@ export default function NavBar({ showClaim }: { showClaim?: boolean }) {
               />
             </Link>
 
-            <div className="flex items-center gap-2">
-              {showClaim && (
-                <button
-                  className="flex items-center gap-2 bg-[#1B874D] rounded-lg p-2"
-                  onClick={openClaimModal}
-                >
-                  <span>Claim</span>{" "}
-                  <Image
-                    src="/money-bag.svg"
-                    alt="money-bag"
-                    width={30}
-                    height={30}
-                  />
-                </button>
-              )}
-
+            <div className="">
               <ConnectButton connected={connected} />
             </div>
 
@@ -354,7 +358,7 @@ export default function NavBar({ showClaim }: { showClaim?: boolean }) {
             Step into your gaming arena of choice! Which one will it be?
           </p>
           
-          <div className="mt-8 flex flex-col gap-2">
+          <div className="mt-8 flex flex-col gap-[6px]">
             <Link href="/basic">
               <div className="p-[1px] rounded-xl border border-[#30302B] hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%">
                 <div className="flex items-center gap-4 bg-[#161616] p-1 rounded-xl">
@@ -364,7 +368,6 @@ export default function NavBar({ showClaim }: { showClaim?: boolean }) {
                       Basic Wheel
                     </p>
                     <p className="text-xs text-[#8E8E8E]">
-                      {/* Play and earn extra rewards <span className="text-transparent">jfjhfkjhsjdchufh</span> */}
                       Play and earn extra rewards, and unlock in-game treasures!
                     </p>
                   </span>
@@ -375,25 +378,8 @@ export default function NavBar({ showClaim }: { showClaim?: boolean }) {
               </div>
             </Link>
 
-            <div className="p-[1px] rounded-xl border border-[#30302B] hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%">
-                <div className="flex items-center gap-4 bg-[#161616] p-1 rounded-xl">
-                  <Image src={ChallengerWheel} alt="" />
-                  <span className="flex flex-col">
-                    <p className="text-sm font-medium mb-1">
-                    Challenger Wheel
-                    </p>
-                    <p className="text-xs text-[#8E8E8E]">
-                    Everyone bets equally, and the winner takes it all
-                    </p>
-                  </span>
-                  <p className="text-xs bg-[#560082] text-[#C6C6C6] rounded-xl py-1 px-2">
-                  Soon
-                </p>
-                </div>
-              </div>
-
             {/* <Link href="/game"> */}
-            {/* <div className="p-[1px] rounded-xl border border-[#30302B] hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%">
+            <div className="p-[1px] rounded-xl border border-[#30302B] hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%">
               <div className="flex justify-between items-center gap-4 bg-[#161616] p-1 rounded-xl">
                 <Image src={ChallengerWheel} alt="" />
                 <span className="flex flex-col">
@@ -408,7 +394,7 @@ export default function NavBar({ showClaim }: { showClaim?: boolean }) {
                   Soon
                 </p>
               </div>
-            </div> */}
+            </div>
             {/* </Link> */}
 
             <div className="p-[1px] rounded-xl border border-[#30302B] hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%">
@@ -447,10 +433,7 @@ function ConnectButton({ connected }: { connected: boolean }) {
   if (!hydrate) return null;
   return (
     <div
-      className={cn(
-        "flex",
-        connected && "border border-[#8E8E8E] rounded-lg"
-      )}
+      className={cn("flex", connected && "border border-[#8E8E8E] rounded-lg")}
     >
       {/* <button className="flex p-3 font-semibold rounded-lg items-center text-sm bg-[#0000FF] text-[#FFFFE3]">
     <Image src={Solana} alt="" className="w-4 h-4 mr-2" />
@@ -460,9 +443,11 @@ function ConnectButton({ connected }: { connected: boolean }) {
       <WalletMultiButton
         style={{
           backgroundColor: `${connected ? "transparent" : "#0000FF"}`,
-          fontSize: ".9rem",
-          padding: ".75rem",
+          fontSize: ".8rem",
+          fontWeight: "500",
+          padding: ".7rem",
           borderRadius: ".5rem",
+          height: "2.4rem",
         }}
 
         // onClick={() => {
@@ -475,13 +460,12 @@ function ConnectButton({ connected }: { connected: boolean }) {
         //       alt="solana icon button"
         //       className="hidden"
         //     />
-            
+
         //   ) : (
         //     <PiCaretDown className="ml-2" />
         //   )
         // }
       />
-
     </div>
   );
 }

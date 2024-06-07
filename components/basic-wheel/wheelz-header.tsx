@@ -45,9 +45,9 @@ export default function WheelzHeader({ wheelz }: { wheelz: WHEELZ }) {
           </button>
         </div>
 
-        <div className="absolute top-1/2 right-0 bg-[#10100E] border-2 border-[#30302B] text-white py-2 grid grid-cols-2 divide-x divide-[#8E8E8E] rounded-lg shadow-lg shadow-fuchsia-700">
-          <div className="text-sm px-2 xl:px-4">N/A SGY</div>
-          <div className="text-sm px-2 xl:px-4">
+        <div className="absolute top-1/2 right-0 bg-[#10100E] border-2 border-[#30302B] py-2 text-white grid grid-cols-2 divide-x divide-[#8E8E8E] rounded-lg shadow-lg shadow-fuchsia-700">
+          <div className="text-xs xl:text-sm py-[1px] px-2 xl:px-4">N/A SGY</div>
+          <div className="text-xs xl:text-sm py-[1px] px-2 xl:px-4">
             {connected && solBalance !== null
               ? formatNumberToKM(solBalance, 2)
               : "N/A"}{" "}

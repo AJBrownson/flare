@@ -1,27 +1,36 @@
-import { useEffect, useState, useCallback, forwardRef, useImperativeHandle } from 'react';
+import {
+  useEffect,
+  useState,
+  useCallback,
+  forwardRef,
+  useImperativeHandle,
+} from "react";
 
-import { useWallet, useConnection } from '@solana/wallet-adapter-react';
-import { PublicKey, SystemProgram, Transaction } from '@solana/web3.js';
+import { useWallet, useConnection } from "@solana/wallet-adapter-react";
+import { PublicKey, SystemProgram, Transaction } from "@solana/web3.js";
 
-import { solToLamports } from '@/utils/solUtils';
-import { sendSolTransaction } from '@/utils/sendSol';
-import { toast } from 'react-toastify';
+import { solToLamports } from "@/utils/solUtils";
+import { sendSolTransaction } from "@/utils/sendSol";
+import { toast } from "react-toastify";
 
-import { registerSpin } from '@/lib/api/userService';
-import { stringify } from 'querystring';
-import { replaceStrPath } from '@/utils/solUtils';
+import { registerSpin } from "@/lib/api/userService";
+import { stringify } from "querystring";
+import { replaceStrPath } from "@/utils/solUtils";
 
 interface SpinWheelChallangerProps {
   items: string[];
   sol: number;
-  onJoin: ()=>Promise<void>
+  onJoin: () => Promise<void>;
 }
 
 export interface SpinWheelChallengerHandle {
   spin: () => void;
 }
 
-const SpinWheelChallanger = forwardRef< SpinWheelChallengerHandle,SpinWheelChallangerProps > (({items,sol,onJoin}, ref) => {
+const SpinWheelChallanger = forwardRef<
+  SpinWheelChallengerHandle,
+  SpinWheelChallangerProps
+>(({ items, sol, onJoin }, ref) => {
   // console.log('received items',items)
 
   const { connection } = useConnection();
@@ -31,15 +40,10 @@ const SpinWheelChallanger = forwardRef< SpinWheelChallengerHandle,SpinWheelChall
   const [easeOut, setEaseOut] = useState<number>(0);
   const [spinning, setSpinning] = useState<boolean>(false);
   const [result, setResult] = useState<number | null>(null);
-  
- 
 
   useEffect(() => {
     renderWheel();
-        
   }, [items]);
-
-  
 
   const renderWheel = () => {
     // Determine number/size of sectors that need to be created
@@ -89,42 +93,48 @@ const SpinWheelChallanger = forwardRef< SpinWheelChallengerHandle,SpinWheelChall
     }
 
     if (topSpot !== null && degreesOff !== null) {
-        setRotate(topSpot - 1);
-        setEaseOut(degreesOff);
-      }
+      setRotate(topSpot - 1);
+      setEaseOut(degreesOff);
+    }
   };
 
-  const renderSector = ( index: number, text: string, start: number, arc: number, color: string) => {
+  const renderSector = (
+    index: number,
+    text: string,
+    start: number,
+    arc: number,
+    color: string
+  ) => {
     // Create canvas arc for each list element
-  let canvas = document.getElementById("wheel")as HTMLCanvasElement;
-  let ctx = canvas.getContext("2d")!;
-  let  x = canvas.width / 2;
-  let  y = canvas.height / 2;
-  let  radius = 75;
-  let  startAngle = start;
-  let  endAngle = start + arc;
-  let  angle = index * arc;
-  let  baseSize = radius * 3.33;
-  let  textRadius = baseSize - 150;
+    let canvas = document.getElementById("wheel") as HTMLCanvasElement;
+    let ctx = canvas.getContext("2d")!;
+    let x = canvas.width / 2;
+    let y = canvas.height / 2;
+    let radius = 75;
+    let startAngle = start;
+    let endAngle = start + arc;
+    let angle = index * arc;
+    let baseSize = radius * 3.33;
+    let textRadius = baseSize - 150;
 
-  ctx.beginPath();
-  ctx.arc(x, y, radius, startAngle, endAngle, false);
-  ctx.lineWidth = radius * 2;
-  ctx.strokeStyle = color;
+    ctx.beginPath();
+    ctx.arc(x, y, radius, startAngle, endAngle, false);
+    ctx.lineWidth = radius * 2;
+    ctx.strokeStyle = color;
 
-  ctx.font = "13px Arial";
-  ctx.fillStyle = "white";
-  ctx.stroke();
+    ctx.font = "13px Arial";
+    ctx.fillStyle = "white";
+    ctx.stroke();
 
-  ctx.save();
-  ctx.translate(
-    x + Math.cos(angle - arc / 2) * textRadius,
-    y + Math.sin(angle - arc / 2) * textRadius
-  );
-  ctx.rotate(angle - arc / 2 + Math.PI / 2);
-  ctx.rotate(Math.PI / 2)
-  ctx.fillText(text, -ctx.measureText(text).width / 2, 0);
-  ctx.restore();
+    ctx.save();
+    ctx.translate(
+      x + Math.cos(angle - arc / 2) * textRadius,
+      y + Math.sin(angle - arc / 2) * textRadius
+    );
+    ctx.rotate(angle - arc / 2 + Math.PI / 2);
+    ctx.rotate(Math.PI / 2);
+    ctx.fillText(text, -ctx.measureText(text).width / 2, 0);
+    ctx.restore();
   };
 
   const getColor = () => {
@@ -135,24 +145,23 @@ const SpinWheelChallanger = forwardRef< SpinWheelChallengerHandle,SpinWheelChall
     return `rgba(${r},${g},${b},0.4)`;
   };
 
-  const spin = ()=> {
-       // Set random spin degree and ease out time
-      // Set state variables to initiate animation
-      let randomSpin = Math.floor(Math.random() * 4000) + 500;
-      setRotate(randomSpin);
-      setEaseOut(2);
-      setSpinning(true);
+  const spin = () => {
+    // Set random spin degree and ease out time
+    // Set state variables to initiate animation
+    let randomSpin = Math.floor(Math.random() * 4000) + 500;
+    setRotate(randomSpin);
+    setEaseOut(2);
+    setSpinning(true);
 
-      // Calculate result after wheel stops spinning
-      setTimeout(() => {
-        getResult(randomSpin);
-      }, 3000);
-  }
+    // Calculate result after wheel stops spinning
+    setTimeout(() => {
+      getResult(randomSpin);
+    }, 3000);
+  };
 
-  useImperativeHandle(ref, ()=>({
+  useImperativeHandle(ref, () => ({
     spin,
-  }))
-
+  }));
 
   const getResult = (spin: number) => {
     // Find net rotation and add to offset angle
@@ -175,11 +184,9 @@ const SpinWheelChallanger = forwardRef< SpinWheelChallengerHandle,SpinWheelChall
 
     // Set state variable to display result
     setResult(finalResult);
-      const res = items[finalResult]
-      registerSpin(publicKey,res,sol)
-    setSpinning(false)
-    
-    
+    const res = items[finalResult];
+    registerSpin(publicKey, res, sol);
+    setSpinning(false);
   };
 
   const reset = () => {
@@ -191,38 +198,50 @@ const SpinWheelChallanger = forwardRef< SpinWheelChallengerHandle,SpinWheelChall
   };
 
   return (
-    <div className='relative -mt-16'>
-      <span id="selector" className='absolute top-8 left-[47%] text-[40px]'>&#9660;</span>
+    <div className="relative -mt-16">
+      <span id="selector" className="absolute top-8 left-[47%] text-[40px]">
+        &#9660;
+      </span>
       <canvas
         id="wheel"
         width="500"
         height="500"
         style={{
           WebkitTransform: `rotate(${rotate}deg)`,
-          WebkitTransition: `-webkit-transform ${easeOut}s ease-out`
+          WebkitTransition: `-webkit-transform ${easeOut}s ease-out`,
         }}
       />
 
       {spinning ? (
-        <button type="button" className='absolute top-[47%] right-[47%] bg-white shadow-lg shadow-white text-black w-8 h-8 rounded-full text-xs font-semibold px-4 py-2 grid place-content-center'  onClick={reset}>
+        <button
+          type="button"
+          className="absolute top-[47%] right-[47%] bg-white shadow-lg shadow-white text-black w-8 h-8 rounded-full text-xs font-semibold px-4 py-2 grid place-content-center"
+          onClick={reset}
+        >
           wait
         </button>
       ) : (
-        <button type="button" className='absolute top-[47%] right-[47%] bg-white shadow-lg shadow-white text-black w-8 h-8 rounded-full text-xs font-semibold px-4 py-2 grid place-content-center'  onClick={onJoin}>
+        <button
+          type="button"
+          className="absolute top-[47%] right-[47%] bg-white shadow-lg shadow-white text-black w-8 h-8 rounded-full text-xs font-semibold px-4 py-2 grid place-content-center"
+          onClick={onJoin}
+        >
           Join
         </button>
       )}
 
-
       <div className="display flex w-full justify-center absolute bottom-12 left-0 -mt-5">
-        <span id="readout" className='flex items-center gap-x-4 -mt-8'>
-          <p className='text-md font-semibold'>YOU WON:{" "}</p>
-          <span id="result" className='text-lg font-semibold'>{result !== null ? items[result] : ''}</span>
+        <span id="readout" className="flex items-center gap-x-4 -mt-8">
+          <p className="text-md font-semibold">YOU WON: </p>
+          <span id="result" className="text-lg font-semibold">
+            {result !== null ? items[result] : ""}
+          </span>
         </span>
       </div>
-
     </div>
   );
 });
+
+SpinWheelChallanger.displayName = "SpinWheelChallanger";
 
 export default SpinWheelChallanger;

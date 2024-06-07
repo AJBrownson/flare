@@ -1,11 +1,43 @@
 "use client";
-import { useState } from "react";
+import { useRef, useEffect, useState } from "react";
 import Image from "next/image";
+import Close from "@/public/assets/menu-close.png";
 import Emoji from "@/public/assets/icons/emoji.png";
 import Send from "@/public/assets/icons/send.png";
-import Close from "@/public/assets/menu-close.png";
 
-export default function ChatWidget() {
+interface ModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+export default function ChatWidget({ isOpen, onClose }: ModalProps) {
+  const modalRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(isOpen);
+
+  useEffect(() => {
+    setIsVisible(isOpen);
+  }, [isOpen]);
+
+  const handleOutsideClick = (event: MouseEvent) => {
+    if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+      setIsVisible(false);
+      setTimeout(() => onClose(), 300); // Delay to allow the animation to finish
+    }
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      document.addEventListener("mousedown", handleOutsideClick);
+    } else {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, [isOpen]);
+
+
   const commentsData = [
     {
       id: 1,
@@ -61,53 +93,71 @@ export default function ChatWidget() {
     },
   ];
 
+  if (!isOpen && !isVisible) return null;
+
   return (
-    <>
-      {/* <div className="lg:mt-10 w-[320px] max-h-[34rem] max-w-full lg:max-w-[20rem] w-[340px]"> */}
-      <div className="font-space w-full xl:max-w-[309px] bg-[#191815] rounded-2xl mt-10 pb-6 text-[#FFFFE3]">
-        <div className="bg-[#30302B] flex items-center justify-center py-3 rounded-tl-2xl rounded-tr-2xl">
-          <div className="flex justify-center items-center bg-[#10100E] w-16 h-6 rounded-2xl">
-            <span className="p-[5px] bg-[#00CC45] rounded-full mr-1"></span>
-            <h1 className="text-[#FFFFE3] text-xs font-montserrat">1101</h1>
+    <div className="z-50 fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+      <div
+        ref={modalRef}
+        className={`relative xl:px-16 transform transition-transform duration-300 ${
+          isVisible ? "translate-y-0" : "translate-y-full"
+        }`}
+      >
+        <button
+          onClick={() => {
+            setIsVisible(false);
+            setTimeout(() => onClose(), 300);
+          }}
+          className="absolute lg:hidden xl:top-10 right-0 xl:right-4 border border-[#FFFFE3] p-1 rounded"
+        >
+          <Image src={Close} alt="Close" />
+        </button>
+
+        <div className="font-space w-[350px] xl:max-w-[309px] bg-[#191815] rounded-2xl mt-10 pb-6 text-[#FFFFE3]">
+          <div className="bg-[#30302B] flex items-center justify-center py-3 rounded-tl-2xl rounded-tr-2xl">
+            <div className="flex justify-center items-center bg-[#10100E] w-16 h-6 rounded-2xl">
+              <span className="p-[5px] bg-[#00CC45] rounded-full mr-1"></span>
+              <h1 className="text-[#FFFFE3] text-xs font-montserrat">1101</h1>
+            </div>
+          </div>
+
+          {/* Comment content  */}
+          <div className="px-5 relative">
+            <div className="absolute top-0 left-0 w-full h-10 bg-gradient-to-b from-[#191815] to-transparent"></div>
+            {commentsData.map((comment, i) => (
+              <div key={i}>
+                <div className="flex items-center mb-1">
+                  <div className="flex items-center text-sm font-bold text-[#DC1FFF]">
+                    <p>{comment.name}</p>
+                    <p className="text-xs ml-3 text-[#8E8E8E]">{comment.date}</p>
+                    <p className="text-xs ml-2 text-[#8E8E8E]">{comment.time}</p>
+                  </div>
+                </div>
+                <p className="mb-4 text-xs">{comment.comment}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* comment box */}
+          <div className="relative px-5">
+            <input
+              type="text"
+              placeholder="Enter Message"
+              className="placeholder:text-[#8E8E8E] text-xs w-full rounded-lg pl-8 py-3 border border-[#30302B] bg-[#191815]"
+            />
+            <Image
+              src={Emoji}
+              alt=""
+              className="absolute left-7 top-1/2 transform -translate-y-1/2"
+            />
+            <Image
+              src={Send}
+              alt=""
+              className="absolute right-7 top-1/2 transform -translate-y-1/2"
+            />
           </div>
         </div>
-
-        {/* Comment content  */}
-        <div className="px-5 relative">
-          <div className="absolute top-0 left-0 w-full h-10 bg-gradient-to-b from-[#191815] to-transparent"></div>
-          {commentsData.map((comment, i) => (
-            <div key={i}>
-              <div className="flex items-center mb-1">
-                <div className="flex items-center text-sm font-bold text-[#DC1FFF]">
-                  <p>{comment.name}</p>
-                  <p className="text-xs ml-3 text-[#8E8E8E]">{comment.date}</p>
-                  <p className="text-xs ml-2 text-[#8E8E8E]">{comment.time}</p>
-                </div>
-              </div>
-              <p className="mb-4 text-xs">{comment.comment}</p>
-            </div>
-          ))}
-        </div>
-
-        {/* comment box */}
-        <div className="relative px-5">
-          <input
-            type="text"
-            placeholder="Enter Message"
-            className="placeholder:text-[#8E8E8E] text-xs w-full rounded-lg pl-8 py-3 border border-[#30302B] bg-[#191815]"
-          />
-          <Image
-            src={Emoji}
-            alt=""
-            className="absolute left-7 top-1/2 transform -translate-y-1/2"
-          />
-          <Image
-            src={Send}
-            alt=""
-            className="absolute right-7 top-1/2 transform -translate-y-1/2"
-          />
-        </div>
       </div>
-    </>
+    </div>
   );
 }

@@ -29,7 +29,6 @@ import { chargeAddress, paymentAddress, getRandomInt } from "@/lib/utils";
 import ModalDialog from "react-basic-modal-dialog";
 import { GiCheckMark } from "react-icons/gi";
 import Guide from "@/public/assets/icons/guide.png";
-import ChatWidget from "./chatWidget";
 import Chat from "@/public/assets/chat btn.png";
 import Chathover from "@/public/assets/chat btn-hover.png";
 import Close from "@/public/assets/menu-close.png";
@@ -39,7 +38,7 @@ import { useSWRConfig } from "swr";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import InsufficientFundsModal from "./insufficientFundsModal";
 import WalletConnectionModal from "./walletConnectModal";
-
+import ChatWidget from "./chatWidget";
 
 
 const segments = Array.from({ length: 12 });
@@ -101,7 +100,16 @@ const RouletteWheel = () => {
 
   const wheelRef = useRef<HTMLDivElement>(null);
 
-  const [chats, setChats] = useState(false);
+  // const [chats, setChats] = useState(false);
+  const [isChatWidgetOpen, setIsChatWidgetOpen] = useState(false);
+  
+  const openChatWidget = () => {
+    setIsChatWidgetOpen(true);
+  };
+
+  const closeChatWidget = () => {
+    setIsChatWidgetOpen(false);
+  };
 
   const handleChats = () => {
     if (!connected) {
@@ -110,7 +118,7 @@ const RouletteWheel = () => {
     }
 
     if (connected) {
-      setChats(!chats);
+      openChatWidget();
     }
   }
 
@@ -309,16 +317,16 @@ const RouletteWheel = () => {
     }
   };
 
-  useEffect(() => {
-    if (chats) {
-      document.addEventListener("mousedown", handleClickOutside);
-    } else {
-      document.removeEventListener("mousedown", handleClickOutside);
-    }
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [chats]);
+  // useEffect(() => {
+  //   if (chats) {
+  //     document.addEventListener("mousedown", handleClickOutside);
+  //   } else {
+  //     document.removeEventListener("mousedown", handleClickOutside);
+  //   }
+  //   return () => {
+  //     document.removeEventListener("mousedown", handleClickOutside);
+  //   };
+  // }, [chats]);
 
   return (
     // px-4 sm:px-10 min-h-screen h-full
@@ -401,10 +409,11 @@ const RouletteWheel = () => {
 
       {/* widget for chat */}
       <div
+        // onClick={openChatWidget}
         onClick={handleChats}
         className="absolute bottom-[32%] xl:bottom-40 right-5 z-10 transform translate-y-9 xl:translate-y-0 translate-x-[10%] xl:translate-x-0"
       >
-        {chats ? (
+        {isChatWidgetOpen ? (
           <Image
             src={Chat}
             alt=""
@@ -420,19 +429,20 @@ const RouletteWheel = () => {
       </div>
       <div
         className={
-          chats
+          isChatWidgetOpen
             ? `z-40 fixed bottom-0 xl:left-[56%] ease-in-out duration-300`
             : `ease-in-out xl:left-[56%] duration-300 z-40 fixed -bottom-[100%]`
         }
-        ref={modalRef}
       >
         <button
           onClick={handleChats}
+          // onClick={openChatWidget}
           className="lg:hidden absolute top-0 right-0 border border-[#FFFFE3] p-1 rounded"
         >
           <Image src={Close} alt="" />
         </button>
-        <ChatWidget />
+        <ChatWidget isOpen={isChatWidgetOpen} onClose={closeChatWidget} />
+        {/* <ChatWidget /> */}
       </div>
 
       {/* Gameplay guide modal */}

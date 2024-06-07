@@ -14,11 +14,11 @@ export default function RecentSpin() {
   const skeletonLoader = (
     <div className="animate-pulse px-5 pb-1 bg-[#10100E]">
       <div className="flex justify-between items-center w-full py-2 rounded-md">
-        <div className="h-4 bg-gray-700 rounded w-1/3"></div>
+        <div className="h-4 bg-[#30302B] rounded w-1/3"></div>
         <div className="px-5 flex items-center gap-1">
-          <div className="h-4 bg-gray-700 rounded w-16"></div>
+          <div className="h-4 bg-[#30302B] rounded w-16"></div>
         </div>
-        <div className="h-4 bg-gray-700 rounded w-1/3"></div>
+        <div className="h-4 bg-[#30302B] rounded w-1/3"></div>
       </div>
     </div>
   );

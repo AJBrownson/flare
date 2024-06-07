@@ -38,8 +38,16 @@ export default function NavBar({ showClaim }: { showClaim?: boolean }) {
 
   const { connected } = useWallet();
 
+  // const handleMenuClick = () => {
+  //   setOpenMobileMenu(!openMobileMenu);
+  // };
   const handleMenuClick = () => {
     setOpenMobileMenu(!openMobileMenu);
+    if (!openMobileMenu) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
   };
 
   const openModalDialog = () => {

@@ -1,11 +1,17 @@
 "use client";
-import { useState } from "react";
+import { useRef, useEffect } from "react";
 import Image from "next/image";
+import Close from "@/public/assets/menu-close.png";
 import Emoji from "@/public/assets/icons/emoji.png";
 import Send from "@/public/assets/icons/send.png";
-import Close from "@/public/assets/menu-close.png";
 
-export default function ChatWidget() {
+interface ModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+export default function Widget({ isOpen, onClose }: ModalProps) {
+  const modalRef = useRef<HTMLDivElement>(null);
   const commentsData = [
     {
       id: 1,
@@ -61,10 +67,41 @@ export default function ChatWidget() {
     },
   ];
 
+  useEffect(() => {
+    const handleOutsideClick = (event: MouseEvent) => {
+      if (
+        modalRef.current &&
+        !modalRef.current.contains(event.target as Node)
+      ) {
+        onClose();
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener("mousedown", handleOutsideClick);
+    } else {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, [isOpen, onClose]);
+
+  if (!isOpen) return null;
+
   return (
     <>
-      {/* <div className="lg:mt-10 w-[320px] max-h-[34rem] max-w-full lg:max-w-[20rem] w-[340px]"> */}
-      <div className="font-space w-full xl:max-w-[309px] bg-[#191815] rounded-2xl mt-10 pb-6 text-[#FFFFE3]">
+      <div className="z-50 fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+        <div ref={modalRef} className="relative xl:px-16">
+          <button
+            onClick={onClose}
+            className="absolute xl:top-10 right-0 xl:right-4 border border-[#FFFFE3] p-1 rounded"
+          >
+            <Image src={Close} alt="" />
+          </button>
+
+          <div className="font-space w-full xl:max-w-[309px] bg-[#191815] rounded-2xl mt-10 pb-6 text-[#FFFFE3]">
         <div className="bg-[#30302B] flex items-center justify-center py-3 rounded-tl-2xl rounded-tr-2xl">
           <div className="flex justify-center items-center bg-[#10100E] w-16 h-6 rounded-2xl">
             <span className="p-[5px] bg-[#00CC45] rounded-full mr-1"></span>
@@ -108,6 +145,20 @@ export default function ChatWidget() {
           />
         </div>
       </div>
+        </div>
+      </div>
     </>
   );
 }
+
+
+
+// const [isChatModalOpen, setChatModelOpen] = useState(false);
+// const openChatModal = () => {
+//   setChatModelOpen(true);
+// };
+
+// const closeChatModal = () => {
+//   setChatModelOpen(false);
+// };
+

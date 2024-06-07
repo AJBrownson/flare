@@ -123,13 +123,13 @@ export default function NavBar({ showClaim }: { showClaim?: boolean }) {
 
             <div className="flex items-center gap-2">
               {showClaim && (
-                <button className="flex items-center gap-2 bg-[#1B874D] rounded-lg p-2">
+                <button className="flex items-center gap-2 bg-[#1B874D] rounded-lg p-2 text-base">
                   <span>Claim</span>{" "}
                   <Image
                     src="/money-bag.svg"
                     alt="money-bag"
-                    width={30}
-                    height={30}
+                    width={25}
+                    height={25}
                   />
                 </button>
               )}
@@ -140,13 +140,32 @@ export default function NavBar({ showClaim }: { showClaim?: boolean }) {
 
           {/* mobile menu div */}
           <div className="flex xl:hidden items-center justify-between py-2">
-            <div onClick={handleMenuClick} className="block xl:hidden">
+            <div
+              onClick={handleMenuClick}
+              className="xl:hidden flex items-center gap-2"
+            >
               {openMobileMenu ? (
                 <Image src={Close} alt="" />
               ) : (
                 <Image src={Open} alt="" />
               )}
+
+              {showClaim && (
+                <button
+                  className="flex items-center gap-2 bg-[#1B874D] rounded-lg p-2 text-base"
+                  onClick={openClaimModal}
+                >
+                  <span>Claim</span>{" "}
+                  <Image
+                    src="/money-bag.svg"
+                    alt="money-bag"
+                    width={25}
+                    height={25}
+                  />
+                </button>
+              )}
             </div>
+
             <Link href="/">
               <Image
                 src={Logo}
@@ -155,22 +174,7 @@ export default function NavBar({ showClaim }: { showClaim?: boolean }) {
               />
             </Link>
 
-            <div className="flex items-center gap-2">
-              {showClaim && (
-                <button
-                  className="flex items-center gap-2 bg-[#1B874D] rounded-lg p-2"
-                  onClick={openClaimModal}
-                >
-                  <span>Claim</span>{" "}
-                  <Image
-                    src="/money-bag.svg"
-                    alt="money-bag"
-                    width={30}
-                    height={30}
-                  />
-                </button>
-              )}
-
+            <div className="">
               <ConnectButton connected={connected} />
             </div>
 
@@ -353,7 +357,7 @@ export default function NavBar({ showClaim }: { showClaim?: boolean }) {
           <p className="text-xs text-center">
             Step into your gaming arena of choice! Which one will it be?
           </p>
-          
+
           <div className="mt-8 flex flex-col gap-[6px]">
             <Link href="/basic">
               <div className="p-[1px] rounded-xl border border-[#30302B] hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%">
@@ -427,10 +431,7 @@ function ConnectButton({ connected }: { connected: boolean }) {
   if (!hydrate) return null;
   return (
     <div
-      className={cn(
-        "flex",
-        connected && "border border-[#8E8E8E] rounded-lg"
-      )}
+      className={cn("flex", connected && "border border-[#8E8E8E] rounded-lg")}
     >
       {/* <button className="flex p-3 font-semibold rounded-lg items-center text-sm bg-[#0000FF] text-[#FFFFE3]">
     <Image src={Solana} alt="" className="w-4 h-4 mr-2" />
@@ -440,9 +441,11 @@ function ConnectButton({ connected }: { connected: boolean }) {
       <WalletMultiButton
         style={{
           backgroundColor: `${connected ? "transparent" : "#0000FF"}`,
-          fontSize: ".9rem",
-          padding: ".75rem",
+          fontSize: ".8rem",
+          fontWeight: "500",
+          padding: ".7rem",
           borderRadius: ".5rem",
+          height: "2.5rem",
         }}
 
         // onClick={() => {
@@ -455,13 +458,12 @@ function ConnectButton({ connected }: { connected: boolean }) {
         //       alt="solana icon button"
         //       className="hidden"
         //     />
-            
+
         //   ) : (
         //     <PiCaretDown className="ml-2" />
         //   )
         // }
       />
-
     </div>
   );
 }

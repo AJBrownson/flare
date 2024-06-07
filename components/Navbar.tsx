@@ -39,9 +39,6 @@ export default function NavBar({ showClaim }: { showClaim?: boolean }) {
 
   const { connected } = useWallet();
 
-  // const handleMenuClick = () => {
-  //   setOpenMobileMenu(!openMobileMenu);
-  // };
   const handleMenuClick = () => {
     setOpenMobileMenu(!openMobileMenu);
     if (!openMobileMenu) {
@@ -358,23 +355,21 @@ export default function NavBar({ showClaim }: { showClaim?: boolean }) {
           <p className="text-xs text-center">
             Step into your gaming arena of choice! Which one will it be?
           </p>
-          
+
           <div className="mt-8 flex flex-col gap-[6px]">
             <Link href="/basic">
               <div className="p-[1px] rounded-xl border border-[#30302B] hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%">
                 <div className="flex items-center gap-4 bg-[#161616] p-1 rounded-xl">
                   <Image src={BasicWheel} alt="" />
                   <span className="flex flex-col">
-                    <p className="text-sm font-medium mb-1">
-                      Basic Wheel
-                    </p>
+                    <p className="text-sm font-medium mb-1">Basic Wheel</p>
                     <p className="text-xs text-[#8E8E8E]">
                       Play and earn extra rewards, and unlock in-game treasures!
                     </p>
                   </span>
                   <p className="text-xs bg-[#560082] text-[#C6C6C6] rounded-xl py-1 px-2">
-                  Soon
-                </p>
+                    Soon
+                  </p>
                 </div>
               </div>
             </Link>
@@ -384,9 +379,7 @@ export default function NavBar({ showClaim }: { showClaim?: boolean }) {
               <div className="flex justify-between items-center gap-4 bg-[#161616] p-1 rounded-xl">
                 <Image src={ChallengerWheel} alt="" />
                 <span className="flex flex-col">
-                  <p className="text-sm font-medium mb-1">
-                    Challenger Wheel
-                  </p>
+                  <p className="text-sm font-medium mb-1">Challenger Wheel</p>
                   <p className=" text-xs text-[#8E8E8E]">
                     Everyone bets equally, and the winner takes it all
                   </p>
@@ -418,6 +411,7 @@ export default function NavBar({ showClaim }: { showClaim?: boolean }) {
           </div>
         </div>
       </ModalDialog>
+      
       {/* Claim Modal */}
       <ClaimPageModal isOpen={isClaimModalOpen} onClose={closeClaimModal} />
     </>

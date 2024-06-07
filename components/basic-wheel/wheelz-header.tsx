@@ -16,6 +16,10 @@ export default function WheelzHeader({ wheelz }: { wheelz: WHEELZ }) {
   const [sgyBalance, setSgybalance] = useState<number | null>(null);
   const [isWheelDetailsModalOpen, setWheelDetailsModalOpen] = useState(false);
 
+  const handleWheelDetails = () => {
+    setWheelDetailsModalOpen(!isWheelDetailsModalOpen);
+  };
+
   useEffect(() => {
     (async () => {
       if (publicKey) {
@@ -30,7 +34,7 @@ export default function WheelzHeader({ wheelz }: { wheelz: WHEELZ }) {
     <>
       <header className="font-space relative flex items-center justify-between text-black w-full">
         <div
-          onClick={() => setWheelDetailsModalOpen(true)}
+          onClick={handleWheelDetails}
           className="absolute top-1/2 left-0 p-[2px] bg-gradient-to-r from-[#935327] to-[#FFFE89] overflow-hidden rounded-lg text-xs sm:text-sm"
         >
           <button className="bg-gradient-to-r from-[#FFFE89] to-[#D7BF65] hover:opacity-70 py-2 xl:py-[6px] px-5 rounded-lg flex items-center gap-2">
@@ -46,7 +50,9 @@ export default function WheelzHeader({ wheelz }: { wheelz: WHEELZ }) {
         </div>
 
         <div className="absolute top-1/2 right-0 bg-[#10100E] border-2 border-[#30302B] py-2 text-white grid grid-cols-2 divide-x divide-[#8E8E8E] rounded-lg shadow-lg shadow-fuchsia-700">
-          <div className="text-xs xl:text-sm py-[1px] px-2 xl:px-4">N/A SGY</div>
+          <div className="text-xs xl:text-sm py-[1px] px-2 xl:px-4">
+            N/A SGY
+          </div>
           <div className="text-xs xl:text-sm py-[1px] px-2 xl:px-4">
             {connected && solBalance !== null
               ? formatNumberToKM(solBalance, 2)

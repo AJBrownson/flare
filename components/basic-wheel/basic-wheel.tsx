@@ -102,9 +102,17 @@ const RouletteWheel = () => {
   const wheelRef = useRef<HTMLDivElement>(null);
 
   const [chats, setChats] = useState(false);
+
   const handleChats = () => {
-    setChats(!chats);
-  };
+    if (!connected) {
+      openWalletConnectModal();
+      return;
+    }
+
+    if (connected) {
+      setChats(!chats);
+    }
+  }
 
   const sendPayment = async () => {
     try {
@@ -178,11 +186,6 @@ const RouletteWheel = () => {
   };
 
   const spinWheel = async (random: boolean) => {
-    if (!connected || !publicKey) {
-      openWalletConnectModal();
-      return;
-    }
-
     if (connected && publicKey) {
       try {
         const spin_wheel = wheelRef.current;
@@ -260,7 +263,8 @@ const RouletteWheel = () => {
       }
     }
     if (!connected) {
-
+      openWalletConnectModal();
+      return;
     }
   };
 

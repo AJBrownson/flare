@@ -10,7 +10,7 @@ import Open from "@/public/assets/menu-bar.png";
 import Close from "@/public/assets/menu-close.png";
 import Home from "@/public/assets/icons/house-05.png";
 import Game from "@/public/assets/icons/nintendo-switch.png";
-import MoneyBag from "@/public/money-bag.svg"
+import MoneyBag from "@/public/money-bag.svg";
 import Wheelz from "@/public/assets/wheelz.png";
 import Tournament from "@/public/assets/tournament.png";
 import Games from "@/public/assets/games.png";
@@ -126,11 +126,7 @@ export default function NavBar({ showClaim }: { showClaim?: boolean }) {
                   onClick={openClaimModal}
                 >
                   <span>Claim</span>{" "}
-                  <Image
-                    src={MoneyBag}
-                    alt="money-bag"
-                    className="w-2 h-2 xl:w-4 xl:h-4"
-                  />
+                  <Image src={MoneyBag} alt="money-bag" className="w-4 h-4" />
                 </button>
               )}
 
@@ -152,16 +148,11 @@ export default function NavBar({ showClaim }: { showClaim?: boolean }) {
 
               {showClaim && (
                 <button
-                  className="flex items-center gap-2 bg-[#1B874D] rounded-lg p-2 h-[2.4rem] text-base"
+                  className="flex items-center gap-2 bg-[#1B874D] rounded-lg px-2 py-2 text-xs xl:text-sm"
                   onClick={openClaimModal}
                 >
                   <span>Claim</span>{" "}
-                  <Image
-                    src="/money-bag.svg"
-                    alt="money-bag"
-                    width={25}
-                    height={25}
-                  />
+                  <Image src={MoneyBag} alt="money-bag" className="w-4 h-4" />
                 </button>
               )}
             </div>
@@ -369,8 +360,8 @@ export default function NavBar({ showClaim }: { showClaim?: boolean }) {
                       Play and earn extra rewards, and unlock in-game treasures!
                     </p>
                   </span>
-                  <p className="text-xs bg-[#560082] text-[#C6C6C6] rounded-xl py-1 px-2">
-                    Soon
+                  <p className="text-xs bg-transparent border border-[#50C878] text-[#50C878] rounded-xl py-1 px-2">
+                    Live
                   </p>
                 </div>
               </div>
@@ -413,7 +404,7 @@ export default function NavBar({ showClaim }: { showClaim?: boolean }) {
           </div>
         </div>
       </ModalDialog>
-      
+
       {/* Claim Modal */}
       <ClaimPageModal isOpen={isClaimModalOpen} onClose={closeClaimModal} />
     </>

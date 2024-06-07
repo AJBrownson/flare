@@ -119,7 +119,7 @@ export default function NavBar({ showClaim }: { showClaim?: boolean }) {
               <Image src={Logo} alt="" className="w-8 lg:w-12 rounded-full" />
             </div>
 
-            <div className="flex items-center gap-10">
+            <div className="flex items-center gap-4">
               {showClaim && (
                 <button
                   className="flex items-center gap-2 bg-[#1B874D] rounded-lg px-2 py-2 text-xs xl:text-sm"

@@ -420,8 +420,8 @@ function ConnectButton({ connected }: { connected: boolean }) {
   return (
     <div
       className={cn(
-        "hidden lg:flex w-max",
-        connected && "border border-[#8E8E8E] rounded-[10px]"
+        "flex",
+        connected && "border border-[#8E8E8E] rounded-lg"
       )}
     >
       {/* <button className="flex p-3 font-semibold rounded-lg items-center text-sm bg-[#0000FF] text-[#FFFFE3]">
@@ -431,28 +431,28 @@ function ConnectButton({ connected }: { connected: boolean }) {
 
       <WalletMultiButton
         style={{
-          backgroundColor: `${connected ? "transparent" : "#023BFF"}`,
+          backgroundColor: `${connected ? "transparent" : "#0000FF"}`,
           fontSize: ".9rem",
-          padding: ".9rem",
-          borderRadius: "10px",
+          padding: ".75rem",
+          borderRadius: ".5rem",
         }}
         // onClick={() => {
         //   console.log("click wallet");
         // }}
-        endIcon={
-          !connected ? (
-            <Image
-              src="/assets/solana-icon.png"
-              alt="solana"
-              width={10}
-              height={10}
-              className="w-0"
-            />
-          ) : (
-            <PiCaretDown className="ml-2" />
-          )
-        }
+        // endIcon={
+        //   !connected ? (
+        //     <Image
+        //       src={Solana}
+        //       alt="solana icon button"
+        //       className="hidden"
+        //     />
+            
+        //   ) : (
+        //     <PiCaretDown className="ml-2" />
+        //   )
+        // }
       />
+
     </div>
   );
 }

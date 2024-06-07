@@ -430,8 +430,8 @@ const RouletteWheel = () => {
       <div
         className={
           isChatWidgetOpen
-            ? `z-40 fixed bottom-0 xl:left-[56%] ease-in-out duration-300`
-            : `ease-in-out xl:left-[56%] duration-300 z-40 fixed -bottom-[100%]`
+            ? `z-40 fixed bottom-0 right-40 ease-in-out duration-300`
+            : `ease-in-out right-40 duration-300 z-40 fixed -bottom-[100%]` // xl:left-[56%]
         }
       >
         <button
@@ -442,8 +442,30 @@ const RouletteWheel = () => {
           <Image src={Close} alt="" />
         </button>
         <ChatWidget isOpen={isChatWidgetOpen} onClose={closeChatWidget} />
-        {/* <ChatWidget /> */}
       </div>
+
+
+      {/* <div
+  className={`z-40 fixed bottom-0 ease-in-out duration-300 ${
+    isChatWidgetOpen
+      ? "xl:right-0 right-0"
+      : "xl:-right-full -bottom-[100%]"
+  }`}
+>
+  <button
+    onClick={handleChats}
+    className="lg:hidden absolute top-0 right-0 border border-[#FFFFE3] p-1 rounded"
+  >
+    <Image src={Close} alt="" />
+  </button>
+  <ChatWidget isOpen={isChatWidgetOpen} onClose={closeChatWidget} />
+</div> */}
+
+
+
+
+
+
 
       {/* Gameplay guide modal */}
       <ModalDialog

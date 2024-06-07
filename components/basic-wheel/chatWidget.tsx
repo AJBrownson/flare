@@ -99,7 +99,7 @@ export default function ChatWidget({ isOpen, onClose }: ModalProps) {
     <div className="z-50 fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
       <div
         ref={modalRef}
-        className={`relative xl:px-16 transform transition-transform duration-300 ${
+        className={`relative xl:-right-[17%] xl:px-16 transform transition-transform duration-300 ${
           isVisible ? "translate-y-0" : "translate-y-full"
         }`}
       >
@@ -108,7 +108,7 @@ export default function ChatWidget({ isOpen, onClose }: ModalProps) {
             setIsVisible(false);
             setTimeout(() => onClose(), 300);
           }}
-          className="absolute lg:hidden xl:top-10 right-0 xl:right-4 border border-[#FFFFE3] p-1 rounded"
+          className="absolute lg:hidden xl:top-10 right-0 border border-[#FFFFE3] p-1 rounded"
         >
           <Image src={Close} alt="Close" />
         </button>

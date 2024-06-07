@@ -67,7 +67,7 @@ export default function ProductDetails({
                 <div className="p-4 flex justify-between items-center border-t border-[#30302B] w-full">
                   <span className="flex justify-between items-center gap-1">
                     <Image src={Medal} alt="" />
-                    <p>Player&apos;s Rank</p>
+                    <p className="text-xs xl:text-sm">Player&apos;s Rank</p>
                   </span>
                   <p className="rounded-full text-center w-28 text-sm border border-[#30302B] py-1 text-transparent font-bold bg-clip-text bg-gradient-to-b from-[#FFFE89] from-10% to-[#C65E34] to-100%">
                     {userRank}
@@ -77,7 +77,7 @@ export default function ProductDetails({
                 <div className="p-4 flex justify-between items-center border-t border-[#30302B] w-full">
                   <span className="flex justify-between items-center gap-1 ">
                     <Image src={Medal} alt="" />
-                    <p>
+                    <p className="text-xs xl:text-sm">
                       {walletAddress.slice(0, 4)}...{walletAddress.slice(-4)}
                     </p>
                   </span>
@@ -87,7 +87,7 @@ export default function ProductDetails({
                       connected ? "bg-[#87E8B4]" : "bg-red-500"
                     )}
                   >
-                    {connected ? "connected" : "disconnected"}
+                    {connected ? "Connected" : "Disconnected"}
                   </p>
                 </div>
               </div>

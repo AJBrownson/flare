@@ -21,7 +21,7 @@ export default function ChatWidget({ isOpen, onClose }: ModalProps) {
   const handleOutsideClick = (event: MouseEvent) => {
     if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
       setIsVisible(false);
-      setTimeout(() => onClose(), 300); // Delay to allow the animation to finish
+      setTimeout(() => onClose(), 300);
     }
   };
 
@@ -36,7 +36,6 @@ export default function ChatWidget({ isOpen, onClose }: ModalProps) {
       document.removeEventListener("mousedown", handleOutsideClick);
     };
   }, [isOpen]);
-
 
   const commentsData = [
     {
@@ -76,7 +75,7 @@ export default function ChatWidget({ isOpen, onClose }: ModalProps) {
       comment: "Another loss... when will I catch a break?",
     },
     {
-      id: 5,
+      id: 6,
       name: "ADXp...HSqu",
       date: "17/1/24",
       time: "8:30 PM",
@@ -85,6 +84,30 @@ export default function ChatWidget({ isOpen, onClose }: ModalProps) {
     },
     {
       id: 7,
+      name: "ADXp...HSqu",
+      date: "17/1/24",
+      time: "8:30 PM",
+      comment:
+        "I really messed up the game and lost heavily. when will my turn reach?",
+    },
+    {
+      id: 8,
+      name: "ADXp...HSqu",
+      date: "17/1/24",
+      time: "8:30 PM",
+      comment:
+        "I really messed up the game and lost heavily. when will my turn reach?",
+    },
+    {
+      id: 9,
+      name: "ADXp...HSqu",
+      date: "17/1/24",
+      time: "8:30 PM",
+      comment:
+        "I really messed up the game and lost heavily. when will my turn reach?",
+    },
+    {
+      id: 10,
       name: "ADXp...HSqu",
       date: "17/1/24",
       time: "8:30 PM",
@@ -122,15 +145,21 @@ export default function ChatWidget({ isOpen, onClose }: ModalProps) {
           </div>
 
           {/* Comment content  */}
-          <div className="px-5 relative">
-            <div className="absolute top-0 left-0 w-full h-10 bg-gradient-to-b from-[#191815] to-transparent"></div>
+          <div className="px-5 relative max-h-[500px] overflow-y-auto">
+            <div className="sticky top-0 w-full z-10 bg-[#191815] to-transparent bg-opacity-25">
+              <div className="w-full h-5 bg-gradient-to-b from-[#191815] to-transparent"></div>
+            </div>
             {commentsData.map((comment, i) => (
               <div key={i}>
                 <div className="flex items-center mb-1">
                   <div className="flex items-center text-sm font-bold text-[#DC1FFF]">
                     <p>{comment.name}</p>
-                    <p className="text-xs ml-3 text-[#8E8E8E]">{comment.date}</p>
-                    <p className="text-xs ml-2 text-[#8E8E8E]">{comment.time}</p>
+                    <p className="text-xs ml-3 text-[#8E8E8E]">
+                      {comment.date}
+                    </p>
+                    <p className="text-xs ml-2 text-[#8E8E8E]">
+                      {comment.time}
+                    </p>
                   </div>
                 </div>
                 <p className="mb-4 text-xs">{comment.comment}</p>

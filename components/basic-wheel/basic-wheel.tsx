@@ -444,29 +444,6 @@ const RouletteWheel = () => {
         <ChatWidget isOpen={isChatWidgetOpen} onClose={closeChatWidget} />
       </div>
 
-
-      {/* <div
-  className={`z-40 fixed bottom-0 ease-in-out duration-300 ${
-    isChatWidgetOpen
-      ? "xl:right-0 right-0"
-      : "xl:-right-full -bottom-[100%]"
-  }`}
->
-  <button
-    onClick={handleChats}
-    className="lg:hidden absolute top-0 right-0 border border-[#FFFFE3] p-1 rounded"
-  >
-    <Image src={Close} alt="" />
-  </button>
-  <ChatWidget isOpen={isChatWidgetOpen} onClose={closeChatWidget} />
-</div> */}
-
-
-
-
-
-
-
       {/* Gameplay guide modal */}
       <ModalDialog
         isDialogVisible={isDialogVisible}

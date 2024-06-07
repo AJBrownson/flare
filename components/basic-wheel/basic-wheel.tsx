@@ -55,7 +55,7 @@ const RouletteWheel = () => {
   const [disable, setDisable] = useState<boolean>(false);
 
   const [isInsufficientModalOpen, setIsInsufficientModalOpen] = useState(false);
-  const [isWalletConnectModalOpen, setIsWalletConnectModalOpen] = useState(false)
+  const [isWalletConnectModalOpen, setIsWalletConnectModalOpen] = useState(false);
 
   const openModal = () => {
     setIsInsufficientModalOpen(true);
@@ -102,7 +102,7 @@ const RouletteWheel = () => {
 
   // const [chats, setChats] = useState(false);
   const [isChatWidgetOpen, setIsChatWidgetOpen] = useState(false);
-  
+
   const openChatWidget = () => {
     setIsChatWidgetOpen(true);
   };

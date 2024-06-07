@@ -9,6 +9,7 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import { prizesKey, fetcher, cn } from "@/lib/utils";
 import { Game, CLAIMED } from "@prisma/client";
 import { OUTCOME } from "./hgbdjbhjdvhjdvag";
+import WalletConnectionModal from "./walletConnectModal";
 
 interface ModalProps {
   isOpen: boolean;
@@ -17,6 +18,7 @@ interface ModalProps {
 
 export default function ClaimPageModal({ isOpen, onClose }: ModalProps) {
   const modalRef = useRef<HTMLDivElement>(null);
+  const [isWalletConnectModalOpen, setIsWalletConnectModalOpen] = useState(false);
 
   const { connected, publicKey } = useWallet();
 
@@ -81,9 +83,17 @@ export default function ClaimPageModal({ isOpen, onClose }: ModalProps) {
   }, [isOpen, onClose]);
 
   if (!isOpen) return null;
+  const openWalletConnectModal = () => {
+    setIsWalletConnectModalOpen(true);
+  };
+
+  const closeWalletConnectModal = () => {
+    setIsWalletConnectModalOpen(false);
+  };
 
   if (!connected && !publicKey) {
-    return (
+      // openWalletConnectModal();
+      // return
       <div className="z-50 fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
         <div ref={modalRef} className="relative xl:px-16">
           <button
@@ -103,7 +113,7 @@ export default function ClaimPageModal({ isOpen, onClose }: ModalProps) {
           </div>
         </div>
       </div>
-    );
+    
   } else if (data && data.data.length < 1) {
     return (
       <div className="z-50 fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
@@ -170,9 +180,7 @@ export default function ClaimPageModal({ isOpen, onClose }: ModalProps) {
                       <p className="text-white/50">{wins.name}</p>
 
                       <button
-                        className="p-2 rounded-lg text-sm text-white/60 w-32
-                                                     border-white/60 border 
-                                                     bg-transparent"
+                        className="p-2 rounded-lg text-sm text-white/60 w-32 border-white/60 border bg-transparent"
                         disabled
                       >
                         Claimed
@@ -210,6 +218,7 @@ export default function ClaimPageModal({ isOpen, onClose }: ModalProps) {
     );
   }
   return (
+    <>
     <div className="z-50 fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
       <div ref={modalRef} className="relative xl:px-16">
         <button
@@ -230,5 +239,8 @@ export default function ClaimPageModal({ isOpen, onClose }: ModalProps) {
         </div>
       </div>
     </div>
+
+    <WalletConnectionModal isOpen={isWalletConnectModalOpen} onClose={closeWalletConnectModal} />
+    </>
   );
 }

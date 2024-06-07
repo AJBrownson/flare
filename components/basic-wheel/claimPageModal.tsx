@@ -116,7 +116,7 @@ export default function ClaimPageModal({ isOpen, onClose }: ModalProps) {
         </div>
       </div>
     );
-  } else if (data.data.length < 1) {
+  } else if (data && data.data.length < 1) {
     return (
       <div className="z-50 fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
         <div ref={modalRef} className="relative xl:px-16">

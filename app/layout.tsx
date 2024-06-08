@@ -44,14 +44,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${space_grotesk.variable} ${montserrat.variable}`}>
-        <div>
-          <Wallet>
-            <div>
-              {children}
-              <ToastContainer />
-            </div>
-          </Wallet>
-        </div>
+        <Wallet>
+          {children}
+          <ToastContainer />
+        </Wallet>
       </body>
     </html>
   );

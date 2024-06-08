@@ -237,7 +237,7 @@ const RouletteWheel = () => {
                   outcome: win.outcome,
                   name: win.name,
                   wager: wheelz,
-                  trans: "transac",
+                  trans: transac,
                 }),
               });
 

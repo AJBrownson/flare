@@ -350,7 +350,8 @@ export default function NavBar({ showClaim }: { showClaim?: boolean }) {
           </p>
 
           <div className="mt-8 flex flex-col gap-[6px]">
-            <Link href="/basic">
+
+            <Link href="/basic-wheel">
               <div className="p-[1px] rounded-xl border border-[#30302B] hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%">
                 <div className="flex items-center gap-4 bg-[#161616] p-1 rounded-xl">
                   <Image src={BasicWheel} alt="" />
@@ -367,7 +368,6 @@ export default function NavBar({ showClaim }: { showClaim?: boolean }) {
               </div>
             </Link>
 
-            {/* <Link href="/game"> */}
             <div className="p-[1px] rounded-xl border border-[#30302B] hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%">
               <div className="flex justify-between items-center gap-4 bg-[#161616] p-1 rounded-xl">
                 <Image src={ChallengerWheel} alt="" />
@@ -382,12 +382,11 @@ export default function NavBar({ showClaim }: { showClaim?: boolean }) {
                 </p>
               </div>
             </div>
-            {/* </Link> */}
 
-            <div className="p-[1px] rounded-xl border border-[#30302B] hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%">
+           <div className="p-[1px] rounded-xl border border-[#30302B] hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%">
               <div className="flex items-center gap-4 bg-[#161616] p-1 rounded-xl">
                 <Image src={EliteWheel} alt="" />
-
+ 
                 <div className="flex justify-between xl:gap-11 items-center">
                   <span className="flex flex-col">
                     <p className="text-sm font-medium mb-1">Elite Wheel</p>

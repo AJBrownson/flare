@@ -138,7 +138,7 @@ export default function NavBar({ showClaim }: { showClaim?: boolean }) {
           <div className="flex xl:hidden items-center justify-between py-2">
             <div
               onClick={handleMenuClick}
-              className="xl:hidden flex items-center gap-2"
+              className="xl:hidden flex items-center gap-5"
             >
               {openMobileMenu ? (
                 <Image src={Close} alt="" />
@@ -148,7 +148,7 @@ export default function NavBar({ showClaim }: { showClaim?: boolean }) {
 
               {showClaim && (
                 <button
-                  className="flex items-center gap-2 bg-[#1B874D] rounded-lg px-2 py-2 text-xs xl:text-sm"
+                  className="flex items-center bg-[#1B874D] rounded-lg px-2 py-2 text-xs xl:text-sm"
                   onClick={openClaimModal}
                 >
                   <span>Claim</span>{" "}

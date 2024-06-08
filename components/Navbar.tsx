@@ -350,11 +350,10 @@ export default function NavBar({ showClaim }: { showClaim?: boolean }) {
           </p>
 
           <div className="mt-8 flex flex-col gap-[6px]">
-
             <Link href="/basic-wheel">
               <div className="p-[1px] rounded-xl border border-[#30302B] hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%">
                 <div className="flex items-center gap-4 bg-[#161616] p-1 rounded-xl">
-                  <Image src={BasicWheel} alt="" />
+                  <Image src={BasicWheel} alt="" className="w-8 h-8" />
                   <span className="flex flex-col">
                     <p className="text-sm font-medium mb-1">Basic Wheel</p>
                     <p className="text-xs text-[#8E8E8E]">
@@ -370,7 +369,7 @@ export default function NavBar({ showClaim }: { showClaim?: boolean }) {
 
             <div className="p-[1px] rounded-xl border border-[#30302B] hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%">
               <div className="flex justify-between items-center gap-4 bg-[#161616] p-1 rounded-xl">
-                <Image src={ChallengerWheel} alt="" />
+                <Image src={ChallengerWheel} alt="" className="w-8 h-8" />
                 <span className="flex flex-col">
                   <p className="text-sm font-medium mb-1">Challenger Wheel</p>
                   <p className=" text-xs text-[#8E8E8E]">
@@ -385,8 +384,7 @@ export default function NavBar({ showClaim }: { showClaim?: boolean }) {
 
            <div className="p-[1px] rounded-xl border border-[#30302B] hover:bg-gradient-to-r from-[#FFFE89] from-60% to-[#C65E34] to-100%">
               <div className="flex items-center gap-4 bg-[#161616] p-1 rounded-xl">
-                <Image src={EliteWheel} alt="" />
- 
+                <Image src={EliteWheel} alt="" className="w-8 h-8" />
                 <div className="flex justify-between xl:gap-11 items-center">
                   <span className="flex flex-col">
                     <p className="text-sm font-medium mb-1">Elite Wheel</p>

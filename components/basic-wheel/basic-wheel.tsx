@@ -39,7 +39,6 @@ import InsufficientFundsModal from "./insufficientFundsModal";
 import WalletConnectionModal from "./walletConnectModal";
 import ChatWidget from "./chatWidget";
 
-
 const segments = Array.from({ length: 12 });
 const circles = Array.from({ length: 12 });
 
@@ -54,7 +53,8 @@ const RouletteWheel = () => {
   const [disable, setDisable] = useState<boolean>(false);
 
   const [isInsufficientModalOpen, setIsInsufficientModalOpen] = useState(false);
-  const [isWalletConnectModalOpen, setIsWalletConnectModalOpen] = useState(false);
+  const [isWalletConnectModalOpen, setIsWalletConnectModalOpen] =
+    useState(false);
 
   const openModal = () => {
     setIsInsufficientModalOpen(true);
@@ -119,7 +119,7 @@ const RouletteWheel = () => {
     if (connected) {
       openChatWidget();
     }
-  }
+  };
 
   const sendPayment = async () => {
     try {
@@ -167,14 +167,16 @@ const RouletteWheel = () => {
             fromPubkey: publicKey,
             toPubkey: new PublicKey(bs58.decode(paymentAddress)),
             lamports: amount * LAMPORTS_PER_SOL,
-          }),
-          SystemProgram.transfer({
-            fromPubkey: publicKey,
-            toPubkey: new PublicKey(bs58.decode(chargeAddress)),
-            lamports: 0.01 * LAMPORTS_PER_SOL,
           })
+          // SystemProgram.transfer({
+          //   fromPubkey: publicKey,
+          //   toPubkey: new PublicKey(bs58.decode(chargeAddress)),
+          //   lamports: 0.01 * LAMPORTS_PER_SOL,
+          // })
         );
-        const data = await sendTransaction(tx, connection);
+        const data = await sendTransaction(tx, connection, {
+          preflightCommitment: "confirmed",
+        });
         // console.log("transac data", data);
         return data;
       } else if (
@@ -527,7 +529,10 @@ const RouletteWheel = () => {
         onClose={closeModal}
       />
 
-    <WalletConnectionModal isOpen={isWalletConnectModalOpen} onClose={closeWalletConnectModal} />
+      <WalletConnectionModal
+        isOpen={isWalletConnectModalOpen}
+        onClose={closeWalletConnectModal}
+      />
     </main>
   );
 };
@@ -643,8 +648,6 @@ const WheelzPicker = ({
   );
 };
 
-
-
 function ConnectButton({ connected }: { connected: boolean }) {
   const [hydrate, setHydrate] = useState(false);
 
@@ -657,7 +660,6 @@ function ConnectButton({ connected }: { connected: boolean }) {
     <div
       className={cn("flex", connected && "border border-[#8E8E8E] rounded-lg")}
     >
-
       <WalletMultiButton
         style={{
           backgroundColor: `${connected ? "transparent" : "#0000FF"}`,

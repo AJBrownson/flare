@@ -28,6 +28,8 @@ export async function sendSolFunds({
 
   const transaction = new Transaction();
 
+  // const balance = await connection.getBalance(myAccount.publicKey)
+
   if (!amount) return null;
 
   try {
@@ -39,9 +41,14 @@ export async function sendSolFunds({
       })
     );
 
-    const trans = await sendAndConfirmTransaction(connection, transaction, [
-      myAccount,
-    ]);
+    const trans = await sendAndConfirmTransaction(
+      connection,
+      transaction,
+      [myAccount],
+      {
+        commitment: "confirmed",
+      }
+    );
 
     return trans;
   } catch (error) {

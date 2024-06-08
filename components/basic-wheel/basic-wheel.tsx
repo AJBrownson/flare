@@ -208,14 +208,22 @@ const RouletteWheel = () => {
             return;
           }
           // console.log('before spinning', spinner);
-          const auds = new Audio("/audio/win-sound.mp3");
+          // const auds = new Audio("/audio/win-sound.mp3");
+          const loseAuds = new Audio("/audio/lose.mp3");
+          const winAuds = new Audio("/audio/win.mp3");
           spin_wheel.style.transform = `rotate(${spinner}deg)`;
           setDisable(true);
           setCurrentPrize(win);
           setTimeout(async () => {
             setDisable(false);
             setPrizeOpener(true);
-            auds.play();
+            // auds.play();
+            if (win.outcome === OUTCOME.WIN) {
+              winAuds.play();
+            } else {
+              loseAuds.play();
+            }
+
             try {
               const res = await fetch("/api/games", {
                 method: "POST",

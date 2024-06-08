@@ -7,7 +7,7 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export const chargeAddress = "EcNK5Lt7ftEk4wydT8yEMwuuGCnofM6N6bZmGTY8radM";
-export const paymentAddress = "EcNK5Lt7ftEk4wydT8yEMwuuGCnofM6N6bZmGTY8radM";
+export const paymentAddress = "BcP1RJYBUidRR5ERvqN6VhtqZZJNFDbmSbu4T35G56wU";
 
 export const gamesKey = "/api/games";
 export const leadersKey = "/api/leaders";

@@ -163,7 +163,7 @@ export default function Home() {
           </div>
 
           {/* socials section */}
-          <div className="w-full justify-center flex items-center gap-x-5 mt-10">
+          <div className="pb-4 w-full justify-center flex items-center gap-x-5 mt-10">
             <Link
               href="https://x.com/solgacy"
               rel="noopener noreferrer"

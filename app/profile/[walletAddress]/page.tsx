@@ -58,7 +58,7 @@ export default function UserProfile({
           <div className="bg-[#10100E] text-[#FFFFE3] px-6 xl:px-12 font-space">
             {/* user info */}
             <section className="py-6 flex justify-center items-center">
-              <div className="bg-[#191815] w-full flex flex-col justify-center items-center max-w-[325px] border border-[#30302B] rounded-lg">
+              <div className="bg-[#191815] flex flex-col justify-center items-center w-full lg:w-[325px] border border-[#30302B] rounded-lg">
                 <Image src={ProfilePic} alt="wheel" className="py-6" />
                 <div className="p-4 flex justify-between items-center border-t border-[#30302B] w-full">
                   <span className="flex justify-between items-center gap-1">

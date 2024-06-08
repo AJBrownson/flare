@@ -253,7 +253,7 @@ const RouletteWheel = () => {
               prev >= basicWheelzData[wheelz].out.length - 1
                 ? 0
                 : random
-                ? getRandomInt(prev + 1, basicWheelzData[wheelz].out.length - 1)
+                ? getRandomInt(0, basicWheelzData[wheelz].out.length - 1)
                 : prev + 1;
             localStorage.setItem(counter, next.toString());
 

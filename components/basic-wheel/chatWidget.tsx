@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, useCallback } from "react";
 import Image from "next/image";
 import Close from "@/public/assets/menu-close.png";
 import Emoji from "@/public/assets/icons/emoji.png";
@@ -18,9 +18,6 @@ interface ModalProps {
 }
 
 const getKey = (pageIndex: any, previousPageData: any) => {
-  console.log("pageIndex", pageIndex);
-  console.log("previousPageData", previousPageData);
-
   if (previousPageData && !previousPageData.data.length) return null; // reached the end
   return `/api/chat?offset=${pageIndex}&limit=${limit}`; // SWR key
 };
@@ -48,17 +45,15 @@ export default function ChatWidget({ isOpen, onClose }: ModalProps) {
   const textRef = useRef<HTMLTextAreaElement>(null);
 
   const { data, size, setSize, isLoading, mutate, isValidating } =
-    useSWRInfinite(getKey, fetcher);
+    useSWRInfinite(getKey, fetcher, {
+      refreshInterval: () => (isOpen ? 3000 : 0),
+    });
 
   const handleEmoji = (emoji: { native: string }) => {
     if (textRef.current) {
       textRef.current.value = `${textRef.current.value}${emoji.native}`;
     }
   };
-
-  console.log("data 000", data);
-
-  console.log("loading...", isValidating);
 
   const sendMessage = async () => {
     setCreateMessage(true);
@@ -117,7 +112,7 @@ export default function ChatWidget({ isOpen, onClose }: ModalProps) {
           <Image src={Close} alt="Close" />
         </button>
 
-        <div className="font-space w-[350px] xl:max-w-[309px] bg-[#191815] rounded-2xl mt-10 pb-6 text-[#FFFFE3]">
+        <div className="font-space w-[350px] xl:max-w-[309px]  bg-[#191815] rounded-2xl mt-10 pb-6 text-[#FFFFE3]">
           <div className="bg-[#30302B] flex items-center justify-center py-3 rounded-tl-2xl rounded-tr-2xl">
             <div className="flex justify-center items-center bg-[#10100E] w-16 h-6 rounded-2xl">
               <span className="p-[5px] bg-[#00CC45] rounded-full mr-1"></span>
@@ -126,12 +121,12 @@ export default function ChatWidget({ isOpen, onClose }: ModalProps) {
           </div>
 
           {/* Comment content  */}
-          <div className="px-5 relative h-[400px] overflow-y-auto min-h-[400px]">
-            <div className="sticky top-0 w-full z-10 bg-[#191815] to-transparent bg-opacity-25 mb-24">
+          <div className="px-5 h-full min-h-[400px] max-h-[500px] flex flex-col overflow-y-auto">
+            <div className="w-full z-10 bg-[#191815] to-transparent bg-opacity-25">
               <div className="w-full h-5 bg-gradient-to-b from-[#191815] to-transparent"></div>
             </div>
 
-            <div className="flex flex-col h-full justify-end mt-2">
+            <div className="flex-1 flex flex-col h-full justify-end mt-2 ">
               <div className="">
                 {data &&
                   data[size - 1]?.data &&
@@ -200,7 +195,6 @@ export default function ChatWidget({ isOpen, onClose }: ModalProps) {
                 <Picker
                   data={emojiData}
                   onEmojiSelect={(emoji: any) => {
-                    console.log(emoji.native);
                     setEmoji(emoji.native);
                     handleEmoji(emoji);
                   }}

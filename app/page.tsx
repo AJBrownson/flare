@@ -5,8 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import Quote from "@/components/quoteBox";
 import Genie from "../public/assets/genie.png";
-import Text from "../public/assets/text-box.png";
-import TextMobile from "../public/assets/textm.png";
 import DiscordStroke from "../public/assets/discord-stroke.png";
 import Gift from "../public/assets/gift.png";
 import Leaderboard from "@/components/leaderboard";
@@ -57,17 +55,6 @@ export default function Home() {
             <div className="animate-bounce absolute top-0 xl:relative xl:ml-24">
               <Quote />
             </div>
-            {/* <Image
-              src={Text}
-              alt=""
-              className="animate-bounce hidden ml-24 xl:block"
-            /> */}
-
-            {/* <Image
-              src={TextMobile}
-              alt=""
-              className="animate-bounce absolute top-0 xl:hidden"
-            /> */}
             <Image
               src={Genie}
               alt=""

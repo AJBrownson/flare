@@ -3,11 +3,11 @@
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Chat from "@/public/assets/chat btn.png";
-import Pointer from "@/public/assets/join-default.png";
+import Pointer from "@/public/assets/join.png";
 import PointerHover from "@/public/assets/join-hover.png";
 import Group from "@/public/assets/Group 2.png";
 import Timer from "@/public/assets/icons/timer-02.png";
-import ChatWidget from "./challengerModals/chatWidget";
+import ChatWidget from "./challenger-wheel/chatWidget";
 
 
 const segments = Array.from({ length: 12 });

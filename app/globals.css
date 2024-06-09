@@ -8,7 +8,7 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  min-height: 100vh;
+  /* min-height: 100vh; */
 }
 
 ::-webkit-scrollbar {
@@ -286,5 +286,41 @@ dialog.slide-down {
   .roulette-ring {
     width: 16rem;
     height: 16rem;
+  }
+}
+
+/* Challenger Wheel styles */
+.conic-bg-grad-challenger {
+  background-image: url("/assets/challenger.png");
+  background-size: 120%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+@media screen and (min-width: 1300px) {
+  .conic-bg-grad-challenger {
+    background-size: 120%;
+    background-position: center;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .conic-bg-grad-challenger {
+    background-size: 800px;
+    background-position: top 0% right 50%;
+  }
+}
+
+@media screen and (max-width: 530px) {
+  .conic-bg-grad-challenger {
+    background-size: 700px;
+    background-position: top 0% right 50%;
+  }
+}
+
+@media screen and (max-width: 490px) {
+  .conic-bg-grad-challenger {
+    background-size: 600px;
+    background-position: top 0% right 50%;
   }
 }

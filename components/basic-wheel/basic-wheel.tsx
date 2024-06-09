@@ -339,7 +339,7 @@ const RouletteWheel = () => {
 
   return (
     // px-4 sm:px-10 min-h-screen h-full
-    <main className="relative px-4 text-white font-space conic-bg-grad ">
+    <main className="relative pb-4 px-4 text-white font-space conic-bg-grad ">
       <div className="h-14 py-4">
         <WheelzHeader wheelz={wheelz} />
       </div>

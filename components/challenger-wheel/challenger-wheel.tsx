@@ -105,7 +105,7 @@ const RouletteWheel = () => {
   }, []);
 
   return (
-    <main className="relative px-4 text-white font-space conic-bg-grad-challenger">
+    <main className="relative px-4 pb-4 text-white font-space conic-bg-grad-challenger">
       <div className="h-14 py-4">
         <WheelzHeader />
       </div>

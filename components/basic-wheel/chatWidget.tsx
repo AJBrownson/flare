@@ -4,25 +4,82 @@ import Image from "next/image";
 import Close from "@/public/assets/menu-close.png";
 import Emoji from "@/public/assets/icons/emoji.png";
 import Send from "@/public/assets/icons/send.png";
+import { useWallet } from "@solana/wallet-adapter-react";
+import Picker from "@emoji-mart/react";
+import emojiData from "@emoji-mart/data";
+import { Popover, PopoverButton, PopoverPanel } from "@headlessui/react";
+import useSWRInfinite from "swr/infinite";
+import { cn, fetcher } from "@/lib/utils";
+import { shortenAddress } from "../leaderboard";
 
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
+const getKey = (pageIndex: any, previousPageData: any) => {
+  console.log("pageIndex", pageIndex);
+  console.log("previousPageData", previousPageData);
+
+  if (previousPageData && !previousPageData.data.length) return null; // reached the end
+  return `/api/chat?offset=${pageIndex}&limit=${limit}`; // SWR key
+};
+
+const limit = 2;
 export default function ChatWidget({ isOpen, onClose }: ModalProps) {
   const modalRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(isOpen);
+  const [createMessage, setCreateMessage] = useState(false);
+  const [emoji, setEmoji] = useState("");
 
   useEffect(() => {
     setIsVisible(isOpen);
   }, [isOpen]);
 
+  const { publicKey } = useWallet();
+
   const handleOutsideClick = (event: MouseEvent) => {
-    if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
-      setIsVisible(false);
-      setTimeout(() => onClose(), 300);
+    // if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+    //   setIsVisible(false);
+    //   setTimeout(() => onClose(), 300);
+    // }
+  };
+
+  const textRef = useRef<HTMLTextAreaElement>(null);
+
+  const { data, size, setSize, isLoading, mutate, isValidating } =
+    useSWRInfinite(getKey, fetcher);
+
+  const handleEmoji = (emoji: { native: string }) => {
+    if (textRef.current) {
+      textRef.current.value = `${textRef.current.value}${emoji.native}`;
     }
+  };
+
+  console.log("data 000", data);
+
+  console.log("loading...", isValidating);
+
+  const sendMessage = async () => {
+    setCreateMessage(true);
+    try {
+      if (publicKey && textRef.current) {
+        const res = await fetch("/api/chat", {
+          method: "post",
+          body: JSON.stringify({
+            address: publicKey.toBase58(),
+            message: textRef.current.value,
+          }),
+        });
+
+        if (res.status === 200) {
+          mutate();
+        }
+
+        textRef.current.value = "";
+      }
+    } catch (error) {}
+    setCreateMessage(false);
   };
 
   useEffect(() => {
@@ -37,84 +94,8 @@ export default function ChatWidget({ isOpen, onClose }: ModalProps) {
     };
   }, [isOpen]);
 
-  const commentsData = [
-    {
-      id: 1,
-      name: "ADXp...HSqu",
-      date: "17/1/24",
-      time: "7:00 PM",
-      comment: "I just had the best spin of my life! Can't wait to play again!",
-    },
-    {
-      id: 2,
-      name: "ADXp...HSqu",
-      date: "17/1/24",
-      time: "7:10 PM",
-      comment: "I actually WON!!!",
-    },
-    {
-      id: 3,
-      name: "ADXp...HSqu",
-      date: "17/1/24",
-      time: "7:30 PM",
-      comment: "This game is so thrilling! My heart races with every spin!",
-    },
-    {
-      id: 4,
-      name: "ADXp...HSqu",
-      date: "17/1/24",
-      time: "8:10 PM",
-      comment:
-        "Even though I didn't win, I had a blast playing. This game is really fun!",
-    },
-    {
-      id: 5,
-      name: "ADXp...HSqu",
-      date: "17/1/24",
-      time: "8:30 PM",
-      comment: "Another loss... when will I catch a break?",
-    },
-    {
-      id: 6,
-      name: "ADXp...HSqu",
-      date: "17/1/24",
-      time: "8:30 PM",
-      comment:
-        "I can't believe I lost all my winnings. Feeling really down right now.",
-    },
-    {
-      id: 7,
-      name: "ADXp...HSqu",
-      date: "17/1/24",
-      time: "8:30 PM",
-      comment:
-        "I really messed up the game and lost heavily. when will my turn reach?",
-    },
-    {
-      id: 8,
-      name: "ADXp...HSqu",
-      date: "17/1/24",
-      time: "8:30 PM",
-      comment:
-        "I really messed up the game and lost heavily. when will my turn reach?",
-    },
-    {
-      id: 9,
-      name: "ADXp...HSqu",
-      date: "17/1/24",
-      time: "8:30 PM",
-      comment:
-        "I really messed up the game and lost heavily. when will my turn reach?",
-    },
-    {
-      id: 10,
-      name: "ADXp...HSqu",
-      date: "17/1/24",
-      time: "8:30 PM",
-      comment:
-        "I really messed up the game and lost heavily. when will my turn reach?",
-    },
-  ];
+  const isLoadingMore =
+    isLoading || (size > 0 && data && typeof data[size - 1] === "undefined");
 
   if (!isOpen && !isVisible) return null;
 
@@ -131,7 +112,7 @@ export default function ChatWidget({ isOpen, onClose }: ModalProps) {
             setIsVisible(false);
             setTimeout(() => onClose(), 300);
           }}
-          className="absolute lg:hidden xl:top-10 right-0 border border-[#FFFFE3] p-1 rounded"
+          className="absolute xl:top-10 right-0 border border-[#FFFFE3] p-1 rounded"
         >
           <Image src={Close} alt="Close" />
         </button>
@@ -145,45 +126,104 @@ export default function ChatWidget({ isOpen, onClose }: ModalProps) {
           </div>
 
           {/* Comment content  */}
-          <div className="px-5 relative max-h-[500px] overflow-y-auto">
-            <div className="sticky top-0 w-full z-10 bg-[#191815] to-transparent bg-opacity-25">
+          <div className="px-5 relative h-[400px] overflow-y-auto min-h-[400px]">
+            <div className="sticky top-0 w-full z-10 bg-[#191815] to-transparent bg-opacity-25 mb-24">
               <div className="w-full h-5 bg-gradient-to-b from-[#191815] to-transparent"></div>
             </div>
-            {commentsData.map((comment, i) => (
-              <div key={i}>
-                <div className="flex items-center mb-1">
-                  <div className="flex items-center text-sm font-bold text-[#DC1FFF]">
-                    <p>{comment.name}</p>
-                    <p className="text-xs ml-3 text-[#8E8E8E]">
-                      {comment.date}
-                    </p>
-                    <p className="text-xs ml-2 text-[#8E8E8E]">
-                      {comment.time}
-                    </p>
-                  </div>
-                </div>
-                <p className="mb-4 text-xs">{comment.comment}</p>
+
+            <div className="flex flex-col h-full justify-end mt-2">
+              <div className="">
+                {data &&
+                  data[size - 1]?.data &&
+                  data[size - 1].data.length === limit && (
+                    <button
+                      className="text-center text-sm my-3 w-full"
+                      onClick={() => setSize(size + 1)}
+                    >
+                      Load More...
+                    </button>
+                  )}
+
+                {isLoadingMore && (
+                  <p className="my-3 text-center">loading...</p>
+                )}
+
+                {isLoading || !data ? (
+                  <p className="my-3 text-center">loading messages...</p>
+                ) : (
+                  data &&
+                  data
+                    .map((dat, i) => {
+                      return dat.data.map((d: any, i: number) => {
+                        return (
+                          <div key={i} className="">
+                            <div className="flex items-center mb-1">
+                              <div className="flex items-center text-sm font-bold text-[#DC1FFF]">
+                                <p>{shortenAddress(d.address)}</p>
+                                <p className="text-xs ml-3 text-[#8E8E8E]">
+                                  {new Date(d.createdAt).toLocaleDateString()}
+                                </p>
+                                <p className="text-xs ml-2 text-[#8E8E8E]">
+                                  {new Date(d.createdAt).toLocaleTimeString()}
+                                </p>
+                              </div>
+                            </div>
+                            <p className="mb-4 text-xs">{d.message}</p>
+                          </div>
+                        );
+                      });
+                    })
+                    .reverse()
+                )}
               </div>
-            ))}
+            </div>
           </div>
 
           {/* comment box */}
-          <div className="relative px-5">
-            <input
-              type="text"
-              placeholder="Enter Message"
-              className="placeholder:text-[#8E8E8E] text-xs w-full rounded-lg pl-8 py-3 border border-[#30302B] bg-[#191815]"
-            />
-            <Image
-              src={Emoji}
-              alt=""
-              className="absolute left-7 top-1/2 transform -translate-y-1/2"
-            />
-            <Image
-              src={Send}
-              alt=""
-              className="absolute right-7 top-1/2 transform -translate-y-1/2"
-            />
+          <div className="relative px-5 mt-2">
+            <textarea
+              ref={textRef}
+              name="message"
+              placeholder="Enter message"
+              id=""
+              disabled={createMessage}
+              cols={30}
+              rows={1}
+              className="placeholder:text-[#8E8E8E] text-xs w-full rounded-lg px-10 py-3 border border-[#30302B] bg-[#191815] resize-none"
+            ></textarea>
+
+            <Popover className="absolute left-7 top-1/2 transform -translate-y-1/2">
+              <PopoverButton className="outline-none">
+                <Image src={Emoji} alt="" className="" width={20} height={20} />
+              </PopoverButton>
+              <PopoverPanel anchor="bottom" className="flex flex-col z-50">
+                <Picker
+                  data={emojiData}
+                  onEmojiSelect={(emoji: any) => {
+                    console.log(emoji.native);
+                    setEmoji(emoji.native);
+                    handleEmoji(emoji);
+                  }}
+                />
+              </PopoverPanel>
+            </Popover>
+
+            <button
+              className={cn(
+                "absolute right-7 top-1/2 transform -translate-y-1/2",
+                createMessage && "opacity-35"
+              )}
+              onClick={sendMessage}
+              disabled={createMessage}
+            >
+              <Image
+                src={Send}
+                width={30}
+                height={30}
+                alt="send"
+                className=""
+              />
+            </button>
           </div>
         </div>
       </div>

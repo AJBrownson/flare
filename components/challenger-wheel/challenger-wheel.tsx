@@ -18,6 +18,7 @@ import PrizeModal from "./prize-modal";
 import InsufficientFundsModal from "../basic-wheel/insufficientFundsModal";
 import WalletConnectionModal from "../basic-wheel/walletConnectModal";
 import ChatWidget from "./chatWidget";
+import CountdownModal from "./countDownModal";
 
 const numberOfSegments = 12;
 const backgroundColor = "#000000";
@@ -84,17 +85,24 @@ const RouletteWheel = () => {
     setIsDialogVisible(false);
   };
 
-  const [countdown, setCountdown] = useState(10);
+  const [countdown, setCountdown] = useState(49);
+  const [isCountdownModalOpen, setIsCountdownModalOpen] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCountdown((prevCountdown) => (prevCountdown === 1 ? 10 : prevCountdown - 1));
+      setCountdown((prevCountdown) => {
+        if (prevCountdown === 4) {
+          setIsCountdownModalOpen(true);
+        }
+        if (prevCountdown === 1) {
+          setIsCountdownModalOpen(false);
+        }
+        return prevCountdown === 1 ? 49 : prevCountdown - 1;
+      });
     }, 1000);
 
     return () => clearInterval(timer);
   }, []);
-
-
 
   return (
     <main className="relative px-4 text-white font-space conic-bg-grad-challenger">
@@ -180,11 +188,16 @@ const RouletteWheel = () => {
         {/* wheel stand */}
         <div className="block bg-[#10100E] p-2 border border-[#30302B] rounded-lg text-center w-full max-w-[476px] max-h-[157] relative -mt-3">
           <div className="flex gap-2 justify-center items-center h-14 xl:h-[70px] px-3 py-2 text-3xl bg-[#320554] rounded-lg">
-            
             <Image src={Timer} alt="" className="w-6 h-6 xl:w-8 xl:h-8" />
-            <span className="text-white font-montserrat font-bold text-3xl xl:text-5xl w-[10%]">
-            {countdown < 10 ? `0${countdown}` : countdown}
-            </span>
+            {countdown <= 3 ? (
+              <span className="text-white font-montserrat font-bold text-3xl xl:text-5xl w-[10%]">
+                --
+              </span>
+            ) : (
+              <span className="text-white font-montserrat font-bold text-3xl xl:text-5xl w-[10%]">
+                {countdown < 10 ? `0${countdown}` : countdown}
+              </span>
+            )}
           </div>
           <div className="grid grid-cols-4 gap-2 mt-2">
             <div className="py-2 flex flex-col bg-[#10100E] border border-[#30302B] rounded-lg">
@@ -305,6 +318,12 @@ const RouletteWheel = () => {
       <WalletConnectionModal
         isOpen={isWalletConnectModalOpen}
         onClose={closeWalletConnectModal}
+      />
+
+      {/* Countdown Modal */}
+      <CountdownModal
+        isOpen={isCountdownModalOpen}
+        onClose={() => setIsCountdownModalOpen(false)}
       />
     </main>
   );

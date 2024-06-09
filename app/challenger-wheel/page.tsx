@@ -1,7 +1,7 @@
 "use client";
 import NavBar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import RouletteWheel from "@/components/basic-wheel/basic-wheel";
+import RouletteWheel from "@/components/challenger-wheel/challenger-wheel";
 
 export default function GameOn() {
   return (

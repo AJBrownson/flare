@@ -2,7 +2,6 @@ import Image from "next/image";
 import GoldCup from "@/public/assets/icons/gold-cup.png";
 import { HiMiniUserGroup } from "react-icons/hi2";
 
-
 export default function RecentWinners() {
   const gamesData = [
     {
@@ -68,6 +67,41 @@ export default function RecentWinners() {
       participants: 6,
       winnings: 0.75,
     },
+    {
+      id: 10,
+      name: "0x45fg...A5qu",
+      score: "WIN",
+      participants: 6,
+      winnings: 0.45,
+    },
+    {
+      id: 11,
+      name: "0x45fg...A5qu",
+      score: "WIN",
+      participants: 9,
+      winnings: 0.95,
+    },
+    {
+      id: 12,
+      name: "Crashed",
+      score: "LOSE",
+      participants: 5,
+      winnings: 0.35,
+    },
+    {
+      id: 13,
+      name: "Crashed",
+      score: "LOSE",
+      participants: 1,
+      winnings: 0.15,
+    },
+    {
+      id: 14,
+      name: "0x45fg...A5qu",
+      score: "WIN",
+      participants: 6,
+      winnings: 0.75,
+    },
   ];
 
   return (
@@ -80,10 +114,10 @@ export default function RecentWinners() {
           </h1>
         </div>
 
+        <div className="h-[480px] xl:max-h-[441px] overflow-y-auto">
           {gamesData.map((winnings) => (
-            <div key={winnings.id} className="px-5 pb-1">
+            <div key={winnings.id} className="px-5 pb-1 ">
               <div className="flex justify-between items-center bg-[#1C1C1C] w-full py-2 rounded-md">
-
                 <p className="text-xs text-white w-1/3">{winnings.name}</p>
 
                 <div className="border border-transparent px-2 border-x-[#30302B] flex items-center gap-1">
@@ -99,7 +133,7 @@ export default function RecentWinners() {
 
                   <div className="border border-[#ffffff9c] rounded-full py-[2px] p-1 pr-2 flex items-center text-xs text-white">
                     <span className="bg-[#333] rounded-full px-1 mr-1">
-                    <HiMiniUserGroup  size={16} className="text-gray-300" />
+                      <HiMiniUserGroup size={16} className="text-gray-300" />
                     </span>
                     {winnings.participants < 10
                       ? `0${winnings.participants}`
@@ -107,10 +141,13 @@ export default function RecentWinners() {
                   </div>
                 </div>
 
-                <p className="ml-4 text-xs text-white">{winnings.winnings} SOL</p>
+                <p className="ml-4 text-xs text-white">
+                  {winnings.winnings} SOL
+                </p>
               </div>
             </div>
           ))}
+        </div>
       </div>
     </>
   );

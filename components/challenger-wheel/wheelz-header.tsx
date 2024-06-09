@@ -67,7 +67,7 @@ export default function WheelzHeader() {
           <div className="text-xs xl:text-sm py-[1px] px-2 xl:px-4">
             {connected && solBalance !== null
               ? formatNumberToKM(solBalance, 2)
-              : "N/A"}
+              : "N/A"}{" "}
             SOL
           </div>
         </div>

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
+import Quote from "@/components/quoteBox";
 import Genie from "../public/assets/genie.png";
 import Text from "../public/assets/text-box.png";
 import TextMobile from "../public/assets/textm.png";
@@ -53,21 +54,24 @@ export default function Home() {
           <NavBar />
           {/* hero image */}
           <div className="flex flex-col justify-center items-center relative mt-8">
-            <Image
+            <div className="animate-bounce absolute top-0 xl:relative xl:ml-24">
+              <Quote />
+            </div>
+            {/* <Image
               src={Text}
               alt=""
               className="animate-bounce hidden ml-24 xl:block"
-            />
+            /> */}
 
-            <Image
+            {/* <Image
               src={TextMobile}
               alt=""
               className="animate-bounce absolute top-0 xl:hidden"
-            />
+            /> */}
             <Image
               src={Genie}
               alt=""
-              className="mt-16 xl:-mt-10 w-60 h-60 z-10"
+              className="mt-16 xl:-mt-2 w-60 h-60 z-10"
             />
             <Link
               href="https://solgacy.gitbook.io/whitepaper"

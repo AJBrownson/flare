@@ -22,7 +22,7 @@ const getKey = (pageIndex: any, previousPageData: any) => {
   return `/api/chat?offset=${pageIndex}&limit=${limit}`; // SWR key
 };
 
-const limit = 2;
+const limit = 20;
 export default function ChatWidget({ isOpen, onClose }: ModalProps) {
   const modalRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(isOpen);

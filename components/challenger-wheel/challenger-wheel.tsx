@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 "use client";
-import { useState, useRef, RefObject, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import PointerHover from "@/public/assets/join-hover.png";
 import Pointer from "@/public/assets/join.png";
@@ -14,9 +14,9 @@ import Guide from "@/public/assets/icons/guide.png";
 import Chat from "@/public/assets/chat btn.png";
 import Chathover from "@/public/assets/chat btn-hover.png";
 import Close from "@/public/assets/menu-close.png";
-import PrizeModal from "./prize-modal";
-import InsufficientFundsModal from "./insufficientFundsModal";
-import WalletConnectionModal from "./walletConnectModal";
+import PrizeModal from "../basic-wheel/prize-modal";
+import InsufficientFundsModal from "../basic-wheel/insufficientFundsModal";
+import WalletConnectionModal from "../basic-wheel/walletConnectModal";
 import ChatWidget from "./chatWidget";
 
 const numberOfSegments = 12;

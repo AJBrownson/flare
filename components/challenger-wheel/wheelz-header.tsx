@@ -6,6 +6,7 @@ import { LAMPORTS_PER_SOL } from "@solana/web3.js";
 import { formatNumberToKM } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import RecentWinnersModal from "./recentWinnersModal";
+import WalletConnectionModal from "../basic-wheel/walletConnectModal";
 
 export default function WheelzHeader() {
   const { publicKey, connected } = useWallet();
@@ -13,11 +14,16 @@ export default function WheelzHeader() {
 
   const [solBalance, setSolbalance] = useState<number | null>(null);
   const [sgyBalance, setSgybalance] = useState<number | null>(null);
-  const [isWheelDetailsModalOpen, setWheelDetailsModalOpen] = useState(false);
   const [isRecentWinnersModalOpen, setRecentWinnersModalOpen] = useState(false);
+  const [isWalletConnectModalOpen, setIsWalletConnectModalOpen] =
+    useState(false);
 
-  const handleWheelDetails = () => {
-    setWheelDetailsModalOpen(!isWheelDetailsModalOpen);
+  const openWalletConnectModal = () => {
+    setIsWalletConnectModalOpen(true);
+  };
+
+  const closeWalletConnectModal = () => {
+    setIsWalletConnectModalOpen(false);
   };
 
   useEffect(() => {
@@ -30,19 +36,26 @@ export default function WheelzHeader() {
     })();
   }, [connected]);
 
+  const handleRecentWinners = () => {
+    if (!connected) {
+      openWalletConnectModal();
+      return;
+    }
+
+    if (connected) {
+      setRecentWinnersModalOpen(true);
+    }
+  };
+
   return (
     <>
       <header className="font-space relative flex items-center justify-between text-black w-full">
         <div
-           onClick={() => setRecentWinnersModalOpen(true)}
+          onClick={handleRecentWinners}
           className="absolute top-1/2 left-0 p-[2px] bg-gradient-to-r from-[#935327] to-[#FFFE89] overflow-hidden rounded-lg text-xs sm:text-sm"
         >
           <button className="bg-gradient-to-r from-[#FFFE89] to-[#D7BF65] hover:opacity-70 py-2 xl:py-[6px] px-5 rounded-lg flex items-center gap-2">
-            <Image
-              src={Cup}
-              alt=""
-              className="w-6 h-6 hidden xl:block"
-            />
+            <Image src={Cup} alt="" className="w-6 h-6 hidden xl:block" />
             <span>Recent Winners</span>
           </button>
         </div>
@@ -64,6 +77,11 @@ export default function WheelzHeader() {
       <RecentWinnersModal
         isOpen={isRecentWinnersModalOpen}
         onClose={() => setRecentWinnersModalOpen(false)}
+      />
+
+      <WalletConnectionModal
+        isOpen={isWalletConnectModalOpen}
+        onClose={closeWalletConnectModal}
       />
     </>
   );

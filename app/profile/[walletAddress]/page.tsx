@@ -33,7 +33,7 @@ export default function UserProfile({
 
   const { data } = useSWR(`/api/leaders?address=${walletAddress}`, fetcher);
 
-  const userRank = data && data.data[0].rank;
+  const userRank = (data && data.data[0]?.rank) || 0;
 
   const { connected } = useWallet();
 

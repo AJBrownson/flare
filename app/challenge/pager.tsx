@@ -158,7 +158,7 @@ function Challanger() {
 
   return (
     <>
-      <div className="container px-16 mx-auto relative">
+      {/* <div className="container px-16 mx-auto relative">
         <div className="flex items-center justify-between w-full">
           <button className="px-4 py-2 bg-gradient-to-r from-[#FFFE89] to-[#935327] text-black text-sm rounded-md">
             Recent winners
@@ -218,7 +218,7 @@ function Challanger() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </>
   );
 }

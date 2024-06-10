@@ -37,7 +37,11 @@ export async function GET(req: NextRequest) {
 
     fiveMinutes.setMinutes(fiveMinutes.getMinutes() - 5);
 
-    const online = await db.chat.count({
+    const online = await db.chat.groupBy({
+      by: ["address"],
+      _count: {
+        address: true,
+      },
       where: {
         createdAt: {
           gte: fiveMinutes,
@@ -45,13 +49,11 @@ export async function GET(req: NextRequest) {
       },
     });
 
-    console.log(online);
-
     return NextResponse.json({
       data: results.reverse(),
       offset,
       count,
-      online,
+      online: online.length,
     });
   } catch (error) {
     console.log(error);

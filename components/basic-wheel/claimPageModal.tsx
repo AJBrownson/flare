@@ -61,7 +61,10 @@ export default function ClaimPageModal({ isOpen, onClose }: ModalProps) {
 
   useEffect(() => {
     const handleOutsideClick = (event: MouseEvent) => {
-      if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+      if (
+        modalRef.current &&
+        !modalRef.current.contains(event.target as Node)
+      ) {
         onClose();
       }
     };
@@ -96,15 +99,20 @@ export default function ClaimPageModal({ isOpen, onClose }: ModalProps) {
         <div className="font-space w-[330px] xl:max-w-[340px] h-[551px] bg-[#191815] rounded-2xl mt-10 pb-8 text-[#FFFFE3]">
           <div className="bg-[#30302B] flex items-center justify-center py-3 rounded-tl-2xl rounded-tr-2xl">
             <Image src={GoldCup} alt="Gold Cup" className="mr-2" />
-            <h1 className="text-[#FFFFE3] text-xs font-montserrat">Your Prize</h1>
+            <h1 className="text-[#FFFFE3] text-xs font-montserrat">
+              Your Prize
+            </h1>
           </div>
-          {isLoading ? (
+          {isLoading || !data ? (
             <div className="text-center text-white mt-4">loading...</div>
           ) : data && data.data && data.data.length > 0 ? (
             <div className="mt-2 space-y-4">
               {data.data.map((wins: Game, i: number) =>
                 wins.claimed === CLAIMED.YES ? (
-                  <div className="flex items-center justify-between px-3" key={i}>
+                  <div
+                    className="flex items-center justify-between px-3"
+                    key={i}
+                  >
                     <p className="text-white/50">{wins.name}</p>
                     <button
                       className="p-2 rounded-lg text-sm text-white/60 w-32 border-white/60 border bg-transparent"
@@ -114,12 +122,17 @@ export default function ClaimPageModal({ isOpen, onClose }: ModalProps) {
                     </button>
                   </div>
                 ) : (
-                  <div className="flex items-center justify-between px-3" key={i}>
+                  <div
+                    className="flex items-center justify-between px-3"
+                    key={i}
+                  >
                     <p className="text-white/50">{wins.name}</p>
                     <button
                       className={cn(
                         `py-2 px-6 rounded-lg text-sm text-white border-white border bg-transparent w-32`,
-                        prizeLoader && prizeId === wins.id && "text-white/60 border-white/60"
+                        prizeLoader &&
+                          prizeId === wins.id &&
+                          "text-white/60 border-white/60"
                       )}
                       onClick={() => claimPrize(wins)}
                       disabled={prizeLoader && prizeId === wins.id}
@@ -134,11 +147,15 @@ export default function ClaimPageModal({ isOpen, onClose }: ModalProps) {
             <section className="mt-10 flex flex-col justify-center items-center">
               <Image src={Empty} alt="Empty" />
               <span className="mt-10 text-center flex flex-col justify-center">
-                <p className="text-[#FFFFE3] text-sm">You haven&apos;t won anything yet.</p>
+                <p className="text-[#FFFFE3] text-sm">
+                  You haven&apos;t won anything yet.
+                </p>
                 <h1 className="font-montserrat font-black text-2xl text-transparent bg-clip-text bg-gradient-to-r from-[#FFFE89] from-35% to-[#C65E34] to-100%">
                   SPIN
                 </h1>
-                <p className="text-[#FFFFE3] text-sm">for a chance to win cool prizes!</p>
+                <p className="text-[#FFFFE3] text-sm">
+                  for a chance to win cool prizes!
+                </p>
               </span>
             </section>
           )}

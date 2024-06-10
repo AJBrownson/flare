@@ -420,7 +420,7 @@ const RouletteWheel = () => {
       <div
         // onClick={openChatWidget}
         onClick={handleChats}
-        className="absolute bottom-[32%] xl:bottom-40 right-5 z-10 transform translate-y-9 xl:translate-y-0 translate-x-[10%] xl:translate-x-0"
+        className="absolute bottom-[32%] xl:bottom-40 right-5 z-10 transform translate-y-6 xl:translate-y-0 translate-x-[10%] xl:translate-x-0"
       >
         {isChatWidgetOpen ? (
           <Image

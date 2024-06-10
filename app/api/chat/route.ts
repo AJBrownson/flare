@@ -15,7 +15,7 @@ export async function GET(req: NextRequest) {
       );
 
     const offsetN = Number(offset) || 0;
-    limit = Number(limin) || 5;
+    limit = Number(limin) || 20;
 
     // if (offsetN < 1)
     //   return NextResponse.json(
@@ -33,7 +33,26 @@ export async function GET(req: NextRequest) {
 
     const count = await db.chat.count();
 
-    return NextResponse.json({ data: results.reverse(), offset, count });
+    const fiveMinutes = new Date();
+
+    fiveMinutes.setMinutes(fiveMinutes.getMinutes() - 5);
+
+    const online = await db.chat.count({
+      where: {
+        createdAt: {
+          gte: fiveMinutes,
+        },
+      },
+    });
+
+    console.log(online);
+
+    return NextResponse.json({
+      data: results.reverse(),
+      offset,
+      count,
+      online,
+    });
   } catch (error) {
     console.log(error);
 

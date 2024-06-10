@@ -17,12 +17,13 @@ interface ModalProps {
   onClose: () => void;
 }
 
+const limit = 20;
+
 const getKey = (pageIndex: any, previousPageData: any) => {
   if (previousPageData && !previousPageData.data.length) return null; // reached the end
   return `/api/chat?offset=${pageIndex}&limit=${limit}`; // SWR key
 };
 
-const limit = 20;
 export default function ChatWidget({ isOpen, onClose }: ModalProps) {
   const modalRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(isOpen);
@@ -116,7 +117,9 @@ export default function ChatWidget({ isOpen, onClose }: ModalProps) {
           <div className="bg-[#30302B] flex items-center justify-center py-3 rounded-tl-2xl rounded-tr-2xl">
             <div className="flex justify-center items-center bg-[#10100E] w-16 h-6 rounded-2xl">
               <span className="p-[5px] bg-[#00CC45] rounded-full mr-1"></span>
-              <h1 className="text-[#FFFFE3] text-xs font-montserrat">1101</h1>
+              <h1 className="text-[#FFFFE3] text-xs font-montserrat">
+                {data && data[size - 1]?.online}
+              </h1>
             </div>
           </div>
 

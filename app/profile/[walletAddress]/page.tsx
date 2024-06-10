@@ -15,7 +15,8 @@ import Footer from "@/components/Footer";
 import BasicWheel from "@/public/assets/icons/basic-wheel.png";
 import ChallengerWheel from "@/public/assets/icons/challenger-wheel.png";
 import EliteWheel from "@/public/assets/icons/elite-wheel.png";
-
+import useSWR from "swr";
+import { fetcher } from "@/lib/utils";
 
 export default function UserProfile({
   params,
@@ -27,10 +28,14 @@ export default function UserProfile({
   const closeDialog = () => setIsDialogVisible(false);
 
   const { walletAddress } = params;
-  const userRank = "1";
+
   const walletState = "Connected";
 
-  console.log(params);
+  const { data } = useSWR(`/api/leaders?address=${walletAddress}`, fetcher);
+
+  const userRank = data && data.data[0].rank;
+
+  console.log(data && data.data[0].rank);
 
   const { connected } = useWallet();
 

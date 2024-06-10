@@ -141,15 +141,6 @@ export async function POST(req: NextRequest) {
 
       console.log("send funds oooo", trans);
 
-      if (!trans) {
-        console.log("Transaction failed");
-
-        return NextResponse.json(
-          { message: "Transaction failed" },
-          { status: 400 }
-        );
-      }
-
       await db.game.updateMany({
         where: {
           address: address,
@@ -162,6 +153,15 @@ export async function POST(req: NextRequest) {
           claimed: CLAIMED.YES,
         },
       });
+
+      if (!trans) {
+        console.log("Transaction failed for address", address);
+
+        return NextResponse.json(
+          { message: "Transaction failed" },
+          { status: 400 }
+        );
+      }
 
       return NextResponse.json({ message: "Updated" });
     }

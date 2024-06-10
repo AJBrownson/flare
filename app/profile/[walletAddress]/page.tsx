@@ -35,8 +35,6 @@ export default function UserProfile({
 
   const userRank = data && data.data[0].rank;
 
-  console.log(data && data.data[0].rank);
-
   const { connected } = useWallet();
 
   const rankSuffix = (number: number) => {

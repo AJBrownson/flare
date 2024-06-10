@@ -147,7 +147,8 @@ export default function ChatWidget({ isOpen, onClose }: ModalProps) {
                 )}
 
                 {isLoading || !data ? (
-                  <p className="my-3 text-center">loading messages...</p>
+                  // <p className="my-3 text-center">loading messages...</p>
+                  <SkeletonLoader />
                 ) : (
                   data &&
                   data
@@ -223,6 +224,31 @@ export default function ChatWidget({ isOpen, onClose }: ModalProps) {
             </button>
           </div>
         </div>
+      </div>
+    </div>
+  );
+}
+
+function SkeletonLoader() {
+  return (
+    <div className="animate-pulse">
+      <div className="flex flex-col mb-1 p-1 w-full">
+        <div className="flex gap-3 items-center py-2 w-full">
+          <div className="h-4 bg-[#30302B] rounded w-32"></div>
+          <div className="h-4 bg-[#30302B] rounded w-10"></div>
+          <div className="h-4 bg-[#30302B] rounded w-10"></div>
+        </div>
+        <div className="h-4 bg-[#30302B] rounded w-full"></div>
+        <div className="h-4 bg-[#30302B] mt-1 rounded w-1/2"></div>
+      </div>
+      <div className="flex flex-col mb-1 p-1 w-full">
+        <div className="flex gap-3 items-center py-2 w-full">
+          <div className="h-4 bg-[#30302B] rounded w-32"></div>
+          <div className="h-4 bg-[#30302B] rounded w-10"></div>
+          <div className="h-4 bg-[#30302B] rounded w-10"></div>
+        </div>
+        <div className="h-4 bg-[#30302B] rounded w-full"></div>
+        <div className="h-4 bg-[#30302B] mt-1 rounded w-1/2"></div>
       </div>
     </div>
   );

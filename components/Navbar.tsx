@@ -60,7 +60,12 @@ export default function NavBar({ showClaim }: { showClaim?: boolean }) {
 
   const [isClaimModalOpen, setIsClaimModalOpen] = useState(false);
 
-  const openClaimModal = () => {
+  // const openClaimModal = () => {
+  //   setIsClaimModalOpen(true);
+  // };
+
+  const openClaimModal = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
     setIsClaimModalOpen(true);
   };
 

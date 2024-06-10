@@ -21,8 +21,13 @@ import {
   SystemProgram,
   PublicKey,
   Connection,
+  sendAndConfirmTransaction,
 } from "@solana/web3.js";
-import { useWallet, useConnection } from "@solana/wallet-adapter-react";
+import {
+  useWallet,
+  useConnection,
+  ConnectionProvider,
+} from "@solana/wallet-adapter-react";
 import * as bs58 from "bs58";
 import { chargeAddress, paymentAddress, getRandomInt } from "@/lib/utils";
 import ModalDialog from "react-basic-modal-dialog";
@@ -92,7 +97,8 @@ const RouletteWheel = () => {
 
   const [isHovered, setIsHovered] = useState(false);
 
-  const { sendTransaction, publicKey, connected } = useWallet();
+  const { sendTransaction, signTransaction, publicKey, connected } =
+    useWallet();
   const { connection } = useConnection();
 
   const { mutate } = useSWRConfig();
@@ -160,7 +166,15 @@ const RouletteWheel = () => {
           return null;
         }
 
-        const tx = new Transaction();
+        const hash = await connection.getLatestBlockhash({
+          commitment: "finalized",
+        });
+
+        const tx = new Transaction({
+          blockhash: hash.blockhash,
+          lastValidBlockHeight: hash.lastValidBlockHeight,
+          feePayer: publicKey,
+        });
 
         tx.add(
           SystemProgram.transfer({
@@ -174,11 +188,18 @@ const RouletteWheel = () => {
           //   lamports: 0.01 * LAMPORTS_PER_SOL,
           // })
         );
-        const data = await sendTransaction(tx, connection, {
-          preflightCommitment: "confirmed",
-        });
-        // console.log("transac data", data);
-        return data;
+
+        if (signTransaction) {
+          const signedTx = await signTransaction(tx);
+
+          const data = await sendTransaction(signedTx, connection, {
+            preflightCommitment: "confirmed",
+          });
+          // console.log("transac data", data);
+          return data;
+        }
+
+        return null;
       } else if (
         wheelz === WHEELZ.one_thousand ||
         wheelz === WHEELZ.one_thousand_five ||

@@ -43,6 +43,7 @@ import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import InsufficientFundsModal from "./insufficientFundsModal";
 import WalletConnectionModal from "./walletConnectModal";
 import ChatWidget from "./chatWidget";
+import { getPhantomProvider } from "@/lib/phantom";
 
 const segments = Array.from({ length: 12 });
 const circles = Array.from({ length: 12 });
@@ -97,7 +98,7 @@ const RouletteWheel = () => {
 
   const [isHovered, setIsHovered] = useState(false);
 
-  const { sendTransaction, signTransaction, publicKey, connected } =
+  const { sendTransaction, signTransaction, publicKey, connected, wallet } =
     useWallet();
   const { connection } = useConnection();
 
@@ -189,17 +190,21 @@ const RouletteWheel = () => {
           // })
         );
 
-        if (signTransaction) {
-          const signedTx = await signTransaction(tx);
+        if (wallet?.adapter.name.toLocaleLowerCase() == "phantom") {
+          const provider = getPhantomProvider();
 
-          const data = await sendTransaction(signedTx, connection, {
-            preflightCommitment: "confirmed",
-          });
-          // console.log("transac data", data);
-          return data;
+          if (provider) {
+            const { signature } = await provider.signAndSendTransaction(tx);
+
+            return signature as string;
+          }
         }
 
-        return null;
+        const data = await sendTransaction(tx, connection, {
+          preflightCommitment: "confirmed",
+        });
+        // console.log("transac data", data);
+        return data;
       } else if (
         wheelz === WHEELZ.one_thousand ||
         wheelz === WHEELZ.one_thousand_five ||

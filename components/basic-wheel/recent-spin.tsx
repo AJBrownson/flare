@@ -8,11 +8,13 @@ type Spin = {
   name: string;
 };
 
+
+
 export default function RecentSpin() {
   const { data, isLoading } = useSWR(gamesKey, fetcher);
 
   const skeletonLoader = (
-    <div className="animate-pulse px-5 pb-1 bg-[#10100E]">
+    <div className="animate-pulse mb-1 px-5 pb-1 bg-[#10100E]">
       <div className="flex justify-between items-center w-full py-2 rounded-md">
         <div className="h-4 bg-[#30302B] rounded w-1/3"></div>
         <div className="px-5 flex items-center gap-1">
@@ -24,12 +26,19 @@ export default function RecentSpin() {
   );
 
   if (!data || !data.data) {
-    return <div>{skeletonLoader}</div>;
+    return (
+      <div>
+        {skeletonLoader}
+        {skeletonLoader}
+        {skeletonLoader}
+        {skeletonLoader}
+      </div>
+    );
   }
 
   return (
     <>
-      <div className="w-[320px] h-[470px] xl:max-w-[380px] overflow-y-auto">
+      <div className="w-[320px] h-[400px] xl:max-w-[380px] overflow-y-auto">
         {isLoading && !data?.data ? (
           <>
             {skeletonLoader}

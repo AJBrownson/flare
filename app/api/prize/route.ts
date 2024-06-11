@@ -149,6 +149,7 @@ export async function POST(req: NextRequest) {
 
       if (update.count < 1)
         return NextResponse.json({ message: "Already claimed" });
+
       const trans = await sendSolFunds({
         address,
         amount: amount,
@@ -206,7 +207,7 @@ const extractAmountSol = ({
 
     return {
       ...acc,
-      name: `${accSol} ${sym}`,
+      name: `${accSol.toFixed(2)} ${sym}`,
     };
   });
 };

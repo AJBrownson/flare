@@ -97,13 +97,15 @@ const Leaderboard = () => {
                         >
                           <td className="flex items-center gap-4 py-2">
                             <p className="text-[#8E8E8E] font-semibold">
-                              0{i + 1}
+                              {tableIndex * 5 + i + 1 < 10
+                                ? `0${tableIndex * 5 + i + 1}`
+                                : tableIndex * 5 + i + 1}
                             </p>
                             <p className="font-medium text-[13px] xl:text-sm">
                               {shortenAddress(player.address)}
                             </p>
                           </td>
-                          <td className="py-2">{getMedalIcon(i + 1)}</td>
+                          <td className="py-2">{getMedalIcon(tableIndex * 5 + i + 1)}</td>
                         </tr>
                       ))}
               </tbody>

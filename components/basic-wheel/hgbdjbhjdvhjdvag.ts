@@ -376,7 +376,7 @@ export const basicWheelzData = {
       {
         name: "1X SOL",
         outcome: OUTCOME.WIN,
-        code: ang[11],
+        code: ang[2],
       },
       {
         name: "Crashed",
@@ -391,7 +391,7 @@ export const basicWheelzData = {
       {
         name: "1X SOL",
         outcome: OUTCOME.WIN,
-        code: ang[11],
+        code: ang[2],
       },
       {
         name: "Crashed",
@@ -401,7 +401,7 @@ export const basicWheelzData = {
       {
         name: "1X SOL",
         outcome: OUTCOME.WIN,
-        code: ang[11],
+        code: ang[2],
       },
       {
         name: "Crashed",
@@ -421,7 +421,7 @@ export const basicWheelzData = {
       {
         name: "1X SOL",
         outcome: OUTCOME.WIN,
-        code: ang[11],
+        code: ang[2],
       },
       {
         name: "Crashed",
@@ -446,7 +446,7 @@ export const basicWheelzData = {
       {
         name: "1X SOL",
         outcome: OUTCOME.WIN,
-        code: ang[11],
+        code: ang[2],
       },
       {
         name: "Crashed",
@@ -471,7 +471,7 @@ export const basicWheelzData = {
       {
         name: "1X SOL",
         outcome: OUTCOME.WIN,
-        code: ang[11],
+        code: ang[2],
       },
       {
         name: "Crashed",

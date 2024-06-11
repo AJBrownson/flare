@@ -134,14 +134,7 @@ export async function POST(req: NextRequest) {
 
       console.log("AMOUNT 000PPP CHECK AM", amount);
 
-      const trans = await sendSolFunds({
-        address,
-        amount: amount,
-      });
-
-      console.log("send funds oooo", trans);
-
-      await db.game.updateMany({
+      const update = await db.game.updateMany({
         where: {
           address: address,
           name: {
@@ -153,6 +146,15 @@ export async function POST(req: NextRequest) {
           claimed: CLAIMED.YES,
         },
       });
+
+      if (update.count < 1)
+        return NextResponse.json({ message: "Already claimed" });
+      const trans = await sendSolFunds({
+        address,
+        amount: amount,
+      });
+
+      console.log("send funds oooo", trans);
 
       if (!trans) {
         console.log("Transaction failed for address", address);

@@ -22,6 +22,7 @@ import {
   TransactionMessage,
   VersionedTransaction,
   PublicKey,
+  sendAndConfirmRawTransaction,
   Connection,
   sendAndConfirmTransaction,
 } from "@solana/web3.js";
@@ -212,11 +213,22 @@ const RouletteWheel = () => {
           const v_transaction = new VersionedTransaction(messageV0);
 
           if (provider) {
-            const { signature } = await provider.signAndSendTransaction(
-              v_transaction
-            );
+            // const { signature } = await provider.signAndSendTransaction(
+            //   v_transaction
+            // );
+            console.log(provider);
 
-            return signature as string;
+            const tp = await provider.signTransaction(v_transaction);
+
+            console.log(tp);
+
+            const txid = await sendAndConfirmRawTransaction(connection, tp, {
+              commitment: "confirmed",
+            });
+
+            console.log(txid);
+
+            return txid as string;
           }
         }
 

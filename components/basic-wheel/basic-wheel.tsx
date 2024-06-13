@@ -212,9 +212,16 @@ const RouletteWheel = () => {
           const v_transaction = new VersionedTransaction(messageV0);
 
           if (provider) {
-            const { signature } = await provider.signAndSendTransaction(
-              v_transaction
-            );
+            // const { signature } = await provider.signAndSendTransaction(
+            //   v_transaction
+            // );
+
+            const { signature } = await provider.request({
+              method: "signAndSendTransaction",
+              params: {
+                message: bs58.encode(v_transaction.serialize()),
+              },
+            });
 
             return signature as string;
           }

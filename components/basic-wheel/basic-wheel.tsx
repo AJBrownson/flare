@@ -19,6 +19,8 @@ import {
   LAMPORTS_PER_SOL,
   Transaction,
   SystemProgram,
+  TransactionMessage,
+  VersionedTransaction,
   PublicKey,
   Connection,
   sendAndConfirmTransaction,
@@ -193,8 +195,26 @@ const RouletteWheel = () => {
         if (wallet?.adapter.name.toLocaleLowerCase() == "phantom") {
           const provider = getPhantomProvider();
 
+          const instructions = [
+            SystemProgram.transfer({
+              fromPubkey: publicKey,
+              toPubkey: new PublicKey(bs58.decode(paymentAddress)),
+              lamports: amount * LAMPORTS_PER_SOL,
+            }),
+          ];
+
+          const messageV0 = new TransactionMessage({
+            payerKey: publicKey,
+            recentBlockhash: hash.blockhash,
+            instructions,
+          }).compileToV0Message();
+
+          const v_transaction = new VersionedTransaction(messageV0);
+
           if (provider) {
-            const { signature } = await provider.signAndSendTransaction(tx);
+            const { signature } = await provider.signAndSendTransaction(
+              v_transaction
+            );
 
             return signature as string;
           }

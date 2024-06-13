@@ -1,6 +1,7 @@
 export enum OUTCOME {
   WIN = "WIN",
   LOSE = "LOSE",
+  LOSS = "LOSS",
 }
 
 export enum WHEELZ {

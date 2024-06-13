@@ -37,20 +37,10 @@ export default function ClaimPageModal({ isOpen, onClose }: ModalProps) {
       });
 
       if (response.status === 200) {
-        const updatedData = data?.data?.map((item: Game) => {
-          if (item.id === prize.id) {
-            return {
-              ...item,
-              claimed: CLAIMED.YES,
-            };
-          }
-          return item;
-        });
-
-        if (updatedData) {
-          mutate({ data: updatedData }, false);
-        }
+        mutate();
+        return;
       }
+      mutate();
     } catch (error) {
       console.error("Error claiming prize:", error);
     } finally {

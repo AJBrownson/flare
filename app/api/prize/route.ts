@@ -1,3 +1,4 @@
+export const maxDuration = 30;
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { CLAIMED, Game } from "@prisma/client";

@@ -4,7 +4,11 @@ import {
   WalletProvider,
   ConnectionProvider,
 } from "@solana/wallet-adapter-react";
-import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
+import {
+  // WalletModalProvider,
+  WalletModal,
+} from "@solana/wallet-adapter-react-ui";
+import { WalletReadyState } from "@solana/wallet-adapter-base";
 import {
   AlphaWalletAdapter,
   LedgerWalletAdapter,
@@ -16,6 +20,7 @@ import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
 
 import "@solana/wallet-adapter-react-ui/styles.css";
 import { clusterApiUrl } from "@solana/web3.js";
+import { WalletModalProvider } from "@/components/connect-wallet/wallet-modal-provider";
 
 type Props = {
   children?: React.ReactNode;
@@ -24,7 +29,7 @@ type Props = {
 export const Wallet: FC<Props> = ({ children }) => {
   //input your RPC as your endpoint value
   // The network can be set to 'devnet', 'testnet', or 'mainnet-beta'.
-  const network = WalletAdapterNetwork.Devnet;
+  const network = WalletAdapterNetwork.Mainnet;
 
   // You can also provide a custom RPC endpoint.
 
@@ -41,7 +46,7 @@ export const Wallet: FC<Props> = ({ children }) => {
       new SolflareWalletAdapter(),
       new AlphaWalletAdapter(),
       new LedgerWalletAdapter(),
-      new PhantomWalletAdapter(),
+      // new PhantomWalletAdapter(),
     ],
     []
   );
